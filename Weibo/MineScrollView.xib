@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" id="jNd-OE-r4x" customClass="MineScrollView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m6W-s3-hp8">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="250" id="CMk-Im-HZ1"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="leeB0Wen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cg3-hX-JUA">
+                    <rect key="frame" x="121" y="143" width="78" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="关注：6  丨  粉丝：32" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48V-sD-8QK">
+                    <rect key="frame" x="86" y="172" width="149" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="简介：这个人很帅，什么都没用留下" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dmd-3n-bOR">
+                    <rect key="frame" x="56" y="198" width="208" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wh2-cU-gDi">
+                    <rect key="frame" x="209" y="143" width="21" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="wh2-cU-gDi" secondAttribute="height" multiplier="1:1" id="yGd-Hz-aBr"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userinfo_membership" translatesAutoresizingMaskIntoConstraints="NO" id="a6g-f3-4xI">
+                    <rect key="frame" x="236" y="143" width="42" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="a6g-f3-4xI" secondAttribute="height" multiplier="2:1" id="LbA-KL-ArG"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CvU-gj-dXA">
+                    <rect key="frame" x="128" y="70" width="65" height="65"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="65" id="MiG-G5-Fno"/>
+                        <constraint firstAttribute="width" constant="65" id="vJ2-uT-fqb"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsE-4U-jqz">
+                    <rect key="frame" x="266" y="198" width="16" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="0na-4G-ZtH"/>
+                        <constraint firstAttribute="width" constant="16" id="nwe-4R-2k4"/>
+                    </constraints>
+                    <state key="normal" image="userinfo_relationship_indicator_edit-1"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Dmd-3n-bOR" firstAttribute="top" secondItem="48V-sD-8QK" secondAttribute="bottom" constant="8" id="3Ko-M9-MpW"/>
+                <constraint firstItem="wh2-cU-gDi" firstAttribute="bottom" secondItem="cg3-hX-JUA" secondAttribute="bottom" id="4C5-hl-0sT"/>
+                <constraint firstItem="48V-sD-8QK" firstAttribute="top" secondItem="cg3-hX-JUA" secondAttribute="bottom" constant="8" id="5Sd-lC-yrM"/>
+                <constraint firstItem="48V-sD-8QK" firstAttribute="centerX" secondItem="jNd-OE-r4x" secondAttribute="centerX" id="60w-9i-qSn"/>
+                <constraint firstItem="CvU-gj-dXA" firstAttribute="top" secondItem="jNd-OE-r4x" secondAttribute="top" constant="70" id="9Gq-Nw-ccB"/>
+                <constraint firstItem="a6g-f3-4xI" firstAttribute="leading" secondItem="wh2-cU-gDi" secondAttribute="trailing" constant="6" id="9Pa-tK-ItQ"/>
+                <constraint firstItem="CvU-gj-dXA" firstAttribute="centerX" secondItem="jNd-OE-r4x" secondAttribute="centerX" id="NXE-Y4-cTc"/>
+                <constraint firstItem="vsE-4U-jqz" firstAttribute="leading" secondItem="Dmd-3n-bOR" secondAttribute="trailing" constant="2" id="NpU-mQ-ucC"/>
+                <constraint firstItem="m6W-s3-hp8" firstAttribute="top" secondItem="jNd-OE-r4x" secondAttribute="top" id="Q2I-AJ-C9S"/>
+                <constraint firstItem="wh2-cU-gDi" firstAttribute="leading" secondItem="cg3-hX-JUA" secondAttribute="trailing" constant="10" id="SUA-67-G17"/>
+                <constraint firstItem="vsE-4U-jqz" firstAttribute="top" secondItem="Dmd-3n-bOR" secondAttribute="top" id="TVb-hF-bZS"/>
+                <constraint firstItem="Dmd-3n-bOR" firstAttribute="centerX" secondItem="jNd-OE-r4x" secondAttribute="centerX" id="Wz3-5q-Rwv"/>
+                <constraint firstItem="a6g-f3-4xI" firstAttribute="bottom" secondItem="cg3-hX-JUA" secondAttribute="bottom" id="Xl3-lX-sGy"/>
+                <constraint firstItem="m6W-s3-hp8" firstAttribute="leading" secondItem="jNd-OE-r4x" secondAttribute="leading" id="YGp-Ef-q6b"/>
+                <constraint firstItem="cg3-hX-JUA" firstAttribute="top" secondItem="CvU-gj-dXA" secondAttribute="bottom" constant="8" id="bMg-wP-a7X"/>
+                <constraint firstItem="wh2-cU-gDi" firstAttribute="top" secondItem="cg3-hX-JUA" secondAttribute="top" id="d2g-el-9g4"/>
+                <constraint firstItem="a6g-f3-4xI" firstAttribute="top" secondItem="cg3-hX-JUA" secondAttribute="top" id="faU-c2-c9e"/>
+                <constraint firstAttribute="trailing" secondItem="m6W-s3-hp8" secondAttribute="trailing" id="lMV-j6-T72"/>
+                <constraint firstItem="m6W-s3-hp8" firstAttribute="centerX" secondItem="jNd-OE-r4x" secondAttribute="centerX" id="rXd-um-jS7"/>
+                <constraint firstItem="cg3-hX-JUA" firstAttribute="centerX" secondItem="jNd-OE-r4x" secondAttribute="centerX" id="z5m-4u-ToQ"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <connections>
+                <outlet property="_bgView" destination="m6W-s3-hp8" id="dCg-Sj-Io1"/>
+                <outlet property="_desc" destination="Dmd-3n-bOR" id="vxv-d9-kop"/>
+                <outlet property="_fale" destination="wh2-cU-gDi" id="FSE-Ij-jUR"/>
+                <outlet property="_icon" destination="CvU-gj-dXA" id="DxN-IM-8in"/>
+                <outlet property="_name" destination="cg3-hX-JUA" id="9Sv-Cm-cgW"/>
+                <outlet property="_num" destination="48V-sD-8QK" id="R0u-CH-QL8"/>
+            </connections>
+            <point key="canvasLocation" x="568" y="294"/>
+        </scrollView>
+    </objects>
+    <resources>
+        <image name="userinfo_membership" width="30" height="16"/>
+        <image name="userinfo_relationship_indicator_edit-1" width="16" height="16"/>
+    </resources>
+</document>

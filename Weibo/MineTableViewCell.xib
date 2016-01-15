@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="46" id="KGk-i7-Jjw" customClass="MineTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tabbar_compose_video" translatesAutoresizingMaskIntoConstraints="NO" id="ptC-HH-auc">
+                        <rect key="frame" x="13" y="10" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="KwP-p5-SE3"/>
+                            <constraint firstAttribute="height" constant="25" id="k4Z-7G-rdE"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新的好友" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5b-q9-afN">
+                        <rect key="frame" x="46" y="15" width="52" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="卡片背景" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWk-j0-VdE">
+                        <rect key="frame" x="106" y="16" width="40" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toolbar_rightarrow" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ2-Ob-BU7">
+                        <rect key="frame" x="285" y="15" width="17" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="8RZ-yR-AJC"/>
+                            <constraint firstAttribute="width" constant="17" id="wbh-Wk-pQn"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="HWk-j0-VdE" firstAttribute="leading" secondItem="m5b-q9-afN" secondAttribute="trailing" constant="8" id="0jH-Db-TFD"/>
+                    <constraint firstItem="ptC-HH-auc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="1Q3-wj-tYw"/>
+                    <constraint firstItem="m5b-q9-afN" firstAttribute="leading" secondItem="ptC-HH-auc" secondAttribute="trailing" constant="8" id="3O0-rB-xC1"/>
+                    <constraint firstItem="HWk-j0-VdE" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Rni-h6-7sz"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ZJ2-Ob-BU7" secondAttribute="trailing" constant="10" id="Upi-to-iJ6"/>
+                    <constraint firstItem="ptC-HH-auc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="WxY-ZZ-IxH"/>
+                    <constraint firstItem="ZJ2-Ob-BU7" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ggR-jX-gQ4"/>
+                    <constraint firstItem="m5b-q9-afN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="qg2-mS-mqn"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="icon" destination="ptC-HH-auc" id="hNA-bM-tbn"/>
+                <outlet property="subTitle" destination="HWk-j0-VdE" id="hJ4-42-XZP"/>
+                <outlet property="title" destination="m5b-q9-afN" id="HbT-mE-hpR"/>
+            </connections>
+            <point key="canvasLocation" x="600" y="321"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="tabbar_compose_video" width="71" height="71"/>
+        <image name="toolbar_rightarrow" width="28" height="28"/>
+    </resources>
+</document>

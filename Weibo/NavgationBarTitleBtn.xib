@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="PgK-5I-XPP" customClass="NavgationBarTitleBtn">
+            <rect key="frame" x="0.0" y="0.0" width="192" height="45"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="好友圈" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4NJ-3U-3Fi">
+                    <rect key="frame" x="71" y="12" width="51" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iwp-v8-dDp">
+                    <rect key="frame" x="127" y="15" width="15" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="8An-i3-lus"/>
+                        <constraint firstAttribute="width" constant="15" id="fIi-SN-oyO"/>
+                    </constraints>
+                    <state key="normal" image="navigationbar_arrow_up"/>
+                    <state key="selected" image="navigationbar_arrow_down"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHr-p4-mEM">
+                    <rect key="frame" x="0.0" y="0.0" width="192" height="45"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                    <connections>
+                        <action selector="btnDidSeletced:" destination="PgK-5I-XPP" eventType="touchUpInside" id="G3y-PJ-zfh"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="4NJ-3U-3Fi" firstAttribute="centerX" secondItem="PgK-5I-XPP" secondAttribute="centerX" id="9bd-x2-pje"/>
+                <constraint firstItem="YHr-p4-mEM" firstAttribute="leading" secondItem="PgK-5I-XPP" secondAttribute="leading" id="Nk0-gL-mXL"/>
+                <constraint firstItem="iwp-v8-dDp" firstAttribute="leading" secondItem="4NJ-3U-3Fi" secondAttribute="trailing" constant="5" id="Ock-Po-q7a"/>
+                <constraint firstItem="4NJ-3U-3Fi" firstAttribute="centerY" secondItem="PgK-5I-XPP" secondAttribute="centerY" id="PNC-rL-EIP"/>
+                <constraint firstItem="YHr-p4-mEM" firstAttribute="top" secondItem="PgK-5I-XPP" secondAttribute="top" id="a5c-6x-b7a"/>
+                <constraint firstAttribute="trailing" secondItem="YHr-p4-mEM" secondAttribute="trailing" id="sm0-r2-YQ7"/>
+                <constraint firstAttribute="bottom" secondItem="YHr-p4-mEM" secondAttribute="bottom" id="x3r-pA-zvL"/>
+                <constraint firstItem="iwp-v8-dDp" firstAttribute="centerY" secondItem="PgK-5I-XPP" secondAttribute="centerY" id="xZb-zm-aSQ"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="btn" destination="iwp-v8-dDp" id="ZSm-Xk-YMU"/>
+                <outlet property="title" destination="4NJ-3U-3Fi" id="RGC-jo-Sqi"/>
+            </connections>
+            <point key="canvasLocation" x="645" y="527.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="navigationbar_arrow_down" width="13" height="7"/>
+        <image name="navigationbar_arrow_up" width="13" height="7"/>
+    </resources>
+</document>
