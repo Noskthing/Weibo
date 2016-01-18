@@ -30,6 +30,7 @@
         _bgView = [[UIView alloc] initWithFrame:frame];
         _bgView.backgroundColor = [UIColor colorWithRed:0.965f green:0.965f blue:0.965f alpha:1.00f];
         _bgView.layer.cornerRadius = frame.size.height/2;
+        _bgView.clipsToBounds = YES;
         [self addSubview:_bgView];
         
         //图标
@@ -80,17 +81,39 @@
     _detail.textColor = color;
 }
 
--(void)getCurrentAddress:(NSString *)address
+-(void)getCurrentAddress:(NSString *)address latitude:(float)lat longitude:(float)lon
 {
     CGSize detailSize = [address sizeWithFont:[UIFont systemFontOfSize:15] maxSize:CGSizeMake(self.frame.size.width - self.frame.size.height * 2, self.frame.size.height)];
+    //防止地址label过长越界
+    if (detailSize.width >= self.frame.size.width - self.frame.size.height * 2.3)
+    {
+        detailSize.width = self.frame.size.width - self.frame.size.height * 2.3;
+    }
+    //禁maskBtn
+    _maskBtn.userInteractionEnabled = NO;
+    
     _detail.text = address;
+    _detail.textColor = [UIColor colorWithRed:0.267f green:0.424f blue:0.635f alpha:1.00f];
     _detail.frame = CGRectMake(self.frame.size.height, 0, detailSize.width, self.frame.size.height);
-    _bgView.frame = CGRectMake(0, 0, self.frame.size.height * 1.5 + detailSize.width, self.frame.size.height);
+    _bgView.frame = CGRectMake(0, 0, self.frame.size.height * 2.3 + detailSize.width, self.frame.size.height);
     _imageView.image = [UIImage imageNamed:@"compose_locatebutton_succeeded"];
     
     UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(_bgView.frame.size.width - self.frame.size.height, 0, self.frame.size.height, self.frame.size.height)];
-    btn.backgroundColor = [UIColor redColor];
+    [btn setImage:[UIImage imageNamed:@"compose_location_icon_delete"] forState:0];
+    [btn addTarget:self action:@selector(cancelButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [_bgView addSubview:btn];
-
+    
+    _lat = lat;
+    _lon = lon;
+}
+//回复待选状态
+-(void)cancelButtonTouch:(UIButton *)btn
+{
+    [btn removeFromSuperview];
+    _maskBtn.userInteractionEnabled = YES;
+    _lat = 0;
+    _lon = 0;
+    [self setDetailText:@"显示位置" imageName:@"compose_locatebutton_ready" viewAlignment:viewAlignmentLeft];
+    [self changeTextColor:[UIColor colorWithRed:0.604f green:0.604f blue:0.604f alpha:1.00f]];
 }
 @end

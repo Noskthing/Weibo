@@ -34,3 +34,4 @@
 #define UserNewFriendWeiBo @"https://api.weibo.com/2/statuses/friends_timeline.json"
 
 #define AppDelegate (AppDelegate *)[[UIApplication sharedApplication] delegate]
+#define NSUserDefaultsObjectForKey(key) [[NSUserDefaults standardUserDefaults] objectForKey:key]

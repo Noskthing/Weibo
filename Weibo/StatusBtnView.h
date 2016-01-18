@@ -15,9 +15,12 @@ typedef enum : NSUInteger {
 typedef void(^maskBtnDidSeletcedBlock)();
 @interface StatusBtnView : UIView
 
+@property (nonatomic,assign)float lon;
+@property (nonatomic,assign)float lat;
+@property (nonatomic,assign)NSInteger jurisdiction;
 
 -(void)setDetailText:(NSString *)text imageName:(NSString *)imageName viewAlignment:(viewAlignment)alignment;
 -(void)setMaskBtnDidSeletcedBlock:(maskBtnDidSeletcedBlock)block;
 -(void)changeTextColor:(UIColor *)color;
--(void)getCurrentAddress:(NSString *)address;
+-(void)getCurrentAddress:(NSString *)address latitude:(float)lat longitude:(float)lon;
 @end

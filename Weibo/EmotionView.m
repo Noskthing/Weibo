@@ -173,7 +173,7 @@ static const CGFloat emotionScale = 0.14;
 -(void)handleTouch:(UITapGestureRecognizer *)tap
 {
     UIImageView * imageView = (UIImageView *)tap.view;
-    NSLog(@"tag = %d   name = %@",tap.view.tag,_emotionNames[tap.view.tag]);
+    NSLog(@"tag = %ld   name = %@",tap.view.tag,_emotionNames[tap.view.tag]);
     if (_block)
     {
         _block(imageView.image,_emotionNames[tap.view.tag]);

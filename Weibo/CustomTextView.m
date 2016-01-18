@@ -35,20 +35,11 @@
     self.font = [UIFont boldSystemFontOfSize:17];
 }
 
-//- (void)textViewDidChange:(UITextView *)textView
-//{
-//    [self judgeText];
-//    NSLog(@"text = %@",textView.text);
-//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-//    paragraphStyle.lineSpacing = 4;// 字体的行间距
-//    
-//    NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:17],
-//    NSParagraphStyleAttributeName:paragraphStyle};
-//    
-//    NSMutableAttributedString * tmpStr = [textView.attributedText mutableCopy];
-//    [tmpStr addAttributes:attributes range:NSMakeRange(0, tmpStr.length)];
-//    self.attributedText = [tmpStr copy];
-//}
+- (void)textViewDidChange:(UITextView *)textView
+{
+    [self judgeText];
+
+}
 
 //- (void)textViewDidEndEditing:(UITextView *)textView
 //{

@@ -57,6 +57,11 @@
 		1828CCEF1C34D1D6003CAF43 /* NavgationBarTitleBtn.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1828CCEE1C34D1D6003CAF43 /* NavgationBarTitleBtn.xib */; };
 		182C36C81C3E44400051B03F /* PostWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182C36C61C3E44400051B03F /* PostWordViewController.m */; };
 		182C36CE1C3E8D790051B03F /* LeeKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 182C36CD1C3E8D790051B03F /* LeeKeyboard.m */; };
+		1837F33D1C4CEEFC00AA1C0D /* LocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837F33C1C4CEEFC00AA1C0D /* LocationModel.m */; };
+		1837F3401C4CFB0700AA1C0D /* LocationTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837F33F1C4CFB0700AA1C0D /* LocationTableView.m */; };
+		183D097B1C4C96400097ACEE /* LeeActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 183D097A1C4C96400097ACEE /* LeeActionSheet.m */; };
+		183D097D1C4CD1740097ACEE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183D097C1C4CD1740097ACEE /* MapKit.framework */; };
+		183D097F1C4CD17D0097ACEE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183D097E1C4CD17D0097ACEE /* CoreLocation.framework */; };
 		18403FA01C28E83700651726 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18403F761C28E83700651726 /* MJRefreshAutoFooter.m */; };
 		18403FA11C28E83700651726 /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18403F781C28E83700651726 /* MJRefreshBackFooter.m */; };
 		18403FA21C28E83700651726 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 18403F7A1C28E83700651726 /* MJRefreshComponent.m */; };
@@ -261,6 +266,14 @@
 		182C36C61C3E44400051B03F /* PostWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostWordViewController.m; sourceTree = "<group>"; };
 		182C36CC1C3E8D790051B03F /* LeeKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeeKeyboard.h; sourceTree = "<group>"; };
 		182C36CD1C3E8D790051B03F /* LeeKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeeKeyboard.m; sourceTree = "<group>"; };
+		1837F33B1C4CEEFC00AA1C0D /* LocationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationModel.h; sourceTree = "<group>"; };
+		1837F33C1C4CEEFC00AA1C0D /* LocationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationModel.m; sourceTree = "<group>"; };
+		1837F33E1C4CFB0700AA1C0D /* LocationTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTableView.h; sourceTree = "<group>"; };
+		1837F33F1C4CFB0700AA1C0D /* LocationTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTableView.m; sourceTree = "<group>"; };
+		183D09791C4C96400097ACEE /* LeeActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeeActionSheet.h; sourceTree = "<group>"; };
+		183D097A1C4C96400097ACEE /* LeeActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeeActionSheet.m; sourceTree = "<group>"; };
+		183D097C1C4CD1740097ACEE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		183D097E1C4CD17D0097ACEE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		18403F751C28E83700651726 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		18403F761C28E83700651726 /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		18403F771C28E83700651726 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -436,6 +449,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183D097F1C4CD17D0097ACEE /* CoreLocation.framework in Frameworks */,
+				183D097D1C4CD1740097ACEE /* MapKit.framework in Frameworks */,
 				18AD922B1C3BA03D00B518B9 /* AddressBook.framework in Frameworks */,
 				184B3ADD1C0E987C00FB7B06 /* CoreGraphics.framework in Frameworks */,
 				184B3AD51C0E984300FB7B06 /* SystemConfiguration.framework in Frameworks */,
@@ -629,6 +644,24 @@
 			name = CustomKeyBoard;
 			sourceTree = "<group>";
 		};
+		1837F33A1C4CEEE800AA1C0D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1837F33B1C4CEEFC00AA1C0D /* LocationModel.h */,
+				1837F33C1C4CEEFC00AA1C0D /* LocationModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		183D09781C4C96110097ACEE /* CustomActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				183D09791C4C96400097ACEE /* LeeActionSheet.h */,
+				183D097A1C4C96400097ACEE /* LeeActionSheet.m */,
+			);
+			name = CustomActionSheet;
+			sourceTree = "<group>";
+		};
 		18403F731C28E83700651726 /* MJRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -731,6 +764,8 @@
 				185C7E311C44A23900544B2B /* CustomTextView.m */,
 				186678211C47762700C64E05 /* StatusBtnView.h */,
 				186678221C47762700C64E05 /* StatusBtnView.m */,
+				1837F33E1C4CFB0700AA1C0D /* LocationTableView.h */,
+				1837F33F1C4CFB0700AA1C0D /* LocationTableView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -769,6 +804,8 @@
 			children = (
 				18BD6CA81C117E55008CF43C /* libsqlite3.dylib */,
 				18BD6CA61C117E3F008CF43C /* libz.dylib */,
+				183D097E1C4CD17D0097ACEE /* CoreLocation.framework */,
+				183D097C1C4CD1740097ACEE /* MapKit.framework */,
 				18AD922A1C3BA03D00B518B9 /* AddressBook.framework */,
 				18F58CE61C33800E00BFFB4C /* CoreFoundation.framework */,
 				18F58CE41C337FF700BFFB4C /* CFNetwork.framework */,
@@ -1043,6 +1080,7 @@
 		18E550591C0C1A91004A5E1D /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1837F33A1C4CEEE800AA1C0D /* Model */,
 				1842026E1C0C317D00ED8AAF /* View */,
 				18E550651C0C1B8E004A5E1D /* Controller */,
 			);
@@ -1127,6 +1165,7 @@
 			isa = PBXGroup;
 			children = (
 				182351CF1C22554800060655 /* Define.h */,
+				183D09781C4C96110097ACEE /* CustomActionSheet */,
 				182C36CB1C3E8D2C0051B03F /* CustomKeyBoard */,
 				187906C51C2D185E00B44180 /* CustomAVPlayer */,
 				181961051C1FC668009CA33B /* WeiBoView */,
@@ -1269,6 +1308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1837F33D1C4CEEFC00AA1C0D /* LocationModel.m in Sources */,
 				18FBA0091C15A3FD00EF6EA6 /* LeeScrollViewWithArray.m in Sources */,
 				18E705921C17CA2100890719 /* MessageTableView.m in Sources */,
 				185C0DDF1C1A753200BAF302 /* MineScrollView.m in Sources */,
@@ -1329,6 +1369,8 @@
 				182C36CE1C3E8D790051B03F /* LeeKeyboard.m in Sources */,
 				18403FA81C28E83700651726 /* MJRefreshBackGifFooter.m in Sources */,
 				180C7F681C28EB7B0050E6B4 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				183D097B1C4C96400097ACEE /* LeeActionSheet.m in Sources */,
+				1837F3401C4CFB0700AA1C0D /* LocationTableView.m in Sources */,
 				1894FB541C2A7FFD001EB7C9 /* WebVIewController.m in Sources */,
 				18FBA0031C15A35F00EF6EA6 /* AdvertisementTableViewCell.m in Sources */,
 				184202711C0C328700ED8AAF /* OtherView.m in Sources */,

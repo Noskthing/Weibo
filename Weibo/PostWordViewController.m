@@ -11,6 +11,9 @@
 #import "LeeKeyboard.h"
 #import "CustomTextView.h"
 #import "StatusBtnView.h"
+#import "ConnectDelegate.h"
+#import "Define.h"
+#import "LocationViewController.h"
 
 @interface PostWordViewController ()<UIScrollViewDelegate>
 {
@@ -47,7 +50,7 @@ static const CGFloat customKeyBoardHeight = 46;
 
 -(void)dealloc
 {
-    [_textView removeObserver:self forKeyPath:@"attributedText"];
+    [_textView removeObserver:self forKeyPath:@"text"];
     [_bgView removeObserver:self forKeyPath:@"frame"];
     [[NSNotificationCenter defaultCenter] postNotificationName:kLeeKeyBoardWillDisappear object:nil];
 }
@@ -58,6 +61,15 @@ static const CGFloat customKeyBoardHeight = 46;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillDisappear:) name:UIKeyboardWillHideNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNotification:) name:@"address" object:nil];
+}
+
+#pragma mark  -地址通知
+-(void)getNotification:(NSNotification *)notification
+{
+    NSArray * arr = notification.object;
+    [_addressBtn getCurrentAddress:arr[2] latitude:[arr[0] floatValue] longitude:[arr[1] floatValue]];
 }
 
 #pragma mark  -创建导航UI
@@ -143,6 +155,10 @@ static const CGFloat customKeyBoardHeight = 46;
     [btn setDetailText:@"显示位置" imageName:@"compose_locatebutton_ready" viewAlignment:viewAlignmentLeft];
     [btn setMaskBtnDidSeletcedBlock:^{
         NSLog(@"aaaaaa");
+        LocationViewController * locationVC = [[LocationViewController alloc] init];
+        [self presentViewController:locationVC animated:YES completion:^{
+            
+        }];
     }];
     [self.view addSubview:btn];
     
@@ -183,7 +199,7 @@ static const CGFloat customKeyBoardHeight = 46;
     
     //输入视图
     _textView = [[CustomTextView alloc] initWithFrame:CGRectMake(0,5, self.view.width, 160)];
-    [_textView addObserver:self forKeyPath:@"attributedText" options:NSKeyValueObservingOptionNew context:nil];
+    [_textView addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:nil];
     [scrollView addSubview:_textView];
 }
 
@@ -198,7 +214,25 @@ static const CGFloat customKeyBoardHeight = 46;
 
 - (void)postBtnTouch:(UIButton *)sender
 {
+    NSString * str = _textView.text;
+    [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
+    NSString * access_token = NSUserDefaultsObjectForKey(@"access_token");
+    
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:@{@"access_token":access_token,@"status":str}];
+    if (_addressBtn.lon!= 0 && _addressBtn.lat !=0)
+    {
+        [dict setObject:@(_addressBtn.lat) forKey:@"lat"];
+        [dict setObject:@(_addressBtn.lon) forKey:@"long"];
+    }
+    
+    ConnectDelegate * connect = [ConnectDelegate standConnectDelegate];
+    [connect requestDataFromUrl:@"https://api.weibo.com/2/statuses/update.json" parameters:[dict copy] andParseDataBlock:^(id obj) {
+        if (obj)
+        {
+            NSLog(@"obj = %@",obj);
+        }
+    }];
 }
 
 -(void)customKeyBoardBarButtonsDidSelected:(UIButton *)btn
@@ -260,9 +294,9 @@ static const CGFloat customKeyBoardHeight = 46;
 #pragma mark  -观察者模式
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"attributedText"])
+    if ([keyPath isEqualToString:@"text"])
     {
-        if (_textView.attributedText.length == 0)
+        if (_textView.text.length == 0)
         {
             _textView.label.hidden = NO;
             _postBtn.backgroundColor = [UIColor whiteColor];

@@ -39,7 +39,7 @@
         
         _requestManager = [AFHTTPRequestOperationManager manager];
         //设置数据传输类型
-        _requestManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain",nil];
+        _requestManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain",@"text/html",nil];
     }
     return self;
 }
