@@ -14,6 +14,7 @@
 #import "ConnectDelegate.h"
 #import "Define.h"
 #import "LocationViewController.h"
+#import "ShareRangeViewController.h"
 
 @interface PostWordViewController ()<UIScrollViewDelegate>
 {
@@ -55,7 +56,7 @@ static const CGFloat customKeyBoardHeight = 46;
     [[NSNotificationCenter defaultCenter] postNotificationName:kLeeKeyBoardWillDisappear object:nil];
 }
 
-#pragma mark  -创建通知
+#pragma mark  -通知相关
 -(void)registerNotification
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
@@ -63,13 +64,32 @@ static const CGFloat customKeyBoardHeight = 46;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillDisappear:) name:UIKeyboardWillHideNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNotification:) name:@"address" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNotification:) name:@"jurisdiction" object:nil];
 }
 
 #pragma mark  -地址通知
 -(void)getNotification:(NSNotification *)notification
 {
-    NSArray * arr = notification.object;
-    [_addressBtn getCurrentAddress:arr[2] latitude:[arr[0] floatValue] longitude:[arr[1] floatValue]];
+    if ([notification.name isEqualToString:@"jurisdiction"])
+    {
+        int num = [notification.object intValue];
+        if (num == 1)
+        {
+            num = 2;
+        }
+        else if(num == 2)
+        {
+            num = 1;
+        }
+            
+        _jurisdictionBtn.jurisdiction = num;
+    }
+    else if ([notification.name isEqualToString:@"address"])
+    {
+        NSArray * arr = notification.object;
+        [_addressBtn getCurrentAddress:arr[2] latitude:[arr[0] floatValue] longitude:[arr[1] floatValue]];
+    }
 }
 
 #pragma mark  -创建导航UI
@@ -149,14 +169,15 @@ static const CGFloat customKeyBoardHeight = 46;
     [_bgView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
     [self.view addSubview:_bgView];
     
+    __weak PostWordViewController * postVC = self;
+    
     //地址按钮
-    StatusBtnView * btn = [[StatusBtnView alloc] initWithFrame:CGRectMake(10, CGRectGetMinY(_bgView.frame) - 30, self.view.width *2/3, 24)];
+    StatusBtnView * btn = [[StatusBtnView alloc] initWithFrame:CGRectMake(10, CGRectGetMinY(_bgView.frame) - 30, self.view.width *0.6, 24)];
     _addressBtn = btn;
     [btn setDetailText:@"显示位置" imageName:@"compose_locatebutton_ready" viewAlignment:viewAlignmentLeft];
-    [btn setMaskBtnDidSeletcedBlock:^{
-        NSLog(@"aaaaaa");
+    [btn setMaskBtnDidSeletcedBlock:^(NSInteger jurisdiction){
         LocationViewController * locationVC = [[LocationViewController alloc] init];
-        [self presentViewController:locationVC animated:YES completion:^{
+        [postVC presentViewController:locationVC animated:YES completion:^{
             
         }];
     }];
@@ -166,6 +187,12 @@ static const CGFloat customKeyBoardHeight = 46;
     _jurisdictionBtn = [[StatusBtnView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(btn.frame), CGRectGetMinY(_bgView.frame) - 30, self.view.width - CGRectGetMaxX(btn.frame) - 10, 24)];
     [_jurisdictionBtn changeTextColor:[UIColor colorWithRed:0.392f green:0.525f blue:0.702f alpha:1.00f]];
     [_jurisdictionBtn setDetailText:@"公开" imageName:@"compose_publicbutton" viewAlignment:viewAlignmentRight];
+    [_jurisdictionBtn setMaskBtnDidSeletcedBlock:^(NSInteger jurisdiction){
+        ShareRangeViewController * shareRange = [[ShareRangeViewController alloc] init];
+        shareRange.num = jurisdiction;
+        [postVC presentViewController:shareRange animated:YES completion:^{
+        }];
+    }];
     [self.view addSubview:_jurisdictionBtn];
     
     //初始化
@@ -219,18 +246,24 @@ static const CGFloat customKeyBoardHeight = 46;
     
     NSString * access_token = NSUserDefaultsObjectForKey(@"access_token");
     
-    NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:@{@"access_token":access_token,@"status":str}];
+
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:@{@"access_token":access_token,@"status":str,@"visible":@(_jurisdictionBtn.jurisdiction)}];
     if (_addressBtn.lon!= 0 && _addressBtn.lat !=0)
     {
         [dict setObject:@(_addressBtn.lat) forKey:@"lat"];
         [dict setObject:@(_addressBtn.lon) forKey:@"long"];
     }
+
     
     ConnectDelegate * connect = [ConnectDelegate standConnectDelegate];
     [connect requestDataFromUrl:@"https://api.weibo.com/2/statuses/update.json" parameters:[dict copy] andParseDataBlock:^(id obj) {
         if (obj)
         {
-            NSLog(@"obj = %@",obj);
+            [self createPromptViewWithImageName:@"health_infoPop_icon_check" title:@"已 发 送"];
+        }
+        else
+        {
+            [self createPromptViewWithImageName:@"health_infoPop_icon_close" title:@"发 送 失 败"];
         }
     }];
 }
@@ -311,7 +344,7 @@ static const CGFloat customKeyBoardHeight = 46;
     }
     else if ([keyPath isEqualToString:@"frame"])
     {
-        _addressBtn.frame = CGRectMake(10, CGRectGetMinY(_bgView.frame) - 30, self.view.width *2/3, 24);
+        _addressBtn.frame = CGRectMake(10, CGRectGetMinY(_bgView.frame) - 30, self.view.width *0.6, 24);
         _jurisdictionBtn.frame = CGRectMake(CGRectGetMaxX(_addressBtn.frame), CGRectGetMinY(_bgView.frame) - 30, self.view.width - CGRectGetMaxX(_addressBtn.frame) - 10, 24);
     }
 }
@@ -360,6 +393,37 @@ static const CGFloat customKeyBoardHeight = 46;
         CGRect rect = _bgView.frame;
         rect.origin.y = self.view.height - customKeyBoardHeight;
         _bgView.frame = rect;
+    }];
+}
+
+#pragma mark  -创建提示视图
+-(void)createPromptViewWithImageName:(NSString *)imageName title:(NSString *)title
+{
+    //收回键盘！
+    [_textView resignFirstResponder];
+    
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 120)];
+    view.layer.position = self.view.center;
+    view.backgroundColor = [UIColor colorWithRed:0.648f green:0.648f blue:0.648f alpha:1.00f];
+    view.layer.cornerRadius = 5;
+    [self.view addSubview:view];
+    
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 30, 40, 40)];
+    imageView.image = [UIImage imageNamed:imageName];
+    [view addSubview:imageView];
+    
+    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 80, 100, 40)];
+    label.text = title;
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    [view addSubview:label];
+    
+    [UIView animateWithDuration:1.5 animations:^{
+        view.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+        }];
     }];
 }
 @end

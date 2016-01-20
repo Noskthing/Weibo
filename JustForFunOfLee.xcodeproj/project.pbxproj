@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1809F2231C4DDDA8002B44F1 /* ShareRangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809F2221C4DDDA8002B44F1 /* ShareRangeViewController.m */; };
 		180C7F5E1C28EB7B0050E6B4 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 180C7F3A1C28EB7B0050E6B4 /* AFHTTPRequestOperation.m */; };
 		180C7F5F1C28EB7B0050E6B4 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 180C7F3C1C28EB7B0050E6B4 /* AFHTTPRequestOperationManager.m */; };
 		180C7F601C28EB7B0050E6B4 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 180C7F3E1C28EB7B0050E6B4 /* AFHTTPSessionManager.m */; };
@@ -158,6 +159,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1809F2211C4DDDA8002B44F1 /* ShareRangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareRangeViewController.h; sourceTree = "<group>"; };
+		1809F2221C4DDDA8002B44F1 /* ShareRangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareRangeViewController.m; sourceTree = "<group>"; };
 		180C7F391C28EB7B0050E6B4 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		180C7F3A1C28EB7B0050E6B4 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		180C7F3B1C28EB7B0050E6B4 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -937,6 +940,8 @@
 				182C36C61C3E44400051B03F /* PostWordViewController.m */,
 				1860720D1C48F79C008489F7 /* LocationViewController.h */,
 				1860720E1C48F79C008489F7 /* LocationViewController.m */,
+				1809F2211C4DDDA8002B44F1 /* ShareRangeViewController.h */,
+				1809F2221C4DDDA8002B44F1 /* ShareRangeViewController.m */,
 			);
 			name = ChildViewController;
 			sourceTree = "<group>";
@@ -1397,6 +1402,7 @@
 				180C7F661C28EB7B0050E6B4 /* AFURLSessionManager.m in Sources */,
 				18403FAB1C28E83700651726 /* MJRefreshGifHeader.m in Sources */,
 				18691D471C3FDC7100EC4B03 /* PageControlView.m in Sources */,
+				1809F2231C4DDDA8002B44F1 /* ShareRangeViewController.m in Sources */,
 				186551E81C3A5D3000BE5C65 /* RightBtnTableView.m in Sources */,
 				18403FAF1C28E83700651726 /* MJRefreshConst.m in Sources */,
 				186551DD1C3A407B00BE5C65 /* UIImage+Addition.m in Sources */,

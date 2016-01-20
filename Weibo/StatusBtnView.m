@@ -47,8 +47,43 @@
          _maskBtn = [[UIButton alloc] init];
         [_maskBtn addTarget:self action:@selector(maskBtnTouch:) forControlEvents:UIControlEventTouchUpInside];
         [_bgView addSubview:_maskBtn];
+        
+        _jurisdiction = 0;
     }
     return self;
+}
+
+-(void)setJurisdiction:(NSInteger)jurisdiction
+{
+    _jurisdiction = jurisdiction;
+    
+    NSString * title;
+    NSString * imageName;
+    switch (_jurisdiction)
+    {
+        case 0:
+        {
+            title = @"公开";
+            imageName = @"compose_publicbutton";
+        }
+            break;
+        case 1:
+        {
+            title = @"好友圈";
+            imageName = @"compose_friendcircle";
+        }
+            break;
+        case 2:
+        {
+            title = @"仅自己可见";
+            imageName = @"compose_myself";
+        }
+            break;
+            
+        default:
+            break;
+    }
+    [self setDetailText:title imageName:imageName viewAlignment:viewAlignmentRight];
 }
 
 -(void)setMaskBtnDidSeletcedBlock:(maskBtnDidSeletcedBlock)block
@@ -60,7 +95,7 @@
 {
     if (_block)
     {
-        _block();
+        _block(_jurisdiction);
     }
 }
 

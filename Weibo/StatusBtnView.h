@@ -12,12 +12,12 @@ typedef enum : NSUInteger {
     viewAlignmentLeft,
     viewAlignmentRight
 } viewAlignment;
-typedef void(^maskBtnDidSeletcedBlock)();
+typedef void(^maskBtnDidSeletcedBlock)(NSInteger jurisdiction);
 @interface StatusBtnView : UIView
 
 @property (nonatomic,assign)float lon;
 @property (nonatomic,assign)float lat;
-@property (nonatomic,assign)NSInteger jurisdiction;
+@property (nonatomic,assign)int jurisdiction;
 
 -(void)setDetailText:(NSString *)text imageName:(NSString *)imageName viewAlignment:(viewAlignment)alignment;
 -(void)setMaskBtnDidSeletcedBlock:(maskBtnDidSeletcedBlock)block;
