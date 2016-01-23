@@ -15,6 +15,7 @@
 #import "Define.h"
 #import "LocationViewController.h"
 #import "ShareRangeViewController.h"
+#import "PhotoViewController.h"
 
 @interface PostWordViewController ()<UIScrollViewDelegate>
 {
@@ -95,28 +96,6 @@ static const CGFloat customKeyBoardHeight = 46;
 #pragma mark  -创建导航UI
 -(void)createNavigationBar
 {
-    //背景
-    UIView * navigationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
-    navigationView.backgroundColor = [UIColor colorWithRed:0.961f green:0.961f blue:0.961f alpha:1.00f];
-    navigationView.layer.borderColor = [UIColor colorWithRed:0.843f green:0.843f blue:0.843f alpha:1.00f].CGColor;
-    navigationView.layer.borderWidth = 1;
-    //阴影效果   仿真系统原生navigationbar
-//    navigationView.layer.masksToBounds = NO;
-////    navigationView.layer.cornerRadius = 8; // if you like rounded corners
-//    navigationView.layer.shadowOffset = CGSizeMake(0, 0.5);
-////    navigationView.layer.shadowRadius = 5;
-//    navigationView.layer.shadowOpacity = 0.5;
-    [self.view addSubview:navigationView];
-    
-    //取消button
-    UIButton * cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 34, 40, 18)];
-    [cancelBtn setTitleColor:[UIColor colorWithRed:0.220f green:0.220f blue:0.220f alpha:1.00f] forState:UIControlStateNormal];
-    [cancelBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
-    [cancelBtn setTitle:@"取消" forState:0];
-    [cancelBtn addTarget:self action:@selector(cancelBtnTouch:) forControlEvents:UIControlEventTouchUpInside];
-    cancelBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [navigationView addSubview:cancelBtn];
-    
     //发微博标题
     UILabel * postWeibo = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
     postWeibo.text = @"发微博";
@@ -124,7 +103,7 @@ static const CGFloat customKeyBoardHeight = 46;
     postWeibo.textAlignment = NSTextAlignmentCenter;
     postWeibo.layer.anchorPoint = CGPointMake(0.5, 0);
     postWeibo.layer.position = CGPointMake(self.view.width/2, 23);
-    [navigationView addSubview:postWeibo];
+    [self.navigationView addSubview:postWeibo];
     
     //用户标题
     UILabel * userName = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 15)];
@@ -136,7 +115,7 @@ static const CGFloat customKeyBoardHeight = 46;
     userName.textAlignment = NSTextAlignmentCenter;
     userName.layer.anchorPoint = CGPointMake(0.5, 0);
     userName.layer.position = CGPointMake(self.view.width/2, CGRectGetMaxY(postWeibo.frame) + 3);
-    [navigationView addSubview:userName];
+    [self.navigationView addSubview:userName];
     
     //发布button
     UIButton * postBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.width - 65,30, 50, 25)];
@@ -148,7 +127,7 @@ static const CGFloat customKeyBoardHeight = 46;
     [postBtn setTitle:@"发布" forState:0];
     [postBtn addTarget:self action:@selector(postBtnTouch:) forControlEvents:UIControlEventTouchUpInside];
     postBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [navigationView addSubview:postBtn];
+    [self.navigationView addSubview:postBtn];
 }
 
 
@@ -231,14 +210,6 @@ static const CGFloat customKeyBoardHeight = 46;
 }
 
 #pragma mark   -UIButton点击事件
-- (void)cancelBtnTouch:(UIButton *)sender
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:kLeeKeyBoardWillDisappear object:nil];
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
-}
-
 - (void)postBtnTouch:(UIButton *)sender
 {
     NSString * str = _textView.text;
@@ -274,8 +245,11 @@ static const CGFloat customKeyBoardHeight = 46;
     {
         case 200:
         {
-            
-        }
+            PhotoViewController * photoViewController = [[PhotoViewController alloc] init];
+            [self presentViewController:photoViewController animated:YES completion:^{
+                
+            }];
+         }
             break;
         case 201:
         {

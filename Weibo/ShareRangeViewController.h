@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface ShareRangeViewController : UIViewController
+@interface ShareRangeViewController : BaseViewController
 
 @property (nonatomic,assign)NSInteger num;
 @end

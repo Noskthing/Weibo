@@ -17,7 +17,7 @@
 
 -(instancetype)initWithTitle:(NSString *)title cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles leeActionSheetDidSelectedBlock:(LeeActionSheetDidSelectedBlock)block
 {
-    UIScreen * screen = [UIScreen mainScreen];
+//    UIScreen * screen = [UIScreen mainScreen];
     
 //    LeeActionSheet * leeActionSheet = [[LeeActionSheet alloc] initWithFrame:CGRectMake(0, screen.bounds.size.height, screen.bounds.size.width, 40 * (titles.count + 1) + 5)];
     

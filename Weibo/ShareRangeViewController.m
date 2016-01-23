@@ -31,22 +31,7 @@
 #pragma mark  -创建导航UI
 -(void)createNavigationBar
 {
-    //背景
-    UIView * navigationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
-    navigationView.backgroundColor = [UIColor colorWithRed:0.961f green:0.961f blue:0.961f alpha:1.00f];
-    navigationView.layer.borderColor = [UIColor colorWithRed:0.843f green:0.843f blue:0.843f alpha:1.00f].CGColor;
-    navigationView.layer.borderWidth = 1;
-    [self.view addSubview:navigationView];
-    
-    //取消button
-    UIButton * cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 34, 40, 18)];
-    [cancelBtn setTitleColor:[UIColor colorWithRed:0.220f green:0.220f blue:0.220f alpha:1.00f] forState:UIControlStateNormal];
-    [cancelBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
-    [cancelBtn setTitle:@"取消" forState:0];
-    [cancelBtn addTarget:self action:@selector(cancelBtnTouch:) forControlEvents:UIControlEventTouchUpInside];
-    cancelBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [navigationView addSubview:cancelBtn];
-    
+
     //发微博标题
     UILabel * locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 36)];
     locationLabel.text = @"选择分享范围";
@@ -54,7 +39,7 @@
     locationLabel.textAlignment = NSTextAlignmentCenter;
     locationLabel.layer.anchorPoint = CGPointMake(0.5, 0);
     locationLabel.layer.position = CGPointMake(self.view.frame.size.width/2 , 25);
-    [navigationView addSubview:locationLabel];
+    [self.navigationView addSubview:locationLabel];
 }
 
 #pragma mark  -创建UI
@@ -66,14 +51,6 @@
     tableView.rowHeight = 60;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tableView];
-}
-
-#pragma mark   -UIButton点击事件
-- (void)cancelBtnTouch:(UIButton *)sender
-{
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
 }
 
 #pragma mark  -tableView代理方法

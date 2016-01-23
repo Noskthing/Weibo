@@ -156,6 +156,12 @@
 		18FBA0031C15A35F00EF6EA6 /* AdvertisementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBA0021C15A35F00EF6EA6 /* AdvertisementTableViewCell.m */; };
 		18FBA0091C15A3FD00EF6EA6 /* LeeScrollViewWithArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBA0061C15A3FD00EF6EA6 /* LeeScrollViewWithArray.m */; };
 		18FBA00A1C15A3FD00EF6EA6 /* LeeScrollViewWithView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBA0081C15A3FD00EF6EA6 /* LeeScrollViewWithView.m */; };
+		39F511391C538142004AB545 /* PhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F511381C538142004AB545 /* PhotoManager.m */; };
+		39F5113B1C538244004AB545 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F5113A1C538244004AB545 /* Photos.framework */; };
+		39F5113F1C538471004AB545 /* AlbumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F5113E1C538471004AB545 /* AlbumModel.m */; };
+		39F511451C5387A8004AB545 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F511441C5387A8004AB545 /* PhotoViewController.m */; };
+		39F511481C5387B6004AB545 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F511471C5387B6004AB545 /* BaseViewController.m */; };
+		39F5114C1C53BEEB004AB545 /* AlbumTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F5114B1C53BEEB004AB545 /* AlbumTitleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -445,6 +451,17 @@
 		18FBA0061C15A3FD00EF6EA6 /* LeeScrollViewWithArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeeScrollViewWithArray.m; sourceTree = "<group>"; };
 		18FBA0071C15A3FD00EF6EA6 /* LeeScrollViewWithView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeeScrollViewWithView.h; sourceTree = "<group>"; };
 		18FBA0081C15A3FD00EF6EA6 /* LeeScrollViewWithView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeeScrollViewWithView.m; sourceTree = "<group>"; };
+		39F511371C538142004AB545 /* PhotoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoManager.h; sourceTree = "<group>"; };
+		39F511381C538142004AB545 /* PhotoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoManager.m; sourceTree = "<group>"; };
+		39F5113A1C538244004AB545 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		39F5113D1C538471004AB545 /* AlbumModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumModel.h; sourceTree = "<group>"; };
+		39F5113E1C538471004AB545 /* AlbumModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumModel.m; sourceTree = "<group>"; };
+		39F511431C5387A8004AB545 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		39F511441C5387A8004AB545 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
+		39F511461C5387B6004AB545 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		39F511471C5387B6004AB545 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		39F5114A1C53BEEB004AB545 /* AlbumTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumTitleView.h; sourceTree = "<group>"; };
+		39F5114B1C53BEEB004AB545 /* AlbumTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumTitleView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -452,6 +469,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39F5113B1C538244004AB545 /* Photos.framework in Frameworks */,
 				183D097F1C4CD17D0097ACEE /* CoreLocation.framework in Frameworks */,
 				183D097D1C4CD1740097ACEE /* MapKit.framework in Frameworks */,
 				18AD922B1C3BA03D00B518B9 /* AddressBook.framework in Frameworks */,
@@ -761,6 +779,7 @@
 		1842026E1C0C317D00ED8AAF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				39F511491C53BEC5004AB545 /* PhotoView */,
 				1842026F1C0C328700ED8AAF /* OtherView.h */,
 				184202701C0C328700ED8AAF /* OtherView.m */,
 				185C7E301C44A23900544B2B /* CustomTextView.h */,
@@ -807,6 +826,7 @@
 			children = (
 				18BD6CA81C117E55008CF43C /* libsqlite3.dylib */,
 				18BD6CA61C117E3F008CF43C /* libz.dylib */,
+				39F5113A1C538244004AB545 /* Photos.framework */,
 				183D097E1C4CD17D0097ACEE /* CoreLocation.framework */,
 				183D097C1C4CD1740097ACEE /* MapKit.framework */,
 				18AD922A1C3BA03D00B518B9 /* AddressBook.framework */,
@@ -936,12 +956,13 @@
 		188E1FB01C3E17A500CC895D /* ChildViewController */ = {
 			isa = PBXGroup;
 			children = (
+				39F511461C5387B6004AB545 /* BaseViewController.h */,
+				39F511471C5387B6004AB545 /* BaseViewController.m */,
+				39F511421C538791004AB545 /* Photo */,
+				39F511411C538770004AB545 /* Jurisdiction */,
+				39F511401C538763004AB545 /* Location */,
 				182C36C51C3E44400051B03F /* PostWordViewController.h */,
 				182C36C61C3E44400051B03F /* PostWordViewController.m */,
-				1860720D1C48F79C008489F7 /* LocationViewController.h */,
-				1860720E1C48F79C008489F7 /* LocationViewController.m */,
-				1809F2211C4DDDA8002B44F1 /* ShareRangeViewController.h */,
-				1809F2221C4DDDA8002B44F1 /* ShareRangeViewController.m */,
 			);
 			name = ChildViewController;
 			sourceTree = "<group>";
@@ -1170,6 +1191,7 @@
 			isa = PBXGroup;
 			children = (
 				182351CF1C22554800060655 /* Define.h */,
+				39F511361C537F8C004AB545 /* Photo */,
 				183D09781C4C96110097ACEE /* CustomActionSheet */,
 				182C36CB1C3E8D2C0051B03F /* CustomKeyBoard */,
 				187906C51C2D185E00B44180 /* CustomAVPlayer */,
@@ -1222,6 +1244,61 @@
 				18FBA0081C15A3FD00EF6EA6 /* LeeScrollViewWithView.m */,
 			);
 			path = LeeScrollView;
+			sourceTree = "<group>";
+		};
+		39F511361C537F8C004AB545 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				39F5113C1C53843D004AB545 /* Model */,
+				39F511371C538142004AB545 /* PhotoManager.h */,
+				39F511381C538142004AB545 /* PhotoManager.m */,
+			);
+			name = Photo;
+			sourceTree = "<group>";
+		};
+		39F5113C1C53843D004AB545 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				39F5113D1C538471004AB545 /* AlbumModel.h */,
+				39F5113E1C538471004AB545 /* AlbumModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		39F511401C538763004AB545 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				1860720D1C48F79C008489F7 /* LocationViewController.h */,
+				1860720E1C48F79C008489F7 /* LocationViewController.m */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
+		39F511411C538770004AB545 /* Jurisdiction */ = {
+			isa = PBXGroup;
+			children = (
+				1809F2211C4DDDA8002B44F1 /* ShareRangeViewController.h */,
+				1809F2221C4DDDA8002B44F1 /* ShareRangeViewController.m */,
+			);
+			name = Jurisdiction;
+			sourceTree = "<group>";
+		};
+		39F511421C538791004AB545 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				39F511431C5387A8004AB545 /* PhotoViewController.h */,
+				39F511441C5387A8004AB545 /* PhotoViewController.m */,
+			);
+			name = Photo;
+			sourceTree = "<group>";
+		};
+		39F511491C53BEC5004AB545 /* PhotoView */ = {
+			isa = PBXGroup;
+			children = (
+				39F5114A1C53BEEB004AB545 /* AlbumTitleView.h */,
+				39F5114B1C53BEEB004AB545 /* AlbumTitleView.m */,
+			);
+			name = PhotoView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1316,15 +1393,19 @@
 				1837F33D1C4CEEFC00AA1C0D /* LocationModel.m in Sources */,
 				18FBA0091C15A3FD00EF6EA6 /* LeeScrollViewWithArray.m in Sources */,
 				18E705921C17CA2100890719 /* MessageTableView.m in Sources */,
+				39F511481C5387B6004AB545 /* BaseViewController.m in Sources */,
 				185C0DDF1C1A753200BAF302 /* MineScrollView.m in Sources */,
 				18AD92371C3BACB300B518B9 /* DevelopmentTableViewCell.m in Sources */,
+				39F5113F1C538471004AB545 /* AlbumModel.m in Sources */,
 				18FBA00A1C15A3FD00EF6EA6 /* LeeScrollViewWithView.m in Sources */,
 				180C7F631C28EB7B0050E6B4 /* AFURLConnectionOperation.m in Sources */,
 				184B3B251C0EDF6900FB7B06 /* ConnectDelegate.m in Sources */,
 				180C7F6E1C28EB7B0050E6B4 /* UIWebView+AFNetworking.m in Sources */,
 				18E550681C0C1B98004A5E1D /* UnusedViewController.m in Sources */,
 				180C7F6D1C28EB7B0050E6B4 /* UIRefreshControl+AFNetworking.m in Sources */,
+				39F5114C1C53BEEB004AB545 /* AlbumTitleView.m in Sources */,
 				18403FA51C28E83700651726 /* MJRefreshAutoGifFooter.m in Sources */,
+				39F511391C538142004AB545 /* PhotoManager.m in Sources */,
 				186551D61C3A3FA100BE5C65 /* PopOverView.m in Sources */,
 				18C1D0791C3A77A500AF78E4 /* TitleViewTableView.m in Sources */,
 				18AD92331C3BAA8E00B518B9 /* DevelopmentTableView.m in Sources */,
@@ -1352,6 +1433,7 @@
 				180C7F6C1C28EB7B0050E6B4 /* UIProgressView+AFNetworking.m in Sources */,
 				1852BF5F1C3A9A65000C69D6 /* TitleViewHeader.m in Sources */,
 				181961171C1FEBE7009CA33B /* ViewController.m in Sources */,
+				39F511451C5387A8004AB545 /* PhotoViewController.m in Sources */,
 				1820CA191C1023120053EF49 /* MineTableView.m in Sources */,
 				18403FA11C28E83700651726 /* MJRefreshBackFooter.m in Sources */,
 				185C7E321C44A23900544B2B /* CustomTextView.m in Sources */,

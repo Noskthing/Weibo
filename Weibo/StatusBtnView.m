@@ -53,7 +53,7 @@
     return self;
 }
 
--(void)setJurisdiction:(NSInteger)jurisdiction
+-(void)setJurisdiction:(int)jurisdiction
 {
     _jurisdiction = jurisdiction;
     
