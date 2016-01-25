@@ -246,7 +246,8 @@ static const CGFloat customKeyBoardHeight = 46;
         case 200:
         {
             PhotoViewController * photoViewController = [[PhotoViewController alloc] init];
-            [self presentViewController:photoViewController animated:YES completion:^{
+            UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:photoViewController];
+            [self presentViewController:nav animated:YES completion:^{
                 
             }];
          }

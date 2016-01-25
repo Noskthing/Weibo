@@ -137,7 +137,9 @@
         //当mediaType == 2时，这个资源则为视频资源
         if (asset.mediaType == 1)
         {
-            [dataArray addObject:asset];
+            [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:CGSizeMake(200, 200) contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+                [dataArray addObject:result];
+            }];
         }
     }
     return [dataArray copy];
