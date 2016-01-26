@@ -113,7 +113,7 @@
 
         NSInteger page = [arr[i] intValue];
         UIView * view = _views[page];
-        view.frame = CGRectMake(i *self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
+        view.frame = CGRectMake((int)i *self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
         if(i == 1)
         {
             UITapGestureRecognizer * ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelected:)];

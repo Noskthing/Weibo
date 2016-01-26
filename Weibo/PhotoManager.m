@@ -94,7 +94,7 @@
     AlbumModel * model = [[AlbumModel alloc] init];
     
     PHFetchResult *group = [PHAsset fetchAssetsInAssetCollection:collection options:nil];
-    [[PHImageManager defaultManager] requestImageForAsset:group.lastObject targetSize:CGSizeMake(200, 200) contentMode:PHImageContentModeDefault options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+    [[PHImageManager defaultManager] requestImageForAsset:group.lastObject targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeDefault options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         if (result == nil)
         {
             model.albumImage = [UIImage imageNamed:@""];
@@ -128,7 +128,7 @@
 }
 
 //获取图片资源
--(NSArray *)getPhotoAssets:(PHFetchResult *)fetchResult
+-(NSArray *)getPhotoAssets:(PHFetchResult *)fetchResult targetSize:(CGSize)size
 {
     NSMutableArray *dataArray = [NSMutableArray array];
     for (PHAsset *asset in fetchResult)
@@ -137,7 +137,7 @@
         //当mediaType == 2时，这个资源则为视频资源
         if (asset.mediaType == 1)
         {
-            [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:CGSizeMake(200, 200) contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
                 [dataArray addObject:result];
             }];
         }

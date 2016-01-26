@@ -11,6 +11,7 @@
 #import "PhotoManager.h"
 #import "AlbumModel.h"
 #import "PhotoShowView.h"
+#import "PhototShowViewController.h"
 
 @interface PhotoViewController ()
 {
@@ -77,18 +78,19 @@
     }
     else
     {
-        PhotoShowView * phototShowView = [[PhotoShowView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64)];
+        PhotoShowView * phototShowView = [[PhotoShowView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         [phototShowView setCellDidSelectedBlock:^(NSInteger row, UIImage *image, NSUInteger countOfImages) {
-            
+            PhototShowViewController * phototShowViewController = [[PhototShowViewController alloc] init];
+            phototShowViewController.images = _images;
+            phototShowViewController.num = row;
+            [self.navigationController pushViewController:phototShowViewController animated:YES];
         }];
         [self.view addSubview:phototShowView];
         
         NSArray * albums = [manager getAlbummodels];
         AlbumModel * model = albums[0];
         
-        NSArray * images = [manager getPhotoAssets:model.result];
-        _images = images;
-        [phototShowView setModels:images];
+        [phototShowView setModels:model];
     }
 }
 

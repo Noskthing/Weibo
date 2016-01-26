@@ -7,7 +7,8 @@
 //
 
 #import "PhototShowViewController.h"
-#import "LeeScrollViewWithView.h"
+#import "LeeScrollViewWithArray.h"
+
 
 @interface PhototShowViewController ()
 
@@ -18,10 +19,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIImageView * imageView = [[UIImageView alloc] init];
-    imageView.image = self.images[self.num];
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
-    LeeScrollViewWithView * scrollView = [[LeeScrollViewWithView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) andView:imageView andTimerWithTimeInterval:999];
+    //遍历创造uiimageView；
+    NSMutableArray * arr = [NSMutableArray array];
+    [_images enumerateObjectsUsingBlock:^(UIImage *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        @autoreleasepool
+        {
+            UIImageView * imageView = [[UIImageView alloc] init];
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
+            imageView.image = obj;
+            [arr addObject:imageView];
+        }
+    }];
+    
+    LeeScrollViewWithArray * scrollView = [[LeeScrollViewWithArray alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height) andArray:[arr copy] andTimerWithTimeInterval:999];
+    [scrollView scrollToPage:self.num];
     
     [self.view addSubview:scrollView];
 }

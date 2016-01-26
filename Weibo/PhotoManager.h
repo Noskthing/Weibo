@@ -14,5 +14,5 @@
 +(instancetype)standPhotoManager;
 
 -(NSArray *)getAlbummodels;
--(NSArray *)getPhotoAssets:(PHFetchResult *)fetchResult;
+-(NSArray *)getPhotoAssets:(PHFetchResult *)fetchResult targetSize:(CGSize)size;
 @end

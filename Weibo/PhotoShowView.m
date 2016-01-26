@@ -8,6 +8,8 @@
 
 #import "PhotoShowView.h"
 #import "PhotoCollectionViewCell.h"
+#import "AlbumModel.h"
+#import "PhotoManager.h"
 
 @interface PhotoShowView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -27,9 +29,12 @@ static const CGFloat edge = 5;
     _block = block;
 }
 
--(void)setModels:(NSArray *)models
+-(void)setModels:(AlbumModel *)model
 {
-    _models = models;
+    CGFloat side = (self.frame.size.width - 2 * (edge + space))/3;
+    
+    _models = [[PhotoManager standPhotoManager] getPhotoAssets:model.result targetSize:CGSizeMake(side,200)];
+    
     [_collectionView reloadData];
 }
 
