@@ -11,7 +11,7 @@
 
 @implementation PhotoManager
 
-//单例类
+#pragma mark    单例类
 +(instancetype)standPhotoManager
 {
     static dispatch_once_t onceTokenOfPhtotManger;
@@ -24,7 +24,7 @@
     return manager;
 }
 
-//判定权限
+#pragma mark    判定权限
 -(BOOL)photoJurisdiction
 {
     //相册权限判断
@@ -62,7 +62,7 @@
     }
 }
 
-//获取相册模型
+#pragma mark   获取相册模型
 -(NSArray *)getAlbummodels
 {
     if ([self photoJurisdiction])
@@ -88,7 +88,7 @@
     }
 }
 
-//根据collection获取相册模型
+#pragma mark 根据collection获取相册模型
 -(AlbumModel *)getALbumModelFromPHAssetCollection:(PHAssetCollection *)collection
 {
     AlbumModel * model = [[AlbumModel alloc] init];
@@ -105,14 +105,54 @@
         }
     }];
     
-    if ([collection.localizedTitle isEqualToString:@"Camera Roll"])
+    /**
+     All Photos:        所有照片
+     Bursts:            连拍快照
+     Favorites:         收藏
+     Selfies:           自拍
+     Screenshots:       屏幕快照
+     Recently Added:    最近添加
+     */
+    
+    NSString *titleStr = nil;
+    if ([collection.localizedTitle isEqualToString:@"All Photos"])
     {
-        model.albumName = @"相机胶卷";
+        titleStr = @"所有相片";
+    }
+    else if ([collection.localizedTitle isEqualToString:@"Bursts"])
+    {
+        titleStr = @"连拍快照";
+    }
+    else if ([collection.localizedTitle isEqualToString:@"Favorites"])
+    {
+        titleStr = @"收藏";
+    }
+    else if ([collection.localizedTitle isEqualToString:@"Selfies"])
+    {
+        titleStr = @"自拍";
+    }
+    else if ([collection.localizedTitle isEqualToString:@"Screenshots"])
+    {
+        titleStr = @"屏幕快照";
+    }
+    else if ([collection.localizedTitle isEqualToString:@"Recently Added"])
+    {
+        titleStr = @"最近添加";
+    }
+    else if ([collection.localizedTitle isEqualToString:@"Recently Deleted"])
+    {
+        titleStr = @"最近删除";
+    }
+    else if ([collection.localizedTitle isEqualToString:@"Camera Roll"])
+    {
+        titleStr = @"相册交卷";
     }
     else
     {
-        model.albumName = [NSString stringWithFormat:@"%@",collection.localizedTitle];
+        titleStr = [NSString stringWithFormat:@"%@",collection.localizedTitle];
     }
+    model.albumName = titleStr;
+    
     model.albumNum = [NSString stringWithFormat:@"%lu",(unsigned long)group.count];
     
     model.result = [self getFetchResult:collection];
@@ -120,24 +160,27 @@
     return model;
 }
 
-
+#pragma mark    获取Result
 -(PHFetchResult *)getFetchResult:(PHAssetCollection *)assetCollection
 {
     PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:assetCollection options:nil];
     return fetchResult;
 }
 
-//获取图片资源
+#pragma mark    获取图片资源
 -(NSArray *)getPhotoAssets:(PHFetchResult *)fetchResult targetSize:(CGSize)size
 {
     NSMutableArray *dataArray = [NSMutableArray array];
     for (PHAsset *asset in fetchResult)
     {
+//        获取屏幕尺寸 转换图片size单位 targetSize使用的是px
+         CGFloat scale = [[UIScreen mainScreen] scale];
+        
         //只添加图片类型资源，去除视频类型资源
         //当mediaType == 2时，这个资源则为视频资源
         if (asset.mediaType == 1)
         {
-            [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:CGSizeMake(size.width * scale, size.height * scale) contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
                 [dataArray addObject:result];
             }];
         }

@@ -66,7 +66,8 @@
 #pragma mark   -更多按钮点击时间
 -(void)btnTouch:(UIButton *)sender
 {
-    
+    //自动挂起的一个私有api   不好玩  我也就玩了几十次
+//    [[UIApplication sharedApplication] performSelector:@selector(suspend)];
     if (sender.tag == 30)
     {
         [sender removeFromSuperview];
