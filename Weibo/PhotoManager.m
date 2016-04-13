@@ -29,33 +29,33 @@
 {
     //相册权限判断
     PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
-    if (status == PHAuthorizationStatusDenied)
+    if (status == PHAuthorizationStatusAuthorized)
     {
-        //相册权限未开启
-        return NO;
-    }
-    else if(status == PHAuthorizationStatusNotDetermined)
-    {
-        __block BOOL result;
-        //相册进行授权
-        /* * * 第一次安装应用时直接进行这个判断进行授权 * * */
-        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status){
-            //授权后直接打开照片库
-            if (status == PHAuthorizationStatusAuthorized)
-            {
-                result = YES;
-            }
-            else
-            {
-                result = NO;
-            }
-        }];
-        return result;
-    }
-    else if (status == PHAuthorizationStatusAuthorized)
-    {
+        //相册权限开启
         return YES;
     }
+//    else if(status == PHAuthorizationStatusNotDetermined)
+//    {
+//        __block BOOL result;
+//        //相册进行授权
+//        /* * * 第一次安装应用时直接进行这个判断进行授权 * * */
+//        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status){
+//            //授权后直接打开照片库
+//            if (status == PHAuthorizationStatusAuthorized)
+//            {
+//                result = YES;
+//            }
+//            else
+//            {
+//                result = NO;
+//            }
+//        }];
+//        return result;
+//    }
+//    else if (status == PHAuthorizationStatusAuthorized)
+//    {
+//        return YES;
+//    }
     else
     {
         return NO;
@@ -174,13 +174,13 @@
     for (PHAsset *asset in fetchResult)
     {
 //        获取屏幕尺寸 转换图片size单位 targetSize使用的是px
-         CGFloat scale = [[UIScreen mainScreen] scale];
+//         CGFloat scale = [[UIScreen mainScreen] scale];
         
         //只添加图片类型资源，去除视频类型资源
         //当mediaType == 2时，这个资源则为视频资源
         if (asset.mediaType == 1)
         {
-            [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:CGSizeMake(size.width * scale, size.height * scale) contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeDefault options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
                 [dataArray addObject:result];
             }];
         }

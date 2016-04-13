@@ -15,7 +15,9 @@
 {
     UICollectionView * _collectionView;
     NSArray * _models;
-    CellDidSelectedBlock _block;
+    CellDidSelectedBlock _cellBlock;
+    SelectedBtnDidSelectedBlock _seleBlock;
+    AlbumModel * _model;
 }
 @end
 
@@ -26,14 +28,19 @@ static const CGFloat edge = 5;
 
 -(void)setCellDidSelectedBlock:(CellDidSelectedBlock)block
 {
-    _block = block;
+    _cellBlock = block;
 }
 
--(void)setModels:(AlbumModel *)model
+-(void)setSelectedBtnDidSelectedBlock:(SelectedBtnDidSelectedBlock)block
 {
-    CGFloat side = (self.frame.size.width - 2 * (edge + space))/3;
-    
-    _models = [[PhotoManager standPhotoManager] getPhotoAssets:model.result targetSize:CGSizeMake(side,200)];
+    _seleBlock = block;
+}
+
+-(void)setModel:(AlbumModel *)model
+{
+//    CGFloat side = (self.frame.size.width - 2 * (edge + space))/3;
+    _model = model;
+    _models = [[PhotoManager standPhotoManager] getPhotoAssets:model.result targetSize:CGSizeMake(200,200)];
     
     [_collectionView reloadData];
 }
@@ -70,7 +77,7 @@ static const CGFloat edge = 5;
 {
     if (_models)
     {
-        return _models.count;
+        return _models.count + 1;
     }
     return 0;
 }
@@ -79,21 +86,19 @@ static const CGFloat edge = 5;
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PhotoCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCollectionViewCell.h" forIndexPath:indexPath];
+
     
     if (_models)
     {
-        [cell setModel:_models[indexPath.row]];
+        [cell setModel:indexPath.row == 0?nil:_models[indexPath.row - 1] isFirstBtn:indexPath.row == 0?YES:NO];
+        [cell setPhototNumber:indexPath.row photosCount:_models.count AlbumModel:_model];
+        if (_seleBlock && _cellBlock)
+        {
+            [cell setCellDidSelectedBlock:_cellBlock SelectedBtnDidSelectedBlock:_seleBlock];
+        }
     }
     
     return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (_block)
-    {
-        UIImage * image = _models[indexPath.row];
-        _block(indexPath.row,image,_models.count);
-    }
-}
 @end

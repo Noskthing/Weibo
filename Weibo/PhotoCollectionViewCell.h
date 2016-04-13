@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef void(^imageDidSelected)(UIImage * image);
+@class  AlbumModel;
+typedef void(^CellDidSelectedBlock)(NSInteger row,AlbumModel * model,NSUInteger countOfImages);
+typedef void(^SelectedBtnDidSelectedBlock)(UIImage * image,BOOL isSelected);
 @interface PhotoCollectionViewCell : UICollectionViewCell
 
--(void)setModel:(UIImage *)image;
+-(void)setModel:(UIImage *)image isFirstBtn:(BOOL)first;
+-(void)setPhototNumber:(NSInteger)num photosCount:(NSInteger)count AlbumModel:(AlbumModel *)model;
+-(void)setCellDidSelectedBlock:(CellDidSelectedBlock)cellBlock SelectedBtnDidSelectedBlock:(SelectedBtnDidSelectedBlock)seleBlock;
 @end

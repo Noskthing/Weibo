@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class  AlbumModel;
 @interface PhototShowViewController : UIViewController
 
 //图片
-@property (nonatomic,strong)NSArray * images;
+@property (nonatomic,strong)AlbumModel * model;
 //图片总量
 @property (nonatomic,assign)NSUInteger count;
 //当前图片

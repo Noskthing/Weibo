@@ -105,15 +105,15 @@
     [self clearSubviews];
     
     //获取将要显示的图片下标
-    NSArray * arr = [self currentImagesPageCount];
+    NSArray * arr = [[self currentImagesPageCount] copy];
     
     //依次创建视图并加入滚动视图中
-    for (int i = 0; i < 3; i++)
+    for (NSInteger i = 0; i < 3; i++)
     {
 
-        NSInteger page = [arr[i] intValue];
+        NSInteger page = [arr[i] integerValue];
         UIView * view = _views[page];
-        view.frame = CGRectMake((int)i *self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
+        view.frame = CGRectMake(i *self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
         if(i == 1)
         {
             UITapGestureRecognizer * ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelected:)];

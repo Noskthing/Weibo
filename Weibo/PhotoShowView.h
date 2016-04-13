@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^CellDidSelectedBlock)(NSInteger row,UIImage * image,NSUInteger countOfImages);
 @class AlbumModel;
+typedef void(^CellDidSelectedBlock)(NSInteger row,AlbumModel * model,NSUInteger countOfImages);
+typedef void(^SelectedBtnDidSelectedBlock)(UIImage * image,BOOL isSelected);
 @interface PhotoShowView : UIView
 
--(void)setModels:(AlbumModel *)model;
+-(void)setModel:(AlbumModel *)model;
 -(void)setCellDidSelectedBlock:(CellDidSelectedBlock)block;
+-(void)setSelectedBtnDidSelectedBlock:(SelectedBtnDidSelectedBlock)block;
 @end

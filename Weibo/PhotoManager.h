@@ -13,6 +13,7 @@
 
 +(instancetype)standPhotoManager;
 
+-(BOOL)photoJurisdiction;
 -(NSArray *)getAlbummodels;
 -(NSArray *)getPhotoAssets:(PHFetchResult *)fetchResult targetSize:(CGSize)size;
 @end

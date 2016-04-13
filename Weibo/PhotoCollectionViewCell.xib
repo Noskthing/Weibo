@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -14,9 +14,12 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="126" height="126"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_icon_addattention" translatesAutoresizingMaskIntoConstraints="NO" id="Cmi-3d-LuN">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAN-bV-DYh">
                         <rect key="frame" x="0.0" y="0.0" width="126" height="126"/>
-                    </imageView>
+                        <connections>
+                            <action selector="imageDidSelected:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Ff7-yT-Qha"/>
+                        </connections>
+                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dej-su-Ora">
                         <rect key="frame" x="97" y="1" width="25" height="25"/>
                         <constraints>
@@ -34,22 +37,22 @@
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="lAN-bV-DYh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="1gL-RA-fZL"/>
                 <constraint firstItem="Dej-su-Ora" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" multiplier="5" constant="1" id="2FE-4C-sFb"/>
                 <constraint firstAttribute="trailing" secondItem="Dej-su-Ora" secondAttribute="trailing" constant="4" id="7xm-Dt-25X"/>
-                <constraint firstAttribute="bottom" secondItem="Cmi-3d-LuN" secondAttribute="bottom" id="Hq7-cv-XLf"/>
-                <constraint firstItem="Cmi-3d-LuN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="YuX-3x-8ow"/>
-                <constraint firstItem="Cmi-3d-LuN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="g5v-gH-hCH"/>
-                <constraint firstAttribute="trailing" secondItem="Cmi-3d-LuN" secondAttribute="trailing" id="zno-kK-SGc"/>
+                <constraint firstAttribute="bottom" secondItem="lAN-bV-DYh" secondAttribute="bottom" id="Fbf-yP-8V7"/>
+                <constraint firstAttribute="trailing" secondItem="lAN-bV-DYh" secondAttribute="trailing" id="cGR-fH-adZ"/>
+                <constraint firstItem="lAN-bV-DYh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="qJX-Zm-axv"/>
             </constraints>
             <size key="customSize" width="126" height="126"/>
             <connections>
-                <outlet property="imageView" destination="Cmi-3d-LuN" id="8KW-UD-qRw"/>
+                <outlet property="imageBtn" destination="lAN-bV-DYh" id="xg2-nl-BTC"/>
+                <outlet property="selectedBtn" destination="Dej-su-Ora" id="lqH-eI-Tfe"/>
             </connections>
             <point key="canvasLocation" x="318" y="266"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="card_icon_addattention" width="24" height="24"/>
         <image name="compose_photo_preview_default" width="30" height="30"/>
         <image name="compose_photo_preview_right" width="30" height="30"/>
     </resources>

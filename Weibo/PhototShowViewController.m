@@ -8,6 +8,8 @@
 
 #import "PhototShowViewController.h"
 #import "LeeScrollViewWithArray.h"
+#import "AlbumModel.h"
+#import "PhotoManager.h"
 
 
 @interface PhototShowViewController ()
@@ -24,20 +26,37 @@
     
     //遍历创造uiimageView；
     NSMutableArray * arr = [NSMutableArray array];
-    [_images enumerateObjectsUsingBlock:^(UIImage *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        @autoreleasepool
+//    NSArray * images = [[PhotoManager standPhotoManager] getPhotoAssets:self.model.result targetSize:PHImageManagerMaximumSize];
+//    [images enumerateObjectsUsingBlock:^(UIImage *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        @autoreleasepool
+//        {
+//            UIImageView * imageView = [[UIImageView alloc] init];
+//            imageView.contentMode = UIViewContentModeScaleAspectFit;
+//            imageView.image = obj;
+//            [arr addObject:imageView];
+//        }
+//    }];
+    [self.model.result enumerateObjectsUsingBlock:^(PHAsset *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        PHImageManager *imageManager = [PHImageManager defaultManager];
+        [imageManager requestImageForAsset:obj
+                                targetSize:PHImageManagerMaximumSize
+                               contentMode:PHImageContentModeDefault
+                                   options:nil
+                             resultHandler:^(UIImage *result, NSDictionary *info) {
+                                 UIImageView * imageView = [[UIImageView alloc] initWithImage:result];
+                                 [arr addObject:imageView];
+                             }];
+        if (idx == self.model.result.count - 1)
         {
-            UIImageView * imageView = [[UIImageView alloc] init];
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            imageView.image = obj;
-            [arr addObject:imageView];
+            LeeScrollViewWithArray * scrollView = [[LeeScrollViewWithArray alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height - 64) andArray:[arr copy] andTimerWithTimeInterval:999];
+            scrollView.backgroundColor = [UIColor redColor];
+//            [scrollView scrollToPage:self.num];
+            
+            [self.view addSubview:scrollView];
         }
     }];
     
-    LeeScrollViewWithArray * scrollView = [[LeeScrollViewWithArray alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height) andArray:[arr copy] andTimerWithTimeInterval:999];
-    [scrollView scrollToPage:self.num];
-    
-    [self.view addSubview:scrollView];
+ 
 }
 
 - (void)didReceiveMemoryWarning {
