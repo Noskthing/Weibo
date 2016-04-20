@@ -47,7 +47,7 @@
             {
                 //授权成功
                 //必须回到主线程更新UI  使用GCD返回主线程  否则会有警告
-                //授权判定应该是异步处理的  之前在photoJurisdiction方法当中进行逻辑判断也是这样 因为是异步  所以在第一次授权情况下会跳过授权过程直接按照授权成功的逻辑处理
+                //授权判定应该是异步处理的  并且阻塞主线程 之前在photoJurisdiction方法当中进行逻辑判断也是这样 因为是异步  所以在第一次授权情况下会跳过授权过程直接按照授权成功的逻辑处理
                 //This application is modifying the autolayout engine from a background thread, which can lead to engine corruption and weird crashes.  This will cause an exception in a future release.
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self createPhotoView];
@@ -79,14 +79,23 @@
 #pragma mark   相册授权成功展示视图的创建
 -(void)createPhotoView
 {
+    //获取相册模型
     PhotoManager * manager = [PhotoManager standPhotoManager];
     
-    PhotoShowView * phototShowView = [[PhotoShowView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 113)];
+    NSArray * albums = [manager getAlbummodels];
+    AlbumModel * model = albums[0];
     
+    
+    //创建PhotoShowView
+    PhotoShowView * phototShowView = [[PhotoShowView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 113)];
+
+    //photoView属性设置
+    [phototShowView setModel:model];
     [phototShowView setCellDidSelectedBlock:^(NSInteger row, AlbumModel *model, NSUInteger countOfImages) {
                     PhototShowViewController * phototShowViewController = [[PhototShowViewController alloc] init];
                     phototShowViewController.model = model;
                     phototShowViewController.num = row;
+                    phototShowViewController.count = countOfImages;
                     [self.navigationController pushViewController:phototShowViewController animated:YES];
 //        NSLog(@"row is %ld countOfImage is %lu",(long)row,(unsigned long)countOfImages);
     }];
@@ -99,10 +108,7 @@
     }];
     [self.view addSubview:phototShowView];
     
-    NSArray * albums = [manager getAlbummodels];
-    AlbumModel * model = albums[0];
     
-    [phototShowView setModel:model];
 }
 
 #pragma mark -UIButton点击事件

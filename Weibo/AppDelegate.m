@@ -49,6 +49,10 @@
     
 //    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
 //    [defaults removeObjectForKey:@"uid"];
+    
+    [NSThread sleepForTimeInterval:5.0];
+    [_window makeKeyAndVisible];
+    
     //导航控制器
     UITabBarController * tabbr = [[UITabBarController alloc] init];
     _tabbr = tabbr;

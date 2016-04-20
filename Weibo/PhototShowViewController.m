@@ -7,12 +7,13 @@
 //
 
 #import "PhototShowViewController.h"
-#import "LeeScrollViewWithArray.h"
+#import "LBWScrollView.h"
 #import "AlbumModel.h"
 #import "PhotoManager.h"
 
 
-@interface PhototShowViewController ()
+@interface PhototShowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@property(nonatomic,strong)UICollectionView * collectionView;
 
 @end
 
@@ -24,54 +25,65 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    //遍历创造uiimageView；
-    NSMutableArray * arr = [NSMutableArray array];
-//    NSArray * images = [[PhotoManager standPhotoManager] getPhotoAssets:self.model.result targetSize:PHImageManagerMaximumSize];
-//    [images enumerateObjectsUsingBlock:^(UIImage *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        @autoreleasepool
-//        {
-//            UIImageView * imageView = [[UIImageView alloc] init];
-//            imageView.contentMode = UIViewContentModeScaleAspectFit;
-//            imageView.image = obj;
-//            [arr addObject:imageView];
-//        }
-//    }];
-    [self.model.result enumerateObjectsUsingBlock:^(PHAsset *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        PHImageManager *imageManager = [PHImageManager defaultManager];
-        [imageManager requestImageForAsset:obj
-                                targetSize:PHImageManagerMaximumSize
-                               contentMode:PHImageContentModeDefault
-                                   options:nil
-                             resultHandler:^(UIImage *result, NSDictionary *info) {
-                                 UIImageView * imageView = [[UIImageView alloc] initWithImage:result];
-                                 [arr addObject:imageView];
-                             }];
-        if (idx == self.model.result.count - 1)
-        {
-            LeeScrollViewWithArray * scrollView = [[LeeScrollViewWithArray alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height - 64) andArray:[arr copy] andTimerWithTimeInterval:999];
-            scrollView.backgroundColor = [UIColor redColor];
-//            [scrollView scrollToPage:self.num];
-            
-            [self.view addSubview:scrollView];
-        }
-    }];
     
- 
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark    创建UI
+#pragma mark  创建UICollectionView
+-(void)createCollectionView
+{
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    flowLayout.minimumInteritemSpacing = 0;
+    flowLayout.minimumLineSpacing = 0;
+    flowLayout.itemSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
+    
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) collectionViewLayout:flowLayout];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    self.collectionView.pagingEnabled = YES;
+    self.collectionView.backgroundColor = [UIColor blackColor];
+    self.collectionView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
+    [self.view addSubview:self.collectionView];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark     错误代码 反思注释
+-(void)errorThing
+{
+    /**
+     
+     这里不推荐使用UIScrollView展示
+     非常抱歉的是个人自己封装的UIScrollView也无法使用
+     遍历获得PHAsset 通过PHImageManager获取图片   其中可能是因为异步的原因导致获取图片数组失败  想要一次性获得所有图片不现实  个人封装的UIScrollView在复用这里考虑的不如系统本身的UITableView之类的全面 可能出现未知崩溃
+     妥协的办法是使用UItableView之类 将PHAsset数组传入 在每一个cell/item使用时去使用PHImageManager去获取图片加载
+     
+     我的疑惑是遍历获取图片是否会出现偏差 因为是单例类PHImageManager  频繁调用某一个方法可能出现线程错误  我的猜测啊
+     
+     */
+    
+    //    LBWScrollViewWithArray * scrollView = [[LBWScrollViewWithArray alloc] initWithFrame: CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height - 64)];
+    //    [self.view addSubview:scrollView];
+    //
+    ////    遍历创造uiimageView
+    //    NSMutableArray * arr = [NSMutableArray array];
+    //
+    //    for(int i = 0; i < 4;i ++)
+    //    {
+    //        NSLog(@"hahahahaha");
+    //        [[PHImageManager defaultManager] requestImageForAsset:self.model.result[0] targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeDefault options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+    //            UIImageView * imageView = [[UIImageView alloc] init];
+    //            imageView.contentMode = UIViewContentModeScaleAspectFit;
+    //            imageView.image = result;
+    //            [arr addObject:imageView];
+    //
+    //            if (i == 3)
+    //            {
+    //                scrollView.views = [arr copy];
+    //            }
+    //        }];
+    //    }
 }
-*/
 
 @end

@@ -9,8 +9,7 @@
 #import "MineInfoViewController.h"
 #import "MineScrollView.h"
 #import "UIImageView+WebCache.h"
-#import "TitleView.h"
-#import "ScrollView.h"
+#import "LBWScrollView.h"
 #import "Define.h"
 #import "UIView+Additions.h"
 #import "ConnectDelegate.h"
@@ -181,12 +180,12 @@ static const CGFloat titleViewHeight = 35;
 {
 
     //创建底部联动视图
-    UICollectionViewFlowLayout * layout  = [[UICollectionViewFlowLayout alloc] init];
-    TitleView * titleView = [[TitleView alloc] initWithFrame:CGRectMake(60, bgViewHeight, self.view.frame.size.width - 120, titleViewHeight) collectionViewLayout:layout];
-    //titleView背景
-    UIView * titleBgView = [[UIView alloc] initWithFrame:CGRectMake(0, bgViewHeight, self.view.frame.size.width, titleViewHeight)];
-    titleBgView.backgroundColor = [UIColor colorWithRed:0.961f green:0.961f blue:0.961f alpha:1];
-    [self.scrollView addSubview:titleBgView];
+//    UICollectionViewFlowLayout * layout  = [[UICollectionViewFlowLayout alloc] init];
+//    TitleView * titleView = [[TitleView alloc] initWithFrame:CGRectMake(60, bgViewHeight, self.view.frame.size.width - 120, titleViewHeight) collectionViewLayout:layout];
+//    //titleView背景
+//    UIView * titleBgView = [[UIView alloc] initWithFrame:CGRectMake(0, bgViewHeight, self.view.frame.size.width, titleViewHeight)];
+//    titleBgView.backgroundColor = [UIColor colorWithRed:0.961f green:0.961f blue:0.961f alpha:1];
+//    [self.scrollView addSubview:titleBgView];
     
     
     UIView * view1 = [[UIView alloc] init];
@@ -199,21 +198,19 @@ static const CGFloat titleViewHeight = 35;
     
     NSArray * views = @[view1,view2,view3];
     
-    ScrollView * scrollViews = [[ScrollView alloc] initWithFrame:CGRectMake(0, bgViewHeight + titleViewHeight, self.view.frame.size.width,self.view.frame.size.height - titleViewHeight)];
     //scollView背景
-    UIView * scrollViewsBg = [[UIView alloc] initWithFrame:CGRectMake(0, bgViewHeight + titleViewHeight, self.view.frame.size.width,self.view.frame.size.height - titleViewHeight)];
-    scrollViewsBg.backgroundColor = [UIColor whiteColor];
-    [self.scrollView addSubview:scrollViewsBg];
-    [scrollViews setOffsetChangeBlock:^(CGFloat scale) {
-        [titleView scrollViewWithOffset:scale];
-    } views:views];
-    
+    UIScrollView * scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, bgViewHeight + titleViewHeight, self.view.frame.size.width,self.view.frame.size.height - titleViewHeight)];
+    scrollView.views = views;
     
     NSArray * arr = @[@"主页",@"微博",@"相册"];
-    [titleView titleViewWithTitles:arr scrollViewColor:[UIColor orangeColor] itemDidSelectedBlock:^(CGFloat scale,NSInteger index) {
-        [scrollViews scrollWithScale:scale];
-    }];
-    [self.scrollView addSubview:scrollViews];
+    LBWScrollTitleView * titleView = [[LBWScrollTitleView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/5, bgViewHeight, self.view.frame.size.width * 3/5, titleViewHeight)];
+    titleView.scrollModuleHeight = 3;
+    titleView.scrollModuleColor = [UIColor orangeColor];
+    titleView.titles = arr;
+    
+    scrollView.titleView = titleView;
+    
+    [self.scrollView addSubview:scrollView];
     [self.scrollView addSubview:titleView];
 }
 

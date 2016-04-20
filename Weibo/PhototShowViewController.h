@@ -11,7 +11,7 @@
 @class  AlbumModel;
 @interface PhototShowViewController : UIViewController
 
-//图片
+//图片模型
 @property (nonatomic,strong)AlbumModel * model;
 //图片总量
 @property (nonatomic,assign)NSUInteger count;
