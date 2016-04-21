@@ -10,23 +10,36 @@
 #import "LBWScrollView.h"
 #import "AlbumModel.h"
 #import "PhotoManager.h"
-
+#import "CheckPhotoViewCell.h"
 
 @interface PhototShowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property(nonatomic,strong)UICollectionView * collectionView;
 
+@property(nonatomic,strong)UIButton * selectedBtn;
+
+@property(nonatomic,strong)UIButton * rightBarItemButton;
 @end
 
 @implementation PhototShowViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    [self createCollectionView];
+    [self createSelectedBtn];
     
-    
+    [self createSubviewsOnNav];
+}
+
+//滑动到制定位置
+-(void)viewDidLayoutSubviews
+{
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:self.num - 1 inSection:0];
+    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
 }
 
 #pragma mark    创建UI
@@ -39,16 +52,114 @@
     flowLayout.minimumLineSpacing = 0;
     flowLayout.itemSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
     
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64) collectionViewLayout:flowLayout];
+    [self.view addSubview:self.collectionView];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.collectionView.pagingEnabled = YES;
-    self.collectionView.backgroundColor = [UIColor blackColor];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
-    [self.view addSubview:self.collectionView];
+    [self.collectionView registerClass:[CheckPhotoViewCell class] forCellWithReuseIdentifier:@"CheckPhotoViewCell"];
+    
 }
 
+#pragma mark     创建选中按钮
+-(void)createSelectedBtn
+{
+    UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width * 0.8, 95, 30, 30)];
+    _selectedBtn = btn;
+    
+    [btn addTarget:self action:@selector(selectedBtnTouch:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [btn setImage:[UIImage imageNamed:@"compose_photo_preview_default"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"compose_photo_preview_right"] forState:UIControlStateSelected];
+    
+    [self.view addSubview:btn];
+}
 
+#pragma mark    导航栏控件创建
+-(void)createSubviewsOnNav
+{
+    self.navigationItem.title = [NSString stringWithFormat:@"%ld/%lu",(long)self.num,(unsigned long)self.count];
+    
+    self.rightBarItemButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.selectedPhotos?68:55, 25)];
+    self.rightBarItemButton.layer.cornerRadius = 5;
+    [self.rightBarItemButton setTitle:self.selectedPhotos?[NSString stringWithFormat:@"下一步(%lu)",(unsigned long)self.selectedPhotos.count]:@"下一步" forState:UIControlStateNormal];
+    self.rightBarItemButton.titleLabel.font = [UIFont systemFontOfSize:15];
+    self.rightBarItemButton.backgroundColor = [UIColor orangeColor];
+    self.rightBarItemButton.titleLabel.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightBarItemButton];
+}
+
+#pragma mark     UICollectionView代理方法
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    if (self.model)
+    {
+        return self.model.result.count;
+    }
+    return 0;
+}
+
+- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CheckPhotoViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CheckPhotoViewCell" forIndexPath:indexPath];
+    
+    if (self.model)
+    {
+        [cell configWith:self.model.result[indexPath.row]];
+    }
+    
+    return cell;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    self.num = ((scrollView.contentOffset.x/self.view.bounds.size.width + 1) < 1?1:(scrollView.contentOffset.x/self.view.bounds.size.width + 1));
+    
+    //修改标题
+    self.navigationItem.title = [NSString stringWithFormat:@"%ld/%lu",(long)self.num,(unsigned long)self.count];
+    
+    //判断选中按钮状态
+    if ([self.selectedPhotos containsObject:@(self.num)])
+    {
+        _selectedBtn.selected = YES;
+    }
+    else
+    {
+        _selectedBtn.selected = NO;
+    }
+    
+    //修改下一步Button
+    [self changeNextSetupBtnTitle];
+}
+
+#pragma mark     选中按钮点击事件
+-(void)selectedBtnTouch:(UIButton *)btn
+{
+//    NSLog(@"num is %ld res is %@",(long)self.num,self.selectedPhotos[0]);
+    if (btn.selected)
+    {
+        [self.selectedPhotos removeObject:@(self.num)];
+    }
+    else
+    {
+        [self.selectedPhotos addObject:@(self.num)];
+    }
+    
+    btn.selected = !btn.selected;
+    
+    [self changeNextSetupBtnTitle];
+}
+
+#pragma mark    修改下一步Button.titleLabel
+-(void)changeNextSetupBtnTitle
+{
+    CGRect frame = self.rightBarItemButton.frame;
+    frame.size.width = self.selectedPhotos.count != 0?68:55;
+    self.rightBarItemButton.frame = frame;
+    [self.rightBarItemButton setTitle:self.selectedPhotos.count != 0?[NSString stringWithFormat:@"下一步(%lu)",(unsigned long)self.selectedPhotos.count]:@"下一步" forState:UIControlStateNormal];
+}
 #pragma mark     错误代码 反思注释
 -(void)errorThing
 {

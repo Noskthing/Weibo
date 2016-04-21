@@ -17,5 +17,7 @@
 @property (nonatomic,assign)NSUInteger count;
 //当前图片
 @property (nonatomic,assign)NSInteger num;
+//被选中的图标下标
+@property (nonatomic,strong)NSMutableArray * selectedPhotos;
 
 @end

@@ -10,6 +10,8 @@
 #import "ConnectDelegate.h"
 #import "MineTableView.h"
 #import "MineInfoViewController.h"
+#import "WeiboSDK.h"
+
 @interface MineViewController ()
 {
     MineTableView * _tableView;
@@ -75,10 +77,12 @@
     
     //导航栏设置
     self.navigationItem.title = @"我";
-    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 20)];
-    label.text = @"设置";
-    label.font = [UIFont systemFontOfSize:15];
-    UIBarButtonItem * barItem = [[UIBarButtonItem alloc] initWithCustomView:label];
+    UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [btn setTitle:@"设置" forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [btn setTintColor:[UIColor blackColor]];
+    [btn addTarget:self action:@selector(configBtnTouch:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * barItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = barItem;
     self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
 }
@@ -115,8 +119,17 @@
 
 }
 
--(void)configBtnTouch
+-(void)configBtnTouch:(UIButton *)btn
 {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"uid"];
     
+    WBAuthorizeRequest *request = [WBAuthorizeRequest request];
+    request.redirectURI = @"https://api.weibo.com/oauth2/default.html";
+    request.scope = @"all";
+    request.userInfo = @{@"SSO_From": @"IndexViewController",
+                         @"Other_Info_1": [NSNumber numberWithInt:123],
+                         @"Other_Info_2": @[@"obj1", @"obj2"],
+                         @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
+    [WeiboSDK sendRequest:request];
 }
 @end

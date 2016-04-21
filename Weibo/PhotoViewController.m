@@ -96,6 +96,7 @@
                     phototShowViewController.model = model;
                     phototShowViewController.num = row;
                     phototShowViewController.count = countOfImages;
+                    phototShowViewController.selectedPhotos = [@[@(1),@(3)] mutableCopy];
                     [self.navigationController pushViewController:phototShowViewController animated:YES];
 //        NSLog(@"row is %ld countOfImage is %lu",(long)row,(unsigned long)countOfImages);
     }];

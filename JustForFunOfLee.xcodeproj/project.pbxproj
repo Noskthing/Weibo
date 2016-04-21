@@ -166,15 +166,14 @@
 		39F511451C5387A8004AB545 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F511441C5387A8004AB545 /* PhotoViewController.m */; };
 		39F511481C5387B6004AB545 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F511471C5387B6004AB545 /* BaseViewController.m */; };
 		39F5114C1C53BEEB004AB545 /* AlbumTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F5114B1C53BEEB004AB545 /* AlbumTitleView.m */; };
-		6017B7E41CC7769300407A87 /* LBWPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6017B7D51CC7769300407A87 /* LBWPageControl.m */; };
-		6017B7E51CC7769300407A87 /* LBWScrollComponentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6017B7D71CC7769300407A87 /* LBWScrollComponentView.m */; };
-		6017B7E61CC7769300407A87 /* LBWScrollTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6017B7D91CC7769300407A87 /* LBWScrollTitleView.m */; };
-		6017B7E71CC7769300407A87 /* LBWScrollViewWithArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 6017B7DC1CC7769300407A87 /* LBWScrollViewWithArray.m */; };
-		6017B7E81CC7769300407A87 /* LBWScrollViewWithTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6017B7DE1CC7769300407A87 /* LBWScrollViewWithTimer.m */; };
-		6017B7E91CC7769300407A87 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 6017B7DF1CC7769300407A87 /* README.md */; };
-		6017B7EA1CC7769300407A87 /* UIScrollView+ChainRecation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6017B7E11CC7769300407A87 /* UIScrollView+ChainRecation.m */; };
-		6017B7EB1CC7769300407A87 /* UIView+FirstTimeMoveToSuperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6017B7E31CC7769300407A87 /* UIView+FirstTimeMoveToSuperView.m */; };
 		6017B7F01CC7882D00407A87 /* CheckPhotoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6017B7EF1CC7882D00407A87 /* CheckPhotoViewCell.m */; };
+		60650D561CC868BC00F6EEF6 /* LBWPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 60650D471CC868BC00F6EEF6 /* LBWPageControl.m */; };
+		60650D571CC868BC00F6EEF6 /* LBWScrollComponentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60650D491CC868BC00F6EEF6 /* LBWScrollComponentView.m */; };
+		60650D581CC868BC00F6EEF6 /* LBWScrollTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60650D4B1CC868BC00F6EEF6 /* LBWScrollTitleView.m */; };
+		60650D591CC868BC00F6EEF6 /* LBWScrollViewWithArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 60650D4E1CC868BC00F6EEF6 /* LBWScrollViewWithArray.m */; };
+		60650D5A1CC868BC00F6EEF6 /* LBWScrollViewWithTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 60650D501CC868BC00F6EEF6 /* LBWScrollViewWithTimer.m */; };
+		60650D5C1CC868BC00F6EEF6 /* UIScrollView+ChainRecation.m in Sources */ = {isa = PBXBuildFile; fileRef = 60650D531CC868BC00F6EEF6 /* UIScrollView+ChainRecation.m */; };
+		60650D5D1CC868BC00F6EEF6 /* UIView+FirstTimeMoveToSuperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60650D551CC868BC00F6EEF6 /* UIView+FirstTimeMoveToSuperView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -482,24 +481,23 @@
 		39F511471C5387B6004AB545 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		39F5114A1C53BEEB004AB545 /* AlbumTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumTitleView.h; sourceTree = "<group>"; };
 		39F5114B1C53BEEB004AB545 /* AlbumTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumTitleView.m; sourceTree = "<group>"; };
-		6017B7D41CC7769300407A87 /* LBWPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBWPageControl.h; sourceTree = "<group>"; };
-		6017B7D51CC7769300407A87 /* LBWPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBWPageControl.m; sourceTree = "<group>"; };
-		6017B7D61CC7769300407A87 /* LBWScrollComponentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBWScrollComponentView.h; sourceTree = "<group>"; };
-		6017B7D71CC7769300407A87 /* LBWScrollComponentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBWScrollComponentView.m; sourceTree = "<group>"; };
-		6017B7D81CC7769300407A87 /* LBWScrollTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBWScrollTitleView.h; sourceTree = "<group>"; };
-		6017B7D91CC7769300407A87 /* LBWScrollTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBWScrollTitleView.m; sourceTree = "<group>"; };
-		6017B7DA1CC7769300407A87 /* LBWScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBWScrollView.h; sourceTree = "<group>"; };
-		6017B7DB1CC7769300407A87 /* LBWScrollViewWithArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBWScrollViewWithArray.h; sourceTree = "<group>"; };
-		6017B7DC1CC7769300407A87 /* LBWScrollViewWithArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBWScrollViewWithArray.m; sourceTree = "<group>"; };
-		6017B7DD1CC7769300407A87 /* LBWScrollViewWithTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBWScrollViewWithTimer.h; sourceTree = "<group>"; };
-		6017B7DE1CC7769300407A87 /* LBWScrollViewWithTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBWScrollViewWithTimer.m; sourceTree = "<group>"; };
-		6017B7DF1CC7769300407A87 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		6017B7E01CC7769300407A87 /* UIScrollView+ChainRecation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+ChainRecation.h"; sourceTree = "<group>"; };
-		6017B7E11CC7769300407A87 /* UIScrollView+ChainRecation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+ChainRecation.m"; sourceTree = "<group>"; };
-		6017B7E21CC7769300407A87 /* UIView+FirstTimeMoveToSuperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FirstTimeMoveToSuperView.h"; sourceTree = "<group>"; };
-		6017B7E31CC7769300407A87 /* UIView+FirstTimeMoveToSuperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FirstTimeMoveToSuperView.m"; sourceTree = "<group>"; };
 		6017B7EE1CC7882D00407A87 /* CheckPhotoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckPhotoViewCell.h; sourceTree = "<group>"; };
 		6017B7EF1CC7882D00407A87 /* CheckPhotoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckPhotoViewCell.m; sourceTree = "<group>"; };
+		60650D461CC868BC00F6EEF6 /* LBWPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBWPageControl.h; sourceTree = "<group>"; };
+		60650D471CC868BC00F6EEF6 /* LBWPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBWPageControl.m; sourceTree = "<group>"; };
+		60650D481CC868BC00F6EEF6 /* LBWScrollComponentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBWScrollComponentView.h; sourceTree = "<group>"; };
+		60650D491CC868BC00F6EEF6 /* LBWScrollComponentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBWScrollComponentView.m; sourceTree = "<group>"; };
+		60650D4A1CC868BC00F6EEF6 /* LBWScrollTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBWScrollTitleView.h; sourceTree = "<group>"; };
+		60650D4B1CC868BC00F6EEF6 /* LBWScrollTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBWScrollTitleView.m; sourceTree = "<group>"; };
+		60650D4C1CC868BC00F6EEF6 /* LBWScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBWScrollView.h; sourceTree = "<group>"; };
+		60650D4D1CC868BC00F6EEF6 /* LBWScrollViewWithArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBWScrollViewWithArray.h; sourceTree = "<group>"; };
+		60650D4E1CC868BC00F6EEF6 /* LBWScrollViewWithArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBWScrollViewWithArray.m; sourceTree = "<group>"; };
+		60650D4F1CC868BC00F6EEF6 /* LBWScrollViewWithTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBWScrollViewWithTimer.h; sourceTree = "<group>"; };
+		60650D501CC868BC00F6EEF6 /* LBWScrollViewWithTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBWScrollViewWithTimer.m; sourceTree = "<group>"; };
+		60650D521CC868BC00F6EEF6 /* UIScrollView+ChainRecation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+ChainRecation.h"; sourceTree = "<group>"; };
+		60650D531CC868BC00F6EEF6 /* UIScrollView+ChainRecation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+ChainRecation.m"; sourceTree = "<group>"; };
+		60650D541CC868BC00F6EEF6 /* UIView+FirstTimeMoveToSuperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FirstTimeMoveToSuperView.h"; sourceTree = "<group>"; };
+		60650D551CC868BC00F6EEF6 /* UIView+FirstTimeMoveToSuperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FirstTimeMoveToSuperView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -883,7 +881,7 @@
 		184B3AE41C0E9B7D00FB7B06 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				6017B7D31CC7769300407A87 /* LBWScrollView */,
+				60650D451CC868BC00F6EEF6 /* LBWScrollView */,
 				18F58CE01C337FBD00BFFB4C /* JPush */,
 				180C7F381C28EB7B0050E6B4 /* AFNetworking */,
 				18403F731C28E83700651726 /* MJRefresh */,
@@ -1373,25 +1371,24 @@
 			name = PhotoView;
 			sourceTree = "<group>";
 		};
-		6017B7D31CC7769300407A87 /* LBWScrollView */ = {
+		60650D451CC868BC00F6EEF6 /* LBWScrollView */ = {
 			isa = PBXGroup;
 			children = (
-				6017B7D41CC7769300407A87 /* LBWPageControl.h */,
-				6017B7D51CC7769300407A87 /* LBWPageControl.m */,
-				6017B7D61CC7769300407A87 /* LBWScrollComponentView.h */,
-				6017B7D71CC7769300407A87 /* LBWScrollComponentView.m */,
-				6017B7D81CC7769300407A87 /* LBWScrollTitleView.h */,
-				6017B7D91CC7769300407A87 /* LBWScrollTitleView.m */,
-				6017B7DA1CC7769300407A87 /* LBWScrollView.h */,
-				6017B7DB1CC7769300407A87 /* LBWScrollViewWithArray.h */,
-				6017B7DC1CC7769300407A87 /* LBWScrollViewWithArray.m */,
-				6017B7DD1CC7769300407A87 /* LBWScrollViewWithTimer.h */,
-				6017B7DE1CC7769300407A87 /* LBWScrollViewWithTimer.m */,
-				6017B7DF1CC7769300407A87 /* README.md */,
-				6017B7E01CC7769300407A87 /* UIScrollView+ChainRecation.h */,
-				6017B7E11CC7769300407A87 /* UIScrollView+ChainRecation.m */,
-				6017B7E21CC7769300407A87 /* UIView+FirstTimeMoveToSuperView.h */,
-				6017B7E31CC7769300407A87 /* UIView+FirstTimeMoveToSuperView.m */,
+				60650D461CC868BC00F6EEF6 /* LBWPageControl.h */,
+				60650D471CC868BC00F6EEF6 /* LBWPageControl.m */,
+				60650D481CC868BC00F6EEF6 /* LBWScrollComponentView.h */,
+				60650D491CC868BC00F6EEF6 /* LBWScrollComponentView.m */,
+				60650D4A1CC868BC00F6EEF6 /* LBWScrollTitleView.h */,
+				60650D4B1CC868BC00F6EEF6 /* LBWScrollTitleView.m */,
+				60650D4C1CC868BC00F6EEF6 /* LBWScrollView.h */,
+				60650D4D1CC868BC00F6EEF6 /* LBWScrollViewWithArray.h */,
+				60650D4E1CC868BC00F6EEF6 /* LBWScrollViewWithArray.m */,
+				60650D4F1CC868BC00F6EEF6 /* LBWScrollViewWithTimer.h */,
+				60650D501CC868BC00F6EEF6 /* LBWScrollViewWithTimer.m */,
+				60650D521CC868BC00F6EEF6 /* UIScrollView+ChainRecation.h */,
+				60650D531CC868BC00F6EEF6 /* UIScrollView+ChainRecation.m */,
+				60650D541CC868BC00F6EEF6 /* UIView+FirstTimeMoveToSuperView.h */,
+				60650D551CC868BC00F6EEF6 /* UIView+FirstTimeMoveToSuperView.m */,
 			);
 			path = LBWScrollView;
 			sourceTree = "<group>";
@@ -1487,18 +1484,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				1837F33D1C4CEEFC00AA1C0D /* LocationModel.m in Sources */,
+				60650D591CC868BC00F6EEF6 /* LBWScrollViewWithArray.m in Sources */,
 				18FBA0091C15A3FD00EF6EA6 /* LeeScrollViewWithArray.m in Sources */,
 				18E705921C17CA2100890719 /* MessageTableView.m in Sources */,
 				39F511481C5387B6004AB545 /* BaseViewController.m in Sources */,
 				39A639E71C55E6F50090905F /* PhototShowViewController.m in Sources */,
 				185C0DDF1C1A753200BAF302 /* MineScrollView.m in Sources */,
-				6017B7EA1CC7769300407A87 /* UIScrollView+ChainRecation.m in Sources */,
+				60650D561CC868BC00F6EEF6 /* LBWPageControl.m in Sources */,
 				18AD92371C3BACB300B518B9 /* DevelopmentTableViewCell.m in Sources */,
 				39F5113F1C538471004AB545 /* AlbumModel.m in Sources */,
-				6017B7E61CC7769300407A87 /* LBWScrollTitleView.m in Sources */,
 				18FBA00A1C15A3FD00EF6EA6 /* LeeScrollViewWithView.m in Sources */,
+				60650D5A1CC868BC00F6EEF6 /* LBWScrollViewWithTimer.m in Sources */,
 				180C7F631C28EB7B0050E6B4 /* AFURLConnectionOperation.m in Sources */,
-				6017B7E81CC7769300407A87 /* LBWScrollViewWithTimer.m in Sources */,
 				184B3B251C0EDF6900FB7B06 /* ConnectDelegate.m in Sources */,
 				180C7F6E1C28EB7B0050E6B4 /* UIWebView+AFNetworking.m in Sources */,
 				18E550681C0C1B98004A5E1D /* UnusedViewController.m in Sources */,
@@ -1526,9 +1523,7 @@
 				18403FAA1C28E83700651726 /* MJRefreshBackStateFooter.m in Sources */,
 				1820CA401C1031330053EF49 /* SDWebImageDecoder.m in Sources */,
 				1820CA471C1031330053EF49 /* UIImage+MultiFormat.m in Sources */,
-				6017B7E91CC7769300407A87 /* README.md in Sources */,
 				18FBA0001C159FBF00EF6EA6 /* FindTableView.m in Sources */,
-				6017B7E41CC7769300407A87 /* LBWPageControl.m in Sources */,
 				1820CA3E1C1031330053EF49 /* SDImageCache.m in Sources */,
 				39A639DD1C550B170090905F /* PhotoCollectionViewCell.m in Sources */,
 				180C7F651C28EB7B0050E6B4 /* AFURLResponseSerialization.m in Sources */,
@@ -1547,7 +1542,6 @@
 				180C7F671C28EB7B0050E6B4 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				18403FA41C28E83700651726 /* MJRefreshHeader.m in Sources */,
 				18403FA61C28E83700651726 /* MJRefreshAutoNormalFooter.m in Sources */,
-				6017B7E71CC7769300407A87 /* LBWScrollViewWithArray.m in Sources */,
 				182351D21C22559400060655 /* WeiBoLabel.m in Sources */,
 				18691D441C3FA99300EC4B03 /* EmotionView.m in Sources */,
 				18E550641C0C1B0D004A5E1D /* MessageViewController.m in Sources */,
@@ -1563,6 +1557,7 @@
 				180C7F681C28EB7B0050E6B4 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				183D097B1C4C96400097ACEE /* LeeActionSheet.m in Sources */,
 				1837F3401C4CFB0700AA1C0D /* LocationTableView.m in Sources */,
+				60650D5D1CC868BC00F6EEF6 /* UIView+FirstTimeMoveToSuperView.m in Sources */,
 				1894FB541C2A7FFD001EB7C9 /* WebVIewController.m in Sources */,
 				18FBA0031C15A35F00EF6EA6 /* AdvertisementTableViewCell.m in Sources */,
 				184202711C0C328700ED8AAF /* OtherView.m in Sources */,
@@ -1573,6 +1568,7 @@
 				18CAF9B31C2118DD0098386F /* WeiBoTableViewCell.m in Sources */,
 				180C7F6B1C28EB7B0050E6B4 /* UIImageView+AFNetworking.m in Sources */,
 				6017B7F01CC7882D00407A87 /* CheckPhotoViewCell.m in Sources */,
+				60650D5C1CC868BC00F6EEF6 /* UIScrollView+ChainRecation.m in Sources */,
 				18403FB21C28E83700651726 /* UIView+MJExtension.m in Sources */,
 				18CAF9BF1C2158360098386F /* NSString+Additions.m in Sources */,
 				1820CA3C1C1031330053EF49 /* MKAnnotationView+WebCache.m in Sources */,
@@ -1594,20 +1590,20 @@
 				186551E81C3A5D3000BE5C65 /* RightBtnTableView.m in Sources */,
 				18403FAF1C28E83700651726 /* MJRefreshConst.m in Sources */,
 				186551DD1C3A407B00BE5C65 /* UIImage+Addition.m in Sources */,
-				6017B7E51CC7769300407A87 /* LBWScrollComponentView.m in Sources */,
 				18403FB01C28E83700651726 /* UIScrollView+MJExtension.m in Sources */,
 				18CAF9B81C2135160098386F /* UIScreen+Additions.m in Sources */,
 				1820CA3D1C1031330053EF49 /* NSData+ImageContentType.m in Sources */,
 				18E550421C0C1A09004A5E1D /* main.m in Sources */,
 				180C7F5E1C28EB7B0050E6B4 /* AFHTTPRequestOperation.m in Sources */,
 				18E550601C0C1AF7004A5E1D /* IndexViewController.m in Sources */,
+				60650D571CC868BC00F6EEF6 /* LBWScrollComponentView.m in Sources */,
 				18403FB11C28E83700651726 /* UIScrollView+MJRefresh.m in Sources */,
 				18AD922E1C3BA17600B518B9 /* DevelopmentViewController.m in Sources */,
 				180C7F691C28EB7B0050E6B4 /* UIAlertView+AFNetworking.m in Sources */,
 				18403FA01C28E83700651726 /* MJRefreshAutoFooter.m in Sources */,
 				18403FA71C28E83700651726 /* MJRefreshAutoStateFooter.m in Sources */,
+				60650D581CC868BC00F6EEF6 /* LBWScrollTitleView.m in Sources */,
 				180C7F6A1C28EB7B0050E6B4 /* UIButton+AFNetworking.m in Sources */,
-				6017B7EB1CC7769300407A87 /* UIView+FirstTimeMoveToSuperView.m in Sources */,
 				1820CA451C1031330053EF49 /* UIButton+WebCache.m in Sources */,
 				186678231C47762700C64E05 /* StatusBtnView.m in Sources */,
 				18E5506C1C0C1BAA004A5E1D /* FindViewController.m in Sources */,
