@@ -42,13 +42,25 @@
     if (!first)
     {
         [imageBtn setBackgroundImage:image forState:UIControlStateNormal];
+        [imageBtn setImage:nil forState:UIControlStateNormal];
     }
     else
     {
+        [imageBtn setBackgroundImage:nil forState:UIControlStateNormal];
         [imageBtn setImage:[UIImage imageNamed:@"compose_photo_photograph_highlighted"] forState:UIControlStateNormal];
     }
     
     selectedBtn.hidden = first;
+}
+
+-(void)changeBtnSelected
+{
+    selectedBtn.selected = !selectedBtn.selected;
+}
+
+-(void)setIsSelected:(BOOL)isSelected
+{
+    selectedBtn.selected = isSelected;
 }
 
 -(void)setPhototNumber:(NSInteger)num photosCount:(NSInteger)count AlbumModel:(AlbumModel *)model
@@ -66,10 +78,12 @@
 
 - (IBAction)btnDidSelected:(UIButton *)sender
 {
-    sender.selected = !sender.selected;
     if (_seleBlock)
     {
-        _seleBlock(_image,sender.selected);
+        if(_seleBlock(_image,!sender.selected,_num))
+        {
+            sender.selected = !sender.selected;
+        }
     }
 }
 

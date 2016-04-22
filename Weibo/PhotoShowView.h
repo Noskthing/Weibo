@@ -10,10 +10,11 @@
 
 @class AlbumModel;
 typedef void(^CellDidSelectedBlock)(NSInteger row,AlbumModel * model,NSUInteger countOfImages);
-typedef void(^SelectedBtnDidSelectedBlock)(UIImage * image,BOOL isSelected);
+typedef BOOL(^SelectedBtnDidSelectedBlock)(UIImage * image,BOOL isSelected,NSInteger num);
 @interface PhotoShowView : UIView
 
 -(void)setModel:(AlbumModel *)model;
+-(void)setImagesNum:(NSArray *)imagesNum;
 -(void)setCellDidSelectedBlock:(CellDidSelectedBlock)block;
 -(void)setSelectedBtnDidSelectedBlock:(SelectedBtnDidSelectedBlock)block;
 @end

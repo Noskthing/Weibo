@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 @class  AlbumModel;
 typedef void(^CellDidSelectedBlock)(NSInteger row,AlbumModel * model,NSUInteger countOfImages);
-typedef void(^SelectedBtnDidSelectedBlock)(UIImage * image,BOOL isSelected);
+typedef BOOL(^SelectedBtnDidSelectedBlock)(UIImage * image,BOOL isSelected,NSInteger num);
 @interface PhotoCollectionViewCell : UICollectionViewCell
 
 -(void)setModel:(UIImage *)image isFirstBtn:(BOOL)first;
+-(void)setIsSelected:(BOOL)isSelected;
+-(void)changeBtnSelected;
 -(void)setPhototNumber:(NSInteger)num photosCount:(NSInteger)count AlbumModel:(AlbumModel *)model;
 -(void)setCellDidSelectedBlock:(CellDidSelectedBlock)cellBlock SelectedBtnDidSelectedBlock:(SelectedBtnDidSelectedBlock)seleBlock;
 @end

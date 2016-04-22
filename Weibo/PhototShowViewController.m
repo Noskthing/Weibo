@@ -11,8 +11,12 @@
 #import "AlbumModel.h"
 #import "PhotoManager.h"
 #import "CheckPhotoViewCell.h"
+#import "PostWordViewController.h"
 
 @interface PhototShowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+{
+    ViewWillDisappearBlock _block;
+}
 @property(nonatomic,strong)UICollectionView * collectionView;
 
 @property(nonatomic,strong)UIButton * selectedBtn;
@@ -35,11 +39,26 @@
     [self createSubviewsOnNav];
 }
 
+
+-(void)setViewWillDisappearBlock:(ViewWillDisappearBlock)block
+{
+    _block = block;
+}
+
 //滑动到制定位置
 -(void)viewDidLayoutSubviews
 {
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:self.num - 1 inSection:0];
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+}
+
+//选中图片回调
+-(void)viewWillDisappear:(BOOL)animated
+{
+    if (_block)
+    {
+        _block(self.selectedPhotos);
+    }
 }
 
 #pragma mark    创建UI
@@ -82,12 +101,13 @@
 {
     self.navigationItem.title = [NSString stringWithFormat:@"%ld/%lu",(long)self.num,(unsigned long)self.count];
     
-    self.rightBarItemButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.selectedPhotos?68:55, 25)];
+    self.rightBarItemButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.selectedPhotos.count != 0?68:55, 25)];
     self.rightBarItemButton.layer.cornerRadius = 5;
-    [self.rightBarItemButton setTitle:self.selectedPhotos?[NSString stringWithFormat:@"下一步(%lu)",(unsigned long)self.selectedPhotos.count]:@"下一步" forState:UIControlStateNormal];
+    [self.rightBarItemButton setTitle:self.selectedPhotos.count != 0?[NSString stringWithFormat:@"下一步(%lu)",(unsigned long)self.selectedPhotos.count]:@"下一步" forState:UIControlStateNormal];
     self.rightBarItemButton.titleLabel.font = [UIFont systemFontOfSize:15];
     self.rightBarItemButton.backgroundColor = [UIColor orangeColor];
     self.rightBarItemButton.titleLabel.tintColor = [UIColor whiteColor];
+    [self.rightBarItemButton addTarget:self action:@selector(nextSetupBtnTouch:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightBarItemButton];
 }
 
@@ -144,7 +164,15 @@
     }
     else
     {
-        [self.selectedPhotos addObject:@(self.num)];
+        if (self.selectedPhotos.count == 9)
+        {
+            NSLog(@"最多只能选择9张");
+            btn.selected = !btn.selected;
+        }
+        else
+        {
+            [self.selectedPhotos addObject:@(self.num)];
+        }
     }
     
     btn.selected = !btn.selected;
@@ -160,6 +188,19 @@
     self.rightBarItemButton.frame = frame;
     [self.rightBarItemButton setTitle:self.selectedPhotos.count != 0?[NSString stringWithFormat:@"下一步(%lu)",(unsigned long)self.selectedPhotos.count]:@"下一步" forState:UIControlStateNormal];
 }
+
+#pragma mark    下一步按钮点击事件
+-(void)nextSetupBtnTouch:(UIButton *)btn
+{
+    NSMutableArray * arr = [NSMutableArray array];
+    [_selectedPhotos enumerateObjectsUsingBlock:^(NSNumber *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [arr addObject:[self.model.result objectAtIndex:[obj integerValue]]];
+    }];
+    
+    [PostWordViewController postWordViewController].getAlbumPhotosBlock(arr);
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 #pragma mark     错误代码 反思注释
 -(void)errorThing
 {

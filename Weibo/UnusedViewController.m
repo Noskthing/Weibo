@@ -68,6 +68,7 @@
 {
     //自动挂起的一个私有api   不好玩  我也就玩了几十次
 //    [[UIApplication sharedApplication] performSelector:@selector(suspend)];
+    
     if (sender.tag == 30)
     {
         [sender removeFromSuperview];
@@ -292,10 +293,19 @@
              {
                  case 10:
                  {
-                     PostWordViewController * postViewController = [[PostWordViewController alloc] init];
-                     [self presentViewController:postViewController animated:YES completion:^{
+                     PostWordViewController * postViewController = [PostWordViewController postWordViewController];
+                     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:postViewController];
+                     [self presentViewController:nav animated:YES completion:^{
                          
                      }];
+                     
+//                     [self.navigationController pushViewController:controller animated:YES];
+//                     
+//                     CATransition * ca = [CATransition animation];
+//                     ca.type = @"rippleEffect";
+//                     ca.duration = 1.0;
+//                     
+//                     [self.navigationController.view.layer addAnimation:ca forKey:nil];
                  }
                      break;
                  case 11:

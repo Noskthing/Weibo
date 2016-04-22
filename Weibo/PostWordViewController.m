@@ -16,13 +16,17 @@
 #import "LocationViewController.h"
 #import "ShareRangeViewController.h"
 #import "PhotoViewController.h"
+#import "NavTitleView.h"
+#import "PostWordCollectionViewCell.h"
 
-@interface PostWordViewController ()<UIScrollViewDelegate>
+@interface PostWordViewController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
     //背景视图下滑目标位置y坐标
     CGFloat _y;
     //发送按钮
     UIButton * _postBtn;
+    //选择图片PHImageResult数组
+    NSMutableArray * _results;
 }
 //自定义键盘的选择视图背景
 @property (nonatomic,strong)UIView * bgView;
@@ -34,10 +38,22 @@
 @property (nonatomic,strong)StatusBtnView * addressBtn;
 //权限按钮
 @property (nonatomic,strong)StatusBtnView * jurisdictionBtn;
+//选择图片展示collectionView
+@property(nonatomic,strong)UICollectionView * photosCollectionView;
 @end
 
 static const CGFloat customKeyBoardHeight = 46;
 @implementation PostWordViewController
+
++(instancetype)postWordViewController
+{
+    static PostWordViewController * viewController = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        viewController = [[PostWordViewController alloc]init];
+    });
+    return viewController;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,6 +61,12 @@ static const CGFloat customKeyBoardHeight = 46;
    
     self.view.backgroundColor = [UIColor whiteColor];
     
+    __weak PostWordViewController * weakSelf = self;
+    self.getAlbumPhotosBlock = ^(NSMutableArray * photots){
+//        NSLog(@"photo is %lu",(unsigned long)photots.count);
+        _results = photots;
+        [weakSelf.photosCollectionView reloadData];
+    };
     [self createNavigationBar];
     [self createUI];
     [self registerNotification];
@@ -96,26 +118,15 @@ static const CGFloat customKeyBoardHeight = 46;
 #pragma mark  -创建导航UI
 -(void)createNavigationBar
 {
-    //发微博标题
-    UILabel * postWeibo = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
-    postWeibo.text = @"发微博";
-    postWeibo.font = [UIFont systemFontOfSize:15];
-    postWeibo.textAlignment = NSTextAlignmentCenter;
-    postWeibo.layer.anchorPoint = CGPointMake(0.5, 0);
-    postWeibo.layer.position = CGPointMake(self.view.width/2, 23);
-    [self.navigationView addSubview:postWeibo];
-    
     //用户标题
-    UILabel * userName = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 15)];
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary * userInfo = [defaults objectForKey:@"userInfo"];
-    userName.text = userInfo[@"screen_name"];
-    userName.font = [UIFont systemFontOfSize:13];
-    userName.textColor = [UIColor grayColor];
-    userName.textAlignment = NSTextAlignmentCenter;
-    userName.layer.anchorPoint = CGPointMake(0.5, 0);
-    userName.layer.position = CGPointMake(self.view.width/2, CGRectGetMaxY(postWeibo.frame) + 3);
-    [self.navigationView addSubview:userName];
+    
+    NavTitleView * titleView = [NavTitleView navTitleView];
+    titleView.name.text = userInfo[@"screen_name"];
+    
+    self.navigationItem.titleView = titleView;
+
     
     //发布button
     UIButton * postBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.width - 65,30, 50, 25)];
@@ -127,16 +138,16 @@ static const CGFloat customKeyBoardHeight = 46;
     [postBtn setTitle:@"发布" forState:0];
     [postBtn addTarget:self action:@selector(postBtnTouch:) forControlEvents:UIControlEventTouchUpInside];
     postBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [self.navigationView addSubview:postBtn];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:postBtn];
 }
 
 
 -(void)createUI
 {
     //滑动背景图
-    UIScrollView * scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height - 64)];
+    UIScrollView * scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height - 113)];
     scrollView.bounces = YES;
-    scrollView.contentSize = CGSizeMake(self.view.width, self.view.height - 63);
+    scrollView.contentSize = CGSizeMake(self.view.width, self.view.height - 112);
     scrollView.delegate = self;
     [self.view addSubview:scrollView];
     
@@ -204,9 +215,32 @@ static const CGFloat customKeyBoardHeight = 46;
     }
     
     //输入视图
-    _textView = [[CustomTextView alloc] initWithFrame:CGRectMake(0,5, self.view.width, 160)];
+    _textView = [[CustomTextView alloc] initWithFrame:CGRectMake(0,5, self.view.width, 120)];
+    _textView.backgroundColor = [UIColor redColor];
     [_textView addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:nil];
     [scrollView addSubview:_textView];
+    
+    //选中图片
+    //参数设置
+    static CGFloat edge = 10;
+    static CGFloat space = 5;
+    CGFloat collectionViewWidth = scrollView.frame.size.width * 0.85;
+    CGFloat itemWidth = (collectionViewWidth - space * 2 -  edge * 2)/3;
+    
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    flowLayout.sectionInset = UIEdgeInsetsMake(edge, edge, edge, edge);
+    flowLayout.minimumInteritemSpacing = space;
+    flowLayout.minimumLineSpacing = space;
+    flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth);
+    
+    self.photosCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - collectionViewWidth)/2 , 125, collectionViewWidth, (itemWidth * 3 + edge * 2 + space * 2)) collectionViewLayout:flowLayout];
+    self.photosCollectionView.backgroundColor = [UIColor greenColor];
+    [scrollView addSubview:self.photosCollectionView];
+    self.photosCollectionView.delegate = self;
+    self.photosCollectionView.dataSource = self;
+    self.photosCollectionView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
+    [self.photosCollectionView registerNib:[UINib nibWithNibName:@"PostWordCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"postViewController"];
 }
 
 #pragma mark   -UIButton点击事件
@@ -246,10 +280,7 @@ static const CGFloat customKeyBoardHeight = 46;
         case 200:
         {
             PhotoViewController * photoViewController = [[PhotoViewController alloc] init];
-            UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:photoViewController];
-            [self presentViewController:nav animated:YES completion:^{
-                
-            }];
+            [self.navigationController pushViewController:photoViewController animated:YES];
          }
             break;
         case 201:
@@ -400,5 +431,36 @@ static const CGFloat customKeyBoardHeight = 46;
             
         }];
     }];
+}
+
+#pragma mark     UICollectionView
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    if (_results)
+    {
+        return _results.count == 9?9:_results.count + 1;
+    }
+    
+    return 0;
+}
+
+// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    PostWordCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"postViewController" forIndexPath:indexPath];
+   
+    if (_results)
+    {
+        if (indexPath.item == _results.count - 1)
+        {
+            _results.count == 9?[cell configWith:_results[indexPath.row]]:[cell addPhotoBtn];
+        }
+        else
+        {
+            [cell configWith:_results[indexPath.row]];
+        }
+    }
+    
+    return cell;
 }
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class  AlbumModel;
+typedef void(^ViewWillDisappearBlock)(NSMutableArray * imagesNum);
 @interface PhototShowViewController : UIViewController
 
 //图片模型
@@ -20,4 +21,5 @@
 //被选中的图标下标
 @property (nonatomic,strong)NSMutableArray * selectedPhotos;
 
+-(void)setViewWillDisappearBlock:(ViewWillDisappearBlock)block;
 @end

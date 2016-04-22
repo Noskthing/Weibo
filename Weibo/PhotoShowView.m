@@ -18,6 +18,7 @@
     CellDidSelectedBlock _cellBlock;
     SelectedBtnDidSelectedBlock _seleBlock;
     AlbumModel * _model;
+    NSArray * _imagesNum;
 }
 @end
 
@@ -29,6 +30,12 @@ static const CGFloat edge = 5;
 -(void)setCellDidSelectedBlock:(CellDidSelectedBlock)block
 {
     _cellBlock = block;
+}
+
+-(void)setImagesNum:(NSArray *)imagesNum
+{
+    _imagesNum = imagesNum;
+    [_collectionView reloadData];
 }
 
 -(void)setSelectedBtnDidSelectedBlock:(SelectedBtnDidSelectedBlock)block
@@ -75,7 +82,7 @@ static const CGFloat edge = 5;
 #pragma mark -代理方法
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (_models)
+    if (_models && _imagesNum)
     {
         return _models.count + 1;
     }
@@ -88,10 +95,11 @@ static const CGFloat edge = 5;
     PhotoCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCollectionViewCell.h" forIndexPath:indexPath];
 
     
-    if (_models)
+    if (_models && _imagesNum)
     {
         [cell setModel:indexPath.row == 0?nil:_models[indexPath.row - 1] isFirstBtn:indexPath.row == 0?YES:NO];
         [cell setPhototNumber:indexPath.row photosCount:_models.count AlbumModel:_model];
+        [cell setIsSelected:[_imagesNum containsObject:@(indexPath.row)]];
         if (_seleBlock && _cellBlock)
         {
             [cell setCellDidSelectedBlock:_cellBlock SelectedBtnDidSelectedBlock:_seleBlock];

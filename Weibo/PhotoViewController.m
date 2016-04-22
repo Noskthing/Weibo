@@ -15,7 +15,8 @@
 
 @interface PhotoViewController ()
 {
-    NSArray * _images;
+    NSMutableArray * _imagesNum;
+    UIButton * _nextStep;
 }
 @property (nonatomic,strong)UIView * tmpView;
 @end
@@ -27,9 +28,26 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    _imagesNum = [NSMutableArray array];
     [self createNavigation];
     [self createToolBar];
     [self createUI];
+}
+
+#pragma mark  根据选中相片数量修改下一步按钮
+-(void)chageNextSetupBtn
+{
+    //颜色
+    _nextStep.backgroundColor = (_imagesNum.count == 0?[UIColor whiteColor]:[UIColor orangeColor]);
+    [_nextStep setTitleColor:(_imagesNum.count == 0?[UIColor grayColor]:[UIColor whiteColor]) forState:UIControlStateNormal];
+    
+    //frame
+    CGRect frame = _nextStep.frame;
+    frame.size.width = (_imagesNum.count == 0?55:65);
+    _nextStep.frame = frame;
+    
+    //文字
+    [_nextStep setTitle:(_imagesNum.count == 0?@"下一步": [NSString stringWithFormat:@"下一步(%lu)",(unsigned long)_imagesNum.count]) forState:UIControlStateNormal];
 }
 
 #pragma mark     相册的获取
@@ -88,25 +106,54 @@
     
     //创建PhotoShowView
     PhotoShowView * phototShowView = [[PhotoShowView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 113)];
-
+    
     //photoView属性设置
     [phototShowView setModel:model];
+    [phototShowView setImagesNum:[_imagesNum copy]];
+    
+    __weak PhotoShowView * weakPhotoShowView = phototShowView;
     [phototShowView setCellDidSelectedBlock:^(NSInteger row, AlbumModel *model, NSUInteger countOfImages) {
                     PhototShowViewController * phototShowViewController = [[PhototShowViewController alloc] init];
                     phototShowViewController.model = model;
                     phototShowViewController.num = row;
                     phototShowViewController.count = countOfImages;
-                    phototShowViewController.selectedPhotos = [@[@(1),@(3)] mutableCopy];
+                    phototShowViewController.selectedPhotos = [_imagesNum mutableCopy];
+        
+                    [phototShowViewController setViewWillDisappearBlock:^(NSMutableArray * imagesNum){
+                        _imagesNum = imagesNum;
+                        [weakPhotoShowView setImagesNum:imagesNum];
+                        [self chageNextSetupBtn];
+                    }];
                     [self.navigationController pushViewController:phototShowViewController animated:YES];
 //        NSLog(@"row is %ld countOfImage is %lu",(long)row,(unsigned long)countOfImages);
     }];
     
-    [phototShowView setSelectedBtnDidSelectedBlock:^(UIImage *image, BOOL isSelected) {
+    
+    [phototShowView setSelectedBtnDidSelectedBlock:^BOOL(UIImage *image, BOOL isSelected, NSInteger num) {
+        //被选中
         if (image && isSelected)
         {
-            NSLog(@"被选中");
+            if(_imagesNum.count  == 9 )
+            {
+                NSLog(@"最多只能选择9张！");
+                return NO;
+            }
+            else
+            {
+                [_imagesNum addObject:@(num)];
+            }
         }
+        //被移除
+        else
+        {
+            [_imagesNum removeObject:@(num)];
+        }
+        
+        [self chageNextSetupBtn];
+        return YES;
     }];
+    
+
     [self.view addSubview:phototShowView];
     
     
@@ -145,7 +192,8 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];
     
     //下一步button
-    UIButton * nextStep = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 65,30, 50, 25)];
+    UIButton * nextStep = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 65,30, 55, 25)];
+    _nextStep = nextStep;
     [nextStep setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     nextStep.backgroundColor = [UIColor whiteColor];
     nextStep.layer.borderColor = [UIColor blackColor].CGColor;

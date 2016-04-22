@@ -174,6 +174,10 @@
 		60181E5A1CC9B9F700F7DAC4 /* LBWScrollViewWithTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 60181E551CC9B9F700F7DAC4 /* LBWScrollViewWithTimer.m */; };
 		60181E5F1CC9BA0000F7DAC4 /* UIScrollView+ChainRecation.m in Sources */ = {isa = PBXBuildFile; fileRef = 60181E5C1CC9BA0000F7DAC4 /* UIScrollView+ChainRecation.m */; };
 		60181E601CC9BA0000F7DAC4 /* UIView+FirstTimeMoveToSuperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60181E5E1CC9BA0000F7DAC4 /* UIView+FirstTimeMoveToSuperView.m */; };
+		60181E631CCA0A4A00F7DAC4 /* NavTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60181E621CCA0A4A00F7DAC4 /* NavTitleView.m */; };
+		60181E651CCA0A5D00F7DAC4 /* NavTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60181E641CCA0A5D00F7DAC4 /* NavTitleView.xib */; };
+		60181E691CCA270A00F7DAC4 /* PostWordCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60181E671CCA270A00F7DAC4 /* PostWordCollectionViewCell.m */; };
+		60181E6A1CCA270A00F7DAC4 /* PostWordCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60181E681CCA270A00F7DAC4 /* PostWordCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -498,6 +502,12 @@
 		60181E5C1CC9BA0000F7DAC4 /* UIScrollView+ChainRecation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+ChainRecation.m"; sourceTree = "<group>"; };
 		60181E5D1CC9BA0000F7DAC4 /* UIView+FirstTimeMoveToSuperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FirstTimeMoveToSuperView.h"; sourceTree = "<group>"; };
 		60181E5E1CC9BA0000F7DAC4 /* UIView+FirstTimeMoveToSuperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FirstTimeMoveToSuperView.m"; sourceTree = "<group>"; };
+		60181E611CCA0A4A00F7DAC4 /* NavTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavTitleView.h; sourceTree = "<group>"; };
+		60181E621CCA0A4A00F7DAC4 /* NavTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavTitleView.m; sourceTree = "<group>"; };
+		60181E641CCA0A5D00F7DAC4 /* NavTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavTitleView.xib; sourceTree = "<group>"; };
+		60181E661CCA270A00F7DAC4 /* PostWordCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostWordCollectionViewCell.h; sourceTree = "<group>"; };
+		60181E671CCA270A00F7DAC4 /* PostWordCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostWordCollectionViewCell.m; sourceTree = "<group>"; };
+		60181E681CCA270A00F7DAC4 /* PostWordCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostWordCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1294,6 +1304,12 @@
 				185C7E311C44A23900544B2B /* CustomTextView.m */,
 				186678211C47762700C64E05 /* StatusBtnView.h */,
 				186678221C47762700C64E05 /* StatusBtnView.m */,
+				60181E611CCA0A4A00F7DAC4 /* NavTitleView.h */,
+				60181E621CCA0A4A00F7DAC4 /* NavTitleView.m */,
+				60181E641CCA0A5D00F7DAC4 /* NavTitleView.xib */,
+				60181E661CCA270A00F7DAC4 /* PostWordCollectionViewCell.h */,
+				60181E671CCA270A00F7DAC4 /* PostWordCollectionViewCell.m */,
+				60181E681CCA270A00F7DAC4 /* PostWordCollectionViewCell.xib */,
 			);
 			name = PostView;
 			sourceTree = "<group>";
@@ -1457,6 +1473,7 @@
 				185347631C16D39600AC2D30 /* HotTopicTableViewCell.xib in Resources */,
 				18E550501C0C1A15004A5E1D /* LaunchScreen.storyboard in Resources */,
 				1820CA161C1021680053EF49 /* MineTableViewCell.xib in Resources */,
+				60181E651CCA0A5D00F7DAC4 /* NavTitleView.xib in Resources */,
 				18AD92381C3BACB300B518B9 /* DevelopmentTableViewCell.xib in Resources */,
 				1828CCEF1C34D1D6003CAF43 /* NavgationBarTitleBtn.xib in Resources */,
 				181961011C1FC3F1009CA33B /* CollectionViewCell.xib in Resources */,
@@ -1466,6 +1483,7 @@
 				1820CA4E1C104AEE0053EF49 /* MineTableViewTitle.json in Resources */,
 				184690E31C11873100621DDD /* WeboTypeHeaderView.xib in Resources */,
 				18403FAE1C28E83700651726 /* MJRefresh.bundle in Resources */,
+				60181E6A1CCA270A00F7DAC4 /* PostWordCollectionViewCell.xib in Resources */,
 				185C0DE11C1A754B00BAF302 /* MineScrollView.xib in Resources */,
 				18E5504D1C0C1A10004A5E1D /* Assets.xcassets in Resources */,
 				18FB9FFC1C159F8500EF6EA6 /* FindJson.json in Resources */,
@@ -1545,6 +1563,7 @@
 				18403FA61C28E83700651726 /* MJRefreshAutoNormalFooter.m in Sources */,
 				182351D21C22559400060655 /* WeiBoLabel.m in Sources */,
 				18691D441C3FA99300EC4B03 /* EmotionView.m in Sources */,
+				60181E691CCA270A00F7DAC4 /* PostWordCollectionViewCell.m in Sources */,
 				18E550641C0C1B0D004A5E1D /* MessageViewController.m in Sources */,
 				18403FA31C28E83700651726 /* MJRefreshFooter.m in Sources */,
 				18CAF9B91C2135160098386F /* UIView+Additions.m in Sources */,
@@ -1574,6 +1593,7 @@
 				1840F0081C1BF8CC0099362D /* MineInfoTableView.m in Sources */,
 				181961021C1FC3F1009CA33B /* ScrollView.m in Sources */,
 				184690DF1C11859800621DDD /* WeboTypeHeaderView.m in Sources */,
+				60181E631CCA0A4A00F7DAC4 /* NavTitleView.m in Sources */,
 				1820CA4A1C1031330053EF49 /* UIImageView+WebCache.m in Sources */,
 				18403FA21C28E83700651726 /* MJRefreshComponent.m in Sources */,
 				18403FA91C28E83700651726 /* MJRefreshBackNormalFooter.m in Sources */,
