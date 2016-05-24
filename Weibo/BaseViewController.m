@@ -25,10 +25,6 @@
 #pragma mark  -创建导航UI
 -(void)initNavigationBar
 {
-
-
- 
-    
     //取消button
     UIButton * cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 34, 40, 18)];
     [cancelBtn setTitleColor:[UIColor colorWithRed:0.220f green:0.220f blue:0.220f alpha:1.00f] forState:UIControlStateNormal];
@@ -43,8 +39,6 @@
 - (void)cancelBtnTouch:(UIButton *)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:kLeeKeyBoardWillDisappear object:nil];
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

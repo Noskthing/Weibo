@@ -13,6 +13,8 @@ typedef void(^CellDidSelectedBlock)(NSInteger row,AlbumModel * model,NSUInteger 
 typedef BOOL(^SelectedBtnDidSelectedBlock)(UIImage * image,BOOL isSelected,NSInteger num);
 @interface PhotoShowView : UIView
 
+
+-(void)selectedItemAtIndexPath:(NSIndexPath *)indexPath;
 -(void)setModel:(AlbumModel *)model;
 -(void)setImagesNum:(NSArray *)imagesNum;
 -(void)setCellDidSelectedBlock:(CellDidSelectedBlock)block;

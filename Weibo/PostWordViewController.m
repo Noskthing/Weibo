@@ -83,6 +83,8 @@ static const CGFloat customKeyBoardHeight = 46;
     [self registerNotification];
 }
 
+
+
 -(void)dealloc
 {
     [_textView removeObserver:self forKeyPath:@"text"];
@@ -291,6 +293,7 @@ static const CGFloat customKeyBoardHeight = 46;
         case 200:
         {
             PhotoViewController * photoViewController = [[PhotoViewController alloc] init];
+        
             [self.navigationController pushViewController:photoViewController animated:YES];
          }
             break;
@@ -498,7 +501,9 @@ static const CGFloat customKeyBoardHeight = 46;
             }
             else
             {
-                NSLog(@"IMAGE");
+                PhotoViewController * photoViewController = [[PhotoViewController alloc] init];
+                photoViewController.imagesNum = _results;
+                [self.navigationController pushViewController:photoViewController animated:YES];
             }
         };
     }

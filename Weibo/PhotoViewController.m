@@ -15,13 +15,25 @@
 
 @interface PhotoViewController ()
 {
-    NSMutableArray * _imagesNum;
+    
     UIButton * _nextStep;
 }
 @property (nonatomic,strong)UIView * tmpView;
+
+@property (nonatomic,strong)PhotoShowView * phototShowView;
 @end
 
 @implementation PhotoViewController
+
+-(void)setImagesNum:(NSMutableArray *)imagesNum
+{
+    if (self.phototShowView)
+    {
+        [self.phototShowView setImagesNum:imagesNum];
+    }
+    
+    _imagesNum = imagesNum;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,6 +44,11 @@
     [self createNavigation];
     [self createToolBar];
     [self createUI];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.phototShowView setImagesNum:self.imagesNum];
 }
 
 #pragma mark  根据选中相片数量修改下一步按钮
@@ -106,12 +123,11 @@
     
     //创建PhotoShowView
     PhotoShowView * phototShowView = [[PhotoShowView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 113)];
+    self.phototShowView = phototShowView;
     
     //photoView属性设置
     [phototShowView setModel:model];
-    [phototShowView setImagesNum:[_imagesNum copy]];
     
-    __weak PhotoShowView * weakPhotoShowView = phototShowView;
     [phototShowView setCellDidSelectedBlock:^(NSInteger row, AlbumModel *model, NSUInteger countOfImages) {
                     PhototShowViewController * phototShowViewController = [[PhototShowViewController alloc] init];
                     phototShowViewController.model = model;
@@ -119,9 +135,9 @@
                     phototShowViewController.count = countOfImages;
                     phototShowViewController.selectedPhotos = [_imagesNum mutableCopy];
         
+//                    __strong __typeof__(weakPhotoShowView) strongPhototShowView = weakPhotoShowView;
                     [phototShowViewController setViewWillDisappearBlock:^(NSMutableArray * imagesNum){
-                        _imagesNum = imagesNum;
-                        [weakPhotoShowView setImagesNum:imagesNum];
+                        self.imagesNum = imagesNum;
                         [self chageNextSetupBtn];
                     }];
                     [self.navigationController pushViewController:phototShowViewController animated:YES];
@@ -156,20 +172,19 @@
 
     [self.view addSubview:phototShowView];
     
-    
+    [phototShowView setImagesNum:[self.imagesNum copy]];
 }
 
 #pragma mark -UIButton点击事件
 -(void)nextStpBtnTouch:(UIButton *)sender
 {
+
     
 }
 
 - (void)cancelBtnTouch:(UIButton *)sender
 {
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark    导航栏的创建
