@@ -197,7 +197,7 @@
         [arr addObject:[self.model.result objectAtIndex:[obj integerValue]]];
     }];
     
-    [PostWordViewController postWordViewController].getAlbumPhotosBlock(arr);
+//    [PostWordViewController postWordViewController].getAlbumPhotosBlock(arr);
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

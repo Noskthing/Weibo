@@ -61,11 +61,12 @@ static const CGFloat customKeyBoardHeight = 46;
    
     self.view.backgroundColor = [UIColor whiteColor];
     
-    __weak PostWordViewController * weakSelf = self;
+    __weak __typeof__(self) weakSelf = self;
     self.getAlbumPhotosBlock = ^(NSMutableArray * photots){
+        __strong __typeof__(weakSelf) strongSelf = weakSelf;
 //        NSLog(@"photo is %lu",(unsigned long)photots.count);
         _results = photots;
-        [weakSelf.photosCollectionView reloadData];
+        [strongSelf.photosCollectionView reloadData];
     };
     [self createNavigationBar];
     [self createUI];
@@ -76,6 +77,7 @@ static const CGFloat customKeyBoardHeight = 46;
 {
     [_textView removeObserver:self forKeyPath:@"text"];
     [_bgView removeObserver:self forKeyPath:@"frame"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] postNotificationName:kLeeKeyBoardWillDisappear object:nil];
 }
 
@@ -436,7 +438,7 @@ static const CGFloat customKeyBoardHeight = 46;
 #pragma mark     UICollectionView
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (_results)
+    if (_results.count > 0)
     {
         return _results.count == 9?9:_results.count + 1;
     }
@@ -451,13 +453,13 @@ static const CGFloat customKeyBoardHeight = 46;
    
     if (_results)
     {
-        if (indexPath.item == _results.count - 1)
+        if (indexPath.item == 0)
         {
             _results.count == 9?[cell configWith:_results[indexPath.row]]:[cell addPhotoBtn];
         }
         else
         {
-            [cell configWith:_results[indexPath.row]];
+            [cell configWith:_results.count == 9?_results[indexPath.row]:_results[indexPath.row - 1]];
         }
     }
     
