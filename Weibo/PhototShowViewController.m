@@ -194,10 +194,10 @@
 {
     NSMutableArray * arr = [NSMutableArray array];
     [_selectedPhotos enumerateObjectsUsingBlock:^(NSNumber *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [arr addObject:[self.model.result objectAtIndex:[obj integerValue]]];
+        [arr addObject:[self.model.result objectAtIndex:[obj integerValue] - 1]];
     }];
     
-//    [PostWordViewController postWordViewController].getAlbumPhotosBlock(arr);
+    [PostWordViewController postWordViewController].getAlbumPhotosBlock(arr);
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

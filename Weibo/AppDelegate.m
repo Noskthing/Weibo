@@ -98,34 +98,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(leeKeyBoardWillDisappear) name:kLeeKeyBoardWillDisappear object:nil];
     
-    //JPush
-    // Required
-#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
-        if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-            //categories
-            [APService
-             registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
-                                                 UIUserNotificationTypeSound |
-                                                 UIUserNotificationTypeAlert)
-             categories:nil];
-        } else {
-            //categories nil
-            [APService
-             registerForRemoteNotificationTypes:      (UIRemoteNotificationTypeBadge |
-                                                 UIRemoteNotificationTypeSound |
-                                                 UIRemoteNotificationTypeAlert)
-#else
-             //categories nil
-             categories:nil];
-            [APService
-             registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                 UIRemoteNotificationTypeSound |
-                                                 UIRemoteNotificationTypeAlert)
-#endif
-             // Required
-             categories:nil];
-        }
-    [APService setupWithOption:launchOptions];
 
     
     return YES;
@@ -217,51 +189,51 @@ forRemoteNotification:(NSDictionary *)userInfo
 }
 #endif
 
-- (void)application:(UIApplication *)application
-didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [APService handleRemoteNotification:userInfo];
-    NSLog(@"收到通知:%@", [self logDic:userInfo]);
-//    [rootViewController addNotificationCount];
-}
+//- (void)application:(UIApplication *)application
+//didReceiveRemoteNotification:(NSDictionary *)userInfo {
+//    [APService handleRemoteNotification:userInfo];
+//    NSLog(@"收到通知:%@", [self logDic:userInfo]);
+////    [rootViewController addNotificationCount];
+//}
 
-- (void)application:(UIApplication *)application
-didReceiveRemoteNotification:(NSDictionary *)userInfo
-fetchCompletionHandler:
-(void (^)(UIBackgroundFetchResult))completionHandler {
-    [APService handleRemoteNotification:userInfo];
-    NSLog(@"收到通知:%@", [self logDic:userInfo]);
-//    [rootViewController addNotificationCount];
-    
-    completionHandler(UIBackgroundFetchResultNewData);
-}
-
-- (void)application:(UIApplication *)application
-didReceiveLocalNotification:(UILocalNotification *)notification {
-    [APService showLocalNotificationAtFront:notification identifierKey:nil];
-}
-
-// log NSSet with UTF8
-// if not ,log will be \Uxxx
-- (NSString *)logDic:(NSDictionary *)dic {
-    if (![dic count]) {
-        return nil;
-    }
-    NSString *tempStr1 =
-    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
-                                                 withString:@"\\U"];
-    NSString *tempStr2 =
-    [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
-    NSString *tempStr3 =
-    [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
-    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *str =
-    [NSPropertyListSerialization propertyListFromData:tempData
-                                     mutabilityOption:NSPropertyListImmutable
-                                               format:NULL
-                                     errorDescription:NULL];
-    return str;
-}
-
+//- (void)application:(UIApplication *)application
+//didReceiveRemoteNotification:(NSDictionary *)userInfo
+//fetchCompletionHandler:
+//(void (^)(UIBackgroundFetchResult))completionHandler {
+//    [APService handleRemoteNotification:userInfo];
+//    NSLog(@"收到通知:%@", [self logDic:userInfo]);
+////    [rootViewController addNotificationCount];
+//    
+//    completionHandler(UIBackgroundFetchResultNewData);
+//}
+//
+//- (void)application:(UIApplication *)application
+//didReceiveLocalNotification:(UILocalNotification *)notification {
+//    [APService showLocalNotificationAtFront:notification identifierKey:nil];
+//}
+//
+//// log NSSet with UTF8
+//// if not ,log will be \Uxxx
+//- (NSString *)logDic:(NSDictionary *)dic {
+//    if (![dic count]) {
+//        return nil;
+//    }
+//    NSString *tempStr1 =
+//    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
+//                                                 withString:@"\\U"];
+//    NSString *tempStr2 =
+//    [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+//    NSString *tempStr3 =
+//    [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+//    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+//    NSString *str =
+//    [NSPropertyListSerialization propertyListFromData:tempData
+//                                     mutabilityOption:NSPropertyListImmutable
+//                                               format:NULL
+//                                     errorDescription:NULL];
+//    return str;
+//}
+//
 
 
 #pragma mark   -第三方微博

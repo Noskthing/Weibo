@@ -24,7 +24,10 @@
 }
 
 
-- (void)configWith:(PHAsset *)phasset{
+- (void)configWith:(PHAsset *)phasset
+{
+    removeBtn.hidden = NO;
+    
     // 在资源的集合中获取第一个集合，并获取其中的图片
     
     PHImageManager *imageManager = [PHImageManager defaultManager];
@@ -35,11 +38,25 @@
                          resultHandler:^(UIImage *result, NSDictionary *info) {
                              [bg setBackgroundImage:result forState:UIControlStateNormal];
                          }];
-    
 }
 
 -(void)addPhotoBtn
 {
+    removeBtn.hidden = YES;
     
+    [bg setBackgroundImage:[UIImage imageNamed:@"compose_pic_add"] forState:UIControlStateNormal];
+    [bg setBackgroundImage:[UIImage imageNamed:@"compose_pic_add_highlighted"] forState:UIControlStateHighlighted];
 }
+
+- (IBAction)removeBtnTouched:(UIButton *)sender
+{
+    self.removeBtnDidSelectedBlock(self.indexPath);
+}
+
+- (IBAction)bgBtnTouched:(UIButton *)sender
+{
+    self.imageBtnDidSelectedBlock(self.indexPath);
+}
+
+
 @end

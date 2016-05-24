@@ -45,6 +45,16 @@
 static const CGFloat customKeyBoardHeight = 46;
 @implementation PostWordViewController
 
+//-(NSMutableArray *)results
+//{
+//    if (!_results)
+//    {
+//        _results = [NSMutableArray arrayWithObject:@(0)];
+//    }
+//    
+//    return _results;
+//}
+
 +(instancetype)postWordViewController
 {
     static PostWordViewController * viewController = nil;
@@ -218,7 +228,6 @@ static const CGFloat customKeyBoardHeight = 46;
     
     //输入视图
     _textView = [[CustomTextView alloc] initWithFrame:CGRectMake(0,5, self.view.width, 120)];
-    _textView.backgroundColor = [UIColor redColor];
     [_textView addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:nil];
     [scrollView addSubview:_textView];
     
@@ -237,7 +246,7 @@ static const CGFloat customKeyBoardHeight = 46;
     flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth);
     
     self.photosCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - collectionViewWidth)/2 , 125, collectionViewWidth, (itemWidth * 3 + edge * 2 + space * 2)) collectionViewLayout:flowLayout];
-    self.photosCollectionView.backgroundColor = [UIColor greenColor];
+    self.photosCollectionView.backgroundColor = [UIColor whiteColor];
     [scrollView addSubview:self.photosCollectionView];
     self.photosCollectionView.delegate = self;
     self.photosCollectionView.dataSource = self;
@@ -440,10 +449,12 @@ static const CGFloat customKeyBoardHeight = 46;
 {
     if (_results.count > 0)
     {
+        collectionView.hidden = NO;
         return _results.count == 9?9:_results.count + 1;
     }
     
-    return 0;
+    collectionView.hidden = YES;
+    return 1;
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
@@ -451,6 +462,47 @@ static const CGFloat customKeyBoardHeight = 46;
 {
     PostWordCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"postViewController" forIndexPath:indexPath];
    
+    cell.indexPath = indexPath;
+    
+    if (!cell.removeBtnDidSelectedBlock)
+    {
+        cell.removeBtnDidSelectedBlock = ^(NSIndexPath * indexPath){
+            
+//            NSLog(@"indexPath is %@",indexPath);
+            /*
+             这里有一个需要注意的地方
+             我们无论是delete insert 还是其他的一些update的操作 都需要先操作数据源
+             查看函数栈可以发现  在update的相关函数里会有一些刷新操作  你的collectionView的数据源没有修改导致和item的不匹配可能导致update的失败  出现数组越界或者插入到空collectionView当中
+             
+             但是这里又有一个特殊的坑点
+             我们这个collectionView它如果不是九张图片 会多一个拍照的cell  本来应该在数据源为空的时候一同消失  但恰恰是这多出的一个cell  让本来数据源和cell一一对应的情况被打破  删除最后一张图片的时候按理应该update以后还有一个cell 的  但是在- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section方法里我们已经将cell置空了  这个时候delete就会出现越界的情况
+             
+             
+             我的解决办法是在数据源为空的时候return 1   但是我让collectionView.hidden = YES  达到相同效果
+             **/
+            
+            [_results removeObjectAtIndex:_results.count == 9?indexPath.item:indexPath.item - 1];
+            [self.photosCollectionView deleteItemsAtIndexPaths:@[indexPath]];
+            
+           //reloadData不走   这个吃屎的bug被我碰到了
+            [self.photosCollectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+        };
+    }
+    
+    if (!cell.imageBtnDidSelectedBlock)
+    {
+        cell.imageBtnDidSelectedBlock = ^(NSIndexPath * indexPath){
+            if (indexPath.item == 0 && _results.count < 9)
+            {
+                NSLog(@"add Btn");
+            }
+            else
+            {
+                NSLog(@"IMAGE");
+            }
+        };
+    }
+    
     if (_results)
     {
         if (indexPath.item == 0)
@@ -461,6 +513,7 @@ static const CGFloat customKeyBoardHeight = 46;
         {
             [cell configWith:_results.count == 9?_results[indexPath.row]:_results[indexPath.row - 1]];
         }
+    
     }
     
     return cell;
