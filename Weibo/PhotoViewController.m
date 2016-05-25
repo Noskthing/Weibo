@@ -12,9 +12,12 @@
 #import "AlbumModel.h"
 #import "PhotoShowView.h"
 #import "PhototShowViewController.h"
+#import "PostWordViewController.h"
+#import "UIView+Toast.h"
 
 @interface PhotoViewController ()
 {
+    AlbumModel * _model;
     
     UIButton * _nextStep;
 }
@@ -25,22 +28,28 @@
 
 @implementation PhotoViewController
 
--(void)setImagesNum:(NSMutableArray *)imagesNum
+
+-(void)setPhotos:(NSMutableArray *)photos
 {
     if (self.phototShowView)
     {
-        [self.phototShowView setImagesNum:imagesNum];
+        [self.phototShowView setImagesNum:photos];
     }
     
-    _imagesNum = imagesNum;
+    _photos = photos;
 }
 
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    _imagesNum = [NSMutableArray array];
+    if (!_photos)
+    {
+        _photos = [NSMutableArray array];
+    }
     [self createNavigation];
     [self createToolBar];
     [self createUI];
@@ -48,23 +57,23 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self.phototShowView setImagesNum:self.imagesNum];
+    [self.phototShowView setImagesNum:self.photos];
 }
 
 #pragma mark  根据选中相片数量修改下一步按钮
 -(void)chageNextSetupBtn
 {
     //颜色
-    _nextStep.backgroundColor = (_imagesNum.count == 0?[UIColor whiteColor]:[UIColor orangeColor]);
-    [_nextStep setTitleColor:(_imagesNum.count == 0?[UIColor grayColor]:[UIColor whiteColor]) forState:UIControlStateNormal];
+    _nextStep.backgroundColor = (_photos.count == 0?[UIColor whiteColor]:[UIColor orangeColor]);
+    [_nextStep setTitleColor:(_photos.count == 0?[UIColor grayColor]:[UIColor whiteColor]) forState:UIControlStateNormal];
     
     //frame
     CGRect frame = _nextStep.frame;
-    frame.size.width = (_imagesNum.count == 0?55:65);
+    frame.size.width = (_photos.count == 0?55:68);
     _nextStep.frame = frame;
     
     //文字
-    [_nextStep setTitle:(_imagesNum.count == 0?@"下一步": [NSString stringWithFormat:@"下一步(%lu)",(unsigned long)_imagesNum.count]) forState:UIControlStateNormal];
+    [_nextStep setTitle:(_photos.count == 0?@"下一步": [NSString stringWithFormat:@"下一步(%lu)",(unsigned long)_photos.count]) forState:UIControlStateNormal];
 }
 
 #pragma mark     相册的获取
@@ -100,7 +109,8 @@
                 label.numberOfLines = 2;
                 label.textAlignment = NSTextAlignmentCenter;
                 label.text = [NSString stringWithFormat:@"请在iPhone的“设置->隐私->照片”开启%@访问你的手机相册",app_Name];
-                [self.view addSubview:label];            }
+                [self.view addSubview:label];
+            }
         }];
 
     }
@@ -119,7 +129,7 @@
     
     NSArray * albums = [manager getAlbummodels];
     AlbumModel * model = albums[0];
-    
+    _model = model;
     
     //创建PhotoShowView
     PhotoShowView * phototShowView = [[PhotoShowView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 113)];
@@ -133,11 +143,11 @@
                     phototShowViewController.model = model;
                     phototShowViewController.num = row;
                     phototShowViewController.count = countOfImages;
-                    phototShowViewController.selectedPhotos = [_imagesNum mutableCopy];
+                    phototShowViewController.selectedPhotos = [_photos mutableCopy];
         
 //                    __strong __typeof__(weakPhotoShowView) strongPhototShowView = weakPhotoShowView;
                     [phototShowViewController setViewWillDisappearBlock:^(NSMutableArray * imagesNum){
-                        self.imagesNum = imagesNum;
+                        self.photos = imagesNum;
                         [self chageNextSetupBtn];
                     }];
                     [self.navigationController pushViewController:phototShowViewController animated:YES];
@@ -149,20 +159,20 @@
         //被选中
         if (image && isSelected)
         {
-            if(_imagesNum.count  == 9 )
+            if(_photos.count  == 9 )
             {
-                NSLog(@"最多只能选择9张！");
+                [self.view makeToast:@"最多只能选择9张"];
                 return NO;
             }
             else
             {
-                [_imagesNum addObject:@(num)];
+                [_photos addObject:@(num)];
             }
         }
         //被移除
         else
         {
-            [_imagesNum removeObject:@(num)];
+            [_photos removeObject:@(num)];
         }
         
         [self chageNextSetupBtn];
@@ -172,14 +182,20 @@
 
     [self.view addSubview:phototShowView];
     
-    [phototShowView setImagesNum:[self.imagesNum copy]];
+    [phototShowView setImagesNum:[self.photos copy]];
+    [self chageNextSetupBtn];
 }
 
 #pragma mark -UIButton点击事件
 -(void)nextStpBtnTouch:(UIButton *)sender
 {
-
+    NSMutableArray * arr = [NSMutableArray array];
+    [_photos enumerateObjectsUsingBlock:^(NSNumber *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [arr addObject:[_model.result objectAtIndex:[obj integerValue] - 1]];
+    }];
     
+    [PostWordViewController postWordViewController].getAlbumPhotosBlock(arr,_photos);
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)cancelBtnTouch:(UIButton *)sender

@@ -14,6 +14,7 @@
 
     __weak IBOutlet UIButton *imageBtn;
     __weak IBOutlet UIButton *selectedBtn;
+
     
     //当前图片
     UIImage * _image;
@@ -78,12 +79,10 @@
 
 - (IBAction)btnDidSelected:(UIButton *)sender
 {
-    if (_seleBlock)
+    
+    if(_seleBlock(_image,!sender.selected,_num))
     {
-        if(_seleBlock(_image,!sender.selected,_num))
-        {
-            sender.selected = !sender.selected;
-        }
+        sender.selected = !sender.selected;
     }
 }
 

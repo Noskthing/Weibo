@@ -27,6 +27,8 @@
     UIButton * _postBtn;
     //选择图片PHImageResult数组
     NSMutableArray * _results;
+    //被选择图片的下标
+    NSMutableArray * _resultsNum;
 }
 //自定义键盘的选择视图背景
 @property (nonatomic,strong)UIView * bgView;
@@ -72,10 +74,11 @@ static const CGFloat customKeyBoardHeight = 46;
     self.view.backgroundColor = [UIColor whiteColor];
     
     __weak __typeof__(self) weakSelf = self;
-    self.getAlbumPhotosBlock = ^(NSMutableArray * photots){
+    self.getAlbumPhotosBlock = ^(NSMutableArray * photots,NSMutableArray * photosNum){
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
 //        NSLog(@"photo is %lu",(unsigned long)photots.count);
         _results = photots;
+        _resultsNum = photosNum;
         [strongSelf.photosCollectionView reloadData];
     };
     [self createNavigationBar];
@@ -259,31 +262,54 @@ static const CGFloat customKeyBoardHeight = 46;
 #pragma mark   -UIButton点击事件
 - (void)postBtnTouch:(UIButton *)sender
 {
-    NSString * str = _textView.text;
-    [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
+
     NSString * access_token = NSUserDefaultsObjectForKey(@"access_token");
     
+    NSString * str = _textView.text;
+    [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
     NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:@{@"access_token":access_token,@"status":str,@"visible":@(_jurisdictionBtn.jurisdiction)}];
-    if (_addressBtn.lon!= 0 && _addressBtn.lat !=0)
-    {
-        [dict setObject:@(_addressBtn.lat) forKey:@"lat"];
-        [dict setObject:@(_addressBtn.lon) forKey:@"long"];
-    }
-
     
-    ConnectDelegate * connect = [ConnectDelegate standConnectDelegate];
-    [connect requestDataFromUrl:@"https://api.weibo.com/2/statuses/update.json" parameters:[dict copy] andParseDataBlock:^(id obj) {
-        if (obj)
+    if (_results.count > 0)
+    {
+        UIImage * image = [UIImage imageNamed:@"card_icon_addattention"];
+        NSData * data = UIImageJPEGRepresentation(image, .5);
+        
+        
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        [manager POST:@"https://upload.api.weibo.com/2/statuses/upload.json" parameters:[dict copy] constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            
+            [formData appendPartWithFileData:data name:@"img" fileName:@"test" mimeType:@"image/jpeg"];
+
+        } success:^(NSURLSessionDataTask *task, id responseObject) {
+            NSLog(@"succ");
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSLog(@"error is %@",error);
+        }];
+    }
+    else
+    {
+        
+        if (_addressBtn.lon!= 0 && _addressBtn.lat !=0)
         {
-            [self createPromptViewWithImageName:@"health_infoPop_icon_check" title:@"已 发 送"];
+            [dict setObject:@(_addressBtn.lat) forKey:@"lat"];
+            [dict setObject:@(_addressBtn.lon) forKey:@"long"];
         }
-        else
-        {
-            [self createPromptViewWithImageName:@"health_infoPop_icon_close" title:@"发 送 失 败"];
-        }
-    }];
+        
+        
+        ConnectDelegate * connect = [ConnectDelegate standConnectDelegate];
+        [connect requestDataFromUrl:@"https://api.weibo.com/2/statuses/update.json" parameters:[dict copy] andParseDataBlock:^(id obj) {
+            if (obj)
+            {
+                [self createPromptViewWithImageName:@"health_infoPop_icon_check" title:@"已 发 送"];
+            }
+            else
+            {
+                [self createPromptViewWithImageName:@"health_infoPop_icon_close" title:@"发 送 失 败"];
+            }
+        }];
+    }
 }
 
 -(void)customKeyBoardBarButtonsDidSelected:(UIButton *)btn
@@ -293,7 +319,6 @@ static const CGFloat customKeyBoardHeight = 46;
         case 200:
         {
             PhotoViewController * photoViewController = [[PhotoViewController alloc] init];
-        
             [self.navigationController pushViewController:photoViewController animated:YES];
          }
             break;
@@ -485,6 +510,7 @@ static const CGFloat customKeyBoardHeight = 46;
              **/
             
             [_results removeObjectAtIndex:_results.count == 9?indexPath.item:indexPath.item - 1];
+            [_resultsNum removeObjectAtIndex:_results.count == 9?indexPath.item:indexPath.item - 1];
             [self.photosCollectionView deleteItemsAtIndexPaths:@[indexPath]];
             
            //reloadData不走   这个吃屎的bug被我碰到了
@@ -497,13 +523,13 @@ static const CGFloat customKeyBoardHeight = 46;
         cell.imageBtnDidSelectedBlock = ^(NSIndexPath * indexPath){
             if (indexPath.item == 0 && _results.count < 9)
             {
-                NSLog(@"add Btn");
+                PhotoViewController * photoViewController = [[PhotoViewController alloc] init];
+                photoViewController.photos = _resultsNum;
+                [self.navigationController pushViewController:photoViewController animated:YES];
             }
             else
             {
-                PhotoViewController * photoViewController = [[PhotoViewController alloc] init];
-                photoViewController.imagesNum = _results;
-                [self.navigationController pushViewController:photoViewController animated:YES];
+                
             }
         };
     }

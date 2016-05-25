@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Weibo/PhotoViewController.m"
-            timestampString = "485776898.818583"
+            filePath = "Weibo/AFNetworking/AFURLRequestSerialization.m"
+            timestampString = "485850767.480982"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "-viewWillAppear:"
+            startingLineNumber = "822"
+            endingLineNumber = "822"
+            landmarkName = "-requestByFinalizingMultipartFormData"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

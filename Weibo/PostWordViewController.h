@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-typedef void(^GetAlbumPhotosBlock)(NSMutableArray * photos);
+typedef void(^GetAlbumPhotosBlock)(NSMutableArray * photos,NSMutableArray * photosNum);
 @interface PostWordViewController : BaseViewController
 
 @property(nonatomic,copy)GetAlbumPhotosBlock getAlbumPhotosBlock;

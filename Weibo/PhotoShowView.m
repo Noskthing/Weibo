@@ -35,7 +35,7 @@ static const CGFloat edge = 5;
 -(void)setImagesNum:(NSArray *)imagesNum
 {
     _imagesNum = imagesNum;
-    [_collectionView reloadData];
+    [_collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
 }
 
 -(void)setSelectedBtnDidSelectedBlock:(SelectedBtnDidSelectedBlock)block
@@ -77,6 +77,11 @@ static const CGFloat edge = 5;
     _collectionView.dataSource = self;
     
     [_collectionView registerNib:[UINib nibWithNibName:@"PhotoCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"PhotoCollectionViewCell.h"];
+}
+
+-(void)selectedItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [_collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
 }
 
 #pragma mark -代理方法

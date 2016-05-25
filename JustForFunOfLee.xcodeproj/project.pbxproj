@@ -1000,11 +1000,11 @@
 			children = (
 				39F511461C5387B6004AB545 /* BaseViewController.h */,
 				39F511471C5387B6004AB545 /* BaseViewController.m */,
+				182C36C51C3E44400051B03F /* PostWordViewController.h */,
+				182C36C61C3E44400051B03F /* PostWordViewController.m */,
 				39F511421C538791004AB545 /* Photo */,
 				39F511411C538770004AB545 /* Jurisdiction */,
 				39F511401C538763004AB545 /* Location */,
-				182C36C51C3E44400051B03F /* PostWordViewController.h */,
-				182C36C61C3E44400051B03F /* PostWordViewController.m */,
 			);
 			name = ChildViewController;
 			sourceTree = "<group>";

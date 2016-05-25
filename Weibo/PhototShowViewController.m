@@ -12,6 +12,7 @@
 #import "PhotoManager.h"
 #import "CheckPhotoViewCell.h"
 #import "PostWordViewController.h"
+#import "UIView+Toast.h"
 
 @interface PhototShowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -166,7 +167,7 @@
     {
         if (self.selectedPhotos.count == 9)
         {
-            NSLog(@"最多只能选择9张");
+            [self.view makeToast:@"最多只能选择9张"];
             btn.selected = !btn.selected;
         }
         else
@@ -197,7 +198,7 @@
         [arr addObject:[self.model.result objectAtIndex:[obj integerValue] - 1]];
     }];
     
-    [PostWordViewController postWordViewController].getAlbumPhotosBlock(arr);
+    [PostWordViewController postWordViewController].getAlbumPhotosBlock(arr,_selectedPhotos);
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

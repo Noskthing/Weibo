@@ -11,6 +11,6 @@
 @interface PhotoViewController : UIViewController
 
 //被选中的图标下标
-@property (nonatomic,copy)NSMutableArray * imagesNum;
+@property (nonatomic,strong)NSMutableArray * photos;
 
 @end
