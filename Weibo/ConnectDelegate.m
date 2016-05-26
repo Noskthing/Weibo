@@ -11,7 +11,7 @@
 @interface ConnectDelegate ()
 {
     AFNetworkReachabilityManager * _manager;
-    AFHTTPRequestOperationManager * _requestManager;
+    AFHTTPSessionManager * _requestManager;
     
     ParseDataBlock  _block;
 }
@@ -37,7 +37,7 @@
     {
         _manager = [AFNetworkReachabilityManager sharedManager];
         
-        _requestManager = [AFHTTPRequestOperationManager manager];
+        _requestManager = [AFHTTPSessionManager manager];
         //设置数据传输类型
         _requestManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain",@"text/html",nil];
     }
@@ -94,22 +94,24 @@
 #pragma mark  -get请求
 -(void)requestDataFromUrl:(NSString *)url
 {
-    [_requestManager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_requestManager GET:url parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         _block(responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         _block(nil);
-        NSLog(@"request error:%@",error);
     }];
 }
 
 #pragma mark  -post请求
 -(void)requestDataFromUrl:(NSString *)url parameters:(id)parameters
 {
-    [_requestManager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject){
+    [_requestManager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         _block(responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         _block(nil);
-        NSLog(@"request errpr：%@",error);
     }];
 }
 @end

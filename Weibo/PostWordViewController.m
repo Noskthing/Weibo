@@ -273,20 +273,8 @@ static const CGFloat customKeyBoardHeight = 46;
     
     if (_results.count > 0)
     {
-        UIImage * image = [UIImage imageNamed:@"card_icon_addattention"];
-        NSData * data = UIImageJPEGRepresentation(image, .5);
-        
-        
-        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        [manager POST:@"https://upload.api.weibo.com/2/statuses/upload.json" parameters:[dict copy] constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-            
-            [formData appendPartWithFileData:data name:@"img" fileName:@"test" mimeType:@"image/jpeg"];
-
-        } success:^(NSURLSessionDataTask *task, id responseObject) {
-            NSLog(@"succ");
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            NSLog(@"error is %@",error);
-        }];
+        //看完AFNetworking源码再来
+        //问题出在bodyStream一直为空  摊手
     }
     else
     {

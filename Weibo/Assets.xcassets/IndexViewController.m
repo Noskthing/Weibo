@@ -166,7 +166,7 @@
 -(void)getDataFromNetWorkWithUserInfo:(NSString *)accion;
 {
     NSString * urlStr = [NSString stringWithFormat:@"%@?access_token=%@",UserNewFriendWeiBo,accion];
-    NSLog(@"accion = %@",urlStr);
+
     
     ConnectDelegate * connect = [ConnectDelegate standConnectDelegate];
     [connect requestDataFromUrl:urlStr andParseDataBlock:^(id obj) {

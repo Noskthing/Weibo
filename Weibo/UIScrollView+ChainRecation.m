@@ -24,7 +24,7 @@ static const char LBWScrollTitleViewKey = '\00';
     
     //传入titleView被点击时执行的block
     __weak UIScrollView * weakSelf = self;
-    NSLog(@"self.titleView is %@",self.titleView);
+//    NSLog(@"self.titleView is %@",self.titleView);
     [self.titleView setTitleViewDidSelectedBlock:^(NSInteger idx) {
         [weakSelf setContentOffset:CGPointMake(weakSelf.frame.size.width * idx, 0) animated:YES];
     }];

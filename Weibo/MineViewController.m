@@ -103,7 +103,6 @@
         NSMutableDictionary * dic = [NSMutableDictionary dictionary];
         NSDictionary * objDict = (NSDictionary *)obj;
         
-        NSLog(@"userInfoDict = %@",[NSString stringWithFormat:@"%@?access_token=%@&uid=%@",url,access_token,uid]);
         NSArray * keys = @[@"avatar_hd",@"avatar_large",@"cover_image",@"gender",@"name",@"friends_count",@"followers_count",@"description",@"screen_name",@"statuses_count",@"profile_image_url"];
 
         [keys enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
