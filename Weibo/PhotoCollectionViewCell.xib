@@ -21,7 +21,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dej-su-Ora">
-                        <rect key="frame" x="97" y="1" width="25" height="25"/>
+                        <rect key="frame" x="101" y="0.0" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="8Sb-Nu-T3N"/>
                             <constraint firstAttribute="width" constant="25" id="xgf-zw-nzL"/>
@@ -38,14 +38,16 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="lAN-bV-DYh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="1gL-RA-fZL"/>
-                <constraint firstItem="Dej-su-Ora" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" multiplier="5" constant="1" id="2FE-4C-sFb"/>
-                <constraint firstAttribute="trailing" secondItem="Dej-su-Ora" secondAttribute="trailing" constant="4" id="7xm-Dt-25X"/>
+                <constraint firstItem="Dej-su-Ora" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" multiplier="5" id="2FE-4C-sFb"/>
+                <constraint firstAttribute="trailing" secondItem="Dej-su-Ora" secondAttribute="trailing" id="7xm-Dt-25X"/>
                 <constraint firstAttribute="bottom" secondItem="lAN-bV-DYh" secondAttribute="bottom" id="Fbf-yP-8V7"/>
                 <constraint firstAttribute="trailing" secondItem="lAN-bV-DYh" secondAttribute="trailing" id="cGR-fH-adZ"/>
                 <constraint firstItem="lAN-bV-DYh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="qJX-Zm-axv"/>
             </constraints>
             <size key="customSize" width="126" height="126"/>
             <connections>
+                <outlet property="cellHeight" destination="8Sb-Nu-T3N" id="Rfv-l1-CXY"/>
+                <outlet property="cellWidth" destination="xgf-zw-nzL" id="NO8-xw-5VX"/>
                 <outlet property="imageBtn" destination="lAN-bV-DYh" id="xg2-nl-BTC"/>
                 <outlet property="selectedBtn" destination="Dej-su-Ora" id="lqH-eI-Tfe"/>
             </connections>

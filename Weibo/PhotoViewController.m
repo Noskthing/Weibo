@@ -14,6 +14,7 @@
 #import "PhototShowViewController.h"
 #import "PostWordViewController.h"
 #import "UIView+Toast.h"
+#import "CustomTakePhotoViewController.h"
 
 @interface PhotoViewController ()
 {
@@ -179,7 +180,12 @@
         return YES;
     }];
     
-
+    [phototShowView setCameraBtnDidSelectedBlock:^{
+        CustomTakePhotoViewController * controller = [[CustomTakePhotoViewController alloc] init];
+        [self.navigationController pushViewController:controller animated:YES];
+    }];
+    
+    
     [self.view addSubview:phototShowView];
     
     [phototShowView setImagesNum:[self.photos copy]];

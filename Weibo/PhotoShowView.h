@@ -11,6 +11,7 @@
 @class AlbumModel;
 typedef void(^CellDidSelectedBlock)(NSInteger row,AlbumModel * model,NSUInteger countOfImages);
 typedef BOOL(^SelectedBtnDidSelectedBlock)(UIImage * image,BOOL isSelected,NSInteger num);
+typedef void(^CameraBtnDidSelectedBlock)();
 @interface PhotoShowView : UIView
 
 
@@ -19,4 +20,5 @@ typedef BOOL(^SelectedBtnDidSelectedBlock)(UIImage * image,BOOL isSelected,NSInt
 -(void)setImagesNum:(NSArray *)imagesNum;
 -(void)setCellDidSelectedBlock:(CellDidSelectedBlock)block;
 -(void)setSelectedBtnDidSelectedBlock:(SelectedBtnDidSelectedBlock)block;
+-(void)setCameraBtnDidSelectedBlock:(CameraBtnDidSelectedBlock)block;
 @end

@@ -17,6 +17,7 @@
     NSArray * _models;
     CellDidSelectedBlock _cellBlock;
     SelectedBtnDidSelectedBlock _seleBlock;
+    CameraBtnDidSelectedBlock _cameraBlock;
     AlbumModel * _model;
     NSArray * _imagesNum;
 }
@@ -84,6 +85,11 @@ static const CGFloat edge = 5;
     [_collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
 }
 
+-(void)setCameraBtnDidSelectedBlock:(CameraBtnDidSelectedBlock)block
+{
+    _cameraBlock = block;
+}
+
 #pragma mark -代理方法
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -105,9 +111,15 @@ static const CGFloat edge = 5;
         [cell setModel:indexPath.row == 0?nil:_models[indexPath.row - 1] isFirstBtn:indexPath.row == 0?YES:NO];
         [cell setPhototNumber:indexPath.row photosCount:_models.count AlbumModel:_model];
         [cell setIsSelected:[_imagesNum containsObject:@(indexPath.row)]];
-        if (_seleBlock && _cellBlock)
+        //其实应该加一个block是否为空的判断的=-=
+        if (!cell.seleBlock && !cell.cellBlock)
         {
             [cell setCellDidSelectedBlock:_cellBlock SelectedBtnDidSelectedBlock:_seleBlock];
+        }
+        
+        if (!cell.cameraBlock)
+        {
+            [cell setCameraBtnDidSelectedBlock:_cameraBlock];
         }
     }
     

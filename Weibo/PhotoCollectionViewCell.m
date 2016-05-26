@@ -15,7 +15,9 @@
     __weak IBOutlet UIButton *imageBtn;
     __weak IBOutlet UIButton *selectedBtn;
 
+    __weak IBOutlet NSLayoutConstraint *cellHeight;
     
+    __weak IBOutlet NSLayoutConstraint *cellWidth;
     //当前图片
     UIImage * _image;
     //第几张图片
@@ -27,10 +29,6 @@
     //相册模型
     AlbumModel * _model;
     
-    //图片点击执行的block
-    CellDidSelectedBlock _cellBlock;
-    //选中图片按钮点击执行的block
-    SelectedBtnDidSelectedBlock _seleBlock;
     
 }
 @end
@@ -59,6 +57,11 @@
     selectedBtn.selected = !selectedBtn.selected;
 }
 
+-(void)setCameraBtnDidSelectedBlock:(CameraBtnDidSelectedBlock)block
+{
+    _cameraBlock = block;
+}
+
 -(void)setIsSelected:(BOOL)isSelected
 {
     selectedBtn.selected = isSelected;
@@ -79,11 +82,19 @@
 
 - (IBAction)btnDidSelected:(UIButton *)sender
 {
+//    [UIView animateWithDuration:2 animations:^{
+//        cellHeight.constant =  40;
+//        cellWidth.constant = 40;
+//    } completion:^(BOOL finished) {
+        if(_seleBlock(_image,!sender.selected,_num))
+        {
+            sender.selected = !sender.selected;
+        }
+//        [UIView animateWithDuration:1 animations:^{
+//            cellWidth.constant = cellHeight.constant = 25;
+//        }];
+//    }];
     
-    if(_seleBlock(_image,!sender.selected,_num))
-    {
-        sender.selected = !sender.selected;
-    }
 }
 
 
@@ -92,6 +103,7 @@
     if (selectedBtn.hidden)
     {
         NSLog(@"拍照");
+        _cameraBlock();
     }
     else
     {
