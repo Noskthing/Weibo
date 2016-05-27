@@ -180,10 +180,12 @@
         return YES;
     }];
     
+    __weak __typeof__(self) weakSelf = self;
     [phototShowView setCameraBtnDidSelectedBlock:^{
+        __strong __typeof__(weakSelf) strongSelf = weakSelf;
         CustomTakePhotoViewController * controller = [[CustomTakePhotoViewController alloc] init];
         controller.model = model;
-        [self.navigationController pushViewController:controller animated:YES];
+        [strongSelf.navigationController pushViewController:controller animated:YES];
     }];
     
     
