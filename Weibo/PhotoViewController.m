@@ -182,6 +182,7 @@
     
     [phototShowView setCameraBtnDidSelectedBlock:^{
         CustomTakePhotoViewController * controller = [[CustomTakePhotoViewController alloc] init];
+        controller.model = model;
         [self.navigationController pushViewController:controller animated:YES];
     }];
     

@@ -208,7 +208,7 @@
     /**
      
      这里不推荐使用UIScrollView展示
-     非常抱歉的是个人自己封装的UIScrollView也无法使用
+     非常遗憾的是个人自己封装的UIScrollView也无法使用
      遍历获得PHAsset 通过PHImageManager获取图片   其中可能是因为异步的原因导致获取图片数组失败  想要一次性获得所有图片不现实  个人封装的UIScrollView在复用这里考虑的不如系统本身的UITableView之类的全面 可能出现未知崩溃
      妥协的办法是使用UItableView之类 将PHAsset数组传入 在每一个cell/item使用时去使用PHImageManager去获取图片加载
      

@@ -39,6 +39,8 @@
 - (void)cancelBtnTouch:(UIButton *)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:kLeeKeyBoardWillDisappear object:nil];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 @end
