@@ -15,6 +15,7 @@
 #import "PostWordViewController.h"
 #import "UIView+Toast.h"
 #import "CustomTakePhotoViewController.h"
+#import "CustomImageViewController.h"
 
 @interface PhotoViewController ()
 {
@@ -203,8 +204,17 @@
         [arr addObject:[_model.result objectAtIndex:[obj integerValue] - 1]];
     }];
     
-    [PostWordViewController postWordViewController].getAlbumPhotosBlock(arr,_photos);
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if (arr.count == 1)
+    {
+        CustomImageViewController * controller = [[CustomImageViewController alloc] init];
+        controller.asset = arr[0];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else
+    {
+        [PostWordViewController postWordViewController].getAlbumPhotosBlock(arr,_photos);
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 - (void)cancelBtnTouch:(UIButton *)sender

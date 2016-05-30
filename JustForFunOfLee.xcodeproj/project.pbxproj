@@ -165,6 +165,8 @@
 		6054547F1CF6A60000BA7270 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 605454771CF6A60000BA7270 /* AFURLRequestSerialization.m */; };
 		605454801CF6A60000BA7270 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 605454791CF6A60000BA7270 /* AFURLResponseSerialization.m */; };
 		605454811CF6A60000BA7270 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6054547B1CF6A60000BA7270 /* AFURLSessionManager.m */; };
+		607FF32C1CFBE66800C49DEC /* CustomImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 607FF32B1CFBE66800C49DEC /* CustomImageViewController.m */; };
+		607FF32F1CFC2D3E00C49DEC /* ImageOptionScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 607FF32E1CFC2D3E00C49DEC /* ImageOptionScrollView.m */; };
 		60898D5F1CF6DF7A00641007 /* CustomTakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60898D5E1CF6DF7A00641007 /* CustomTakePhotoViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -466,6 +468,10 @@
 		605454791CF6A60000BA7270 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		6054547A1CF6A60000BA7270 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		6054547B1CF6A60000BA7270 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		607FF32A1CFBE66800C49DEC /* CustomImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomImageViewController.h; sourceTree = "<group>"; };
+		607FF32B1CFBE66800C49DEC /* CustomImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomImageViewController.m; sourceTree = "<group>"; };
+		607FF32D1CFC2D3E00C49DEC /* ImageOptionScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageOptionScrollView.h; sourceTree = "<group>"; };
+		607FF32E1CFC2D3E00C49DEC /* ImageOptionScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageOptionScrollView.m; sourceTree = "<group>"; };
 		60898D5D1CF6DF7A00641007 /* CustomTakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTakePhotoViewController.h; sourceTree = "<group>"; };
 		60898D5E1CF6DF7A00641007 /* CustomTakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTakePhotoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1263,6 +1269,8 @@
 				39A639E61C55E6F50090905F /* PhototShowViewController.m */,
 				60898D5D1CF6DF7A00641007 /* CustomTakePhotoViewController.h */,
 				60898D5E1CF6DF7A00641007 /* CustomTakePhotoViewController.m */,
+				607FF32A1CFBE66800C49DEC /* CustomImageViewController.h */,
+				607FF32B1CFBE66800C49DEC /* CustomImageViewController.m */,
 			);
 			name = Photo;
 			sourceTree = "<group>";
@@ -1279,6 +1287,8 @@
 				39A639E01C550BF90090905F /* PhotoShowView.m */,
 				6017B7EE1CC7882D00407A87 /* CheckPhotoViewCell.h */,
 				6017B7EF1CC7882D00407A87 /* CheckPhotoViewCell.m */,
+				607FF32D1CFC2D3E00C49DEC /* ImageOptionScrollView.h */,
+				607FF32E1CFC2D3E00C49DEC /* ImageOptionScrollView.m */,
 			);
 			name = PhotoView;
 			sourceTree = "<group>";
@@ -1421,8 +1431,10 @@
 				18FBA0091C15A3FD00EF6EA6 /* LeeScrollViewWithArray.m in Sources */,
 				18E705921C17CA2100890719 /* MessageTableView.m in Sources */,
 				39F511481C5387B6004AB545 /* BaseViewController.m in Sources */,
+				607FF32C1CFBE66800C49DEC /* CustomImageViewController.m in Sources */,
 				39A639E71C55E6F50090905F /* PhototShowViewController.m in Sources */,
 				60181E5F1CC9BA0000F7DAC4 /* UIScrollView+ChainRecation.m in Sources */,
+				607FF32F1CFC2D3E00C49DEC /* ImageOptionScrollView.m in Sources */,
 				185C0DDF1C1A753200BAF302 /* MineScrollView.m in Sources */,
 				60181E561CC9B9F700F7DAC4 /* LBWPageControl.m in Sources */,
 				18AD92371C3BACB300B518B9 /* DevelopmentTableViewCell.m in Sources */,
@@ -1610,7 +1622,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "6a92e65b-c2c8-4e06-9a7b-3cba2fa6e677";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -1650,7 +1662,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "6a92e65b-c2c8-4e06-9a7b-3cba2fa6e677";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s arm64";

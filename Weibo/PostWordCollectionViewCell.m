@@ -24,20 +24,31 @@
 }
 
 
-- (void)configWith:(PHAsset *)phasset
+- (void)configWith:(id)model
 {
-    removeBtn.hidden = NO;
-    
-    // 在资源的集合中获取第一个集合，并获取其中的图片
-    
-    PHImageManager *imageManager = [PHImageManager defaultManager];
-    [imageManager requestImageForAsset:phasset
-                            targetSize:PHImageManagerMaximumSize
-                           contentMode:PHImageContentModeDefault
-                               options:nil
-                         resultHandler:^(UIImage *result, NSDictionary *info) {
-                             [bg setBackgroundImage:result forState:UIControlStateNormal];
-                         }];
+    if ([model isKindOfClass:[PHAsset class]])
+    {
+        removeBtn.hidden = NO;
+        
+        // 在资源的集合中获取第一个集合，并获取其中的图片
+        
+        PHImageManager *imageManager = [PHImageManager defaultManager];
+        [imageManager requestImageForAsset:model
+                                targetSize:PHImageManagerMaximumSize
+                               contentMode:PHImageContentModeDefault
+                                   options:nil
+                             resultHandler:^(UIImage *result, NSDictionary *info) {
+                                 [bg setBackgroundImage:result forState:UIControlStateNormal];
+                             }];
+    }
+    else if([model isKindOfClass:[UIImage class]])
+    {
+        [bg setBackgroundImage:model forState:UIControlStateNormal];
+    }
+    else
+    {
+        
+    }
 }
 
 -(void)addPhotoBtn

@@ -262,8 +262,6 @@ static const CGFloat customKeyBoardHeight = 46;
 #pragma mark   -UIButton点击事件
 - (void)postBtnTouch:(UIButton *)sender
 {
-    
-
     NSString * access_token = NSUserDefaultsObjectForKey(@"access_token");
     
     NSString * str = _textView.text;

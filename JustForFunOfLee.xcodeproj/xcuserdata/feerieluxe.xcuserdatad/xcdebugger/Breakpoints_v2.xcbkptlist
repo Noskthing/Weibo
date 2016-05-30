@@ -17,38 +17,6 @@
             endingLineNumber = "822"
             landmarkName = "-requestByFinalizingMultipartFormData"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[AFStreamingMultipartFormData appendPartWithFileURL:name:fileName:mimeType:error:]"
-                  moduleName = "JustForFunOfLee"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/feerieluxe/Downloads/Weibo/Weibo/AFNetworking/AFURLRequestSerialization.m"
-                  timestampString = "486025234.578142"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "828"
-                  endingLineNumber = "828"
-                  offsetFromSymbolStart = "180">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[AFStreamingMultipartFormData appendPartWithFileURL:name:fileName:mimeType:error:]"
-                  moduleName = "JustForFunOfLee"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/feerieluxe/Downloads/Weibo/Weibo/AFNetworking/AFURLRequestSerialization.m"
-                  timestampString = "486025234.578326"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "828"
-                  endingLineNumber = "828"
-                  offsetFromSymbolStart = "212">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

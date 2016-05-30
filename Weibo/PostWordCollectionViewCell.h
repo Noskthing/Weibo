@@ -20,6 +20,6 @@ typedef void(^ImageBtnDidSelectedBlock)(NSIndexPath * indexPath);
 
 @property (nonatomic,assign)NSIndexPath* indexPath;
 
-- (void)configWith:(PHAsset*)phasset;
+- (void)configWith:(id)model;
 -(void)addPhotoBtn;
 @end
