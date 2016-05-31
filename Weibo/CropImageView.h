@@ -1,5 +1,5 @@
 //
-//  UIImageView+Animation.h
+//  CropImageView.h
 //  JustForFunOfLee
 //
 //  Created by feerie luxe on 16/5/31.
@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImageView (Animation)
+@interface CropImageView : UIView
 
-+ (UIImageView *)rotate90DegreeWithImageView:(UIImageView *)imageView;
 @end

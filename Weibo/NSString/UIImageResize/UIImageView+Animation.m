@@ -10,7 +10,7 @@
 
 @implementation UIImageView (Animation)
 
-+ (UIImageView *)rotate360DegreeWithImageView:(UIImageView *)imageView
++ (UIImageView *)rotate90DegreeWithImageView:(UIImageView *)imageView
 {
     CABasicAnimation *animation = [ CABasicAnimation
                                    animationWithKeyPath: @"transform" ];

@@ -28,6 +28,8 @@
 @property (nonatomic,strong)ImageOptionScrollView * filterView;
 
 @property (nonatomic,strong)ImageOptionScrollView * stickerView;
+
+@property (nonatomic,strong)UIScrollView * cropView;
 @end
 @implementation CustomImageViewController
 
@@ -100,6 +102,8 @@
     }
     return _filterView;
 }
+
+
 
 -(void)createUI
 {
@@ -208,10 +212,9 @@
     switch (btn.tag)
     {
         case 5:
-            _imageView = [UIImageView rotate360DegreeWithImageView:_imageView];
+            _imageView = [UIImageView rotate90DegreeWithImageView:_imageView];
             _image = [UIImage image:_image rotation:UIImageOrientationRight];
             _imageView.image = _image;
-
             break;
             
         case 6:

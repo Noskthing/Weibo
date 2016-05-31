@@ -157,6 +157,7 @@
 		60181E691CCA270A00F7DAC4 /* PostWordCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60181E671CCA270A00F7DAC4 /* PostWordCollectionViewCell.m */; };
 		60181E6A1CCA270A00F7DAC4 /* PostWordCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60181E681CCA270A00F7DAC4 /* PostWordCollectionViewCell.xib */; };
 		6051CFBD1CFD7CB3006C9898 /* UIImageView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6051CFBC1CFD7CB3006C9898 /* UIImageView+Animation.m */; };
+		6051CFC01CFD92D7006C9898 /* CropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6051CFBF1CFD92D7006C9898 /* CropImageView.m */; };
 		6054547C1CF6A60000BA7270 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 605454701CF6A60000BA7270 /* AFHTTPSessionManager.m */; };
 		6054547D1CF6A60000BA7270 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 605454731CF6A60000BA7270 /* AFNetworkReachabilityManager.m */; };
 		6054547E1CF6A60000BA7270 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 605454751CF6A60000BA7270 /* AFSecurityPolicy.m */; };
@@ -446,6 +447,8 @@
 		60181E681CCA270A00F7DAC4 /* PostWordCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostWordCollectionViewCell.xib; sourceTree = "<group>"; };
 		6051CFBB1CFD7CB3006C9898 /* UIImageView+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Animation.h"; sourceTree = "<group>"; };
 		6051CFBC1CFD7CB3006C9898 /* UIImageView+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Animation.m"; sourceTree = "<group>"; };
+		6051CFBE1CFD92D7006C9898 /* CropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropImageView.h; sourceTree = "<group>"; };
+		6051CFBF1CFD92D7006C9898 /* CropImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropImageView.m; sourceTree = "<group>"; };
 		6054546F1CF6A60000BA7270 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		605454701CF6A60000BA7270 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		605454711CF6A60000BA7270 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -1266,6 +1269,8 @@
 				6017B7EF1CC7882D00407A87 /* CheckPhotoViewCell.m */,
 				607FF32D1CFC2D3E00C49DEC /* ImageOptionScrollView.h */,
 				607FF32E1CFC2D3E00C49DEC /* ImageOptionScrollView.m */,
+				6051CFBE1CFD92D7006C9898 /* CropImageView.h */,
+				6051CFBF1CFD92D7006C9898 /* CropImageView.m */,
 			);
 			name = PhotoView;
 			sourceTree = "<group>";
@@ -1446,6 +1451,7 @@
 				1820CA471C1031330053EF49 /* UIImage+MultiFormat.m in Sources */,
 				60898D5F1CF6DF7A00641007 /* CustomTakePhotoViewController.m in Sources */,
 				18FBA0001C159FBF00EF6EA6 /* FindTableView.m in Sources */,
+				6051CFC01CFD92D7006C9898 /* CropImageView.m in Sources */,
 				1820CA3E1C1031330053EF49 /* SDImageCache.m in Sources */,
 				39A639DD1C550B170090905F /* PhotoCollectionViewCell.m in Sources */,
 				18403FAC1C28E83700651726 /* MJRefreshNormalHeader.m in Sources */,
