@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1809F2231C4DDDA8002B44F1 /* ShareRangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809F2221C4DDDA8002B44F1 /* ShareRangeViewController.m */; };
-		181961011C1FC3F1009CA33B /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 181960F81C1FC3F1009CA33B /* CollectionViewCell.xib */; };
-		181961021C1FC3F1009CA33B /* ScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181960FA1C1FC3F1009CA33B /* ScrollView.m */; };
-		181961031C1FC3F1009CA33B /* TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181960FC1C1FC3F1009CA33B /* TitleView.m */; };
 		181961171C1FEBE7009CA33B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181961161C1FEBE7009CA33B /* ViewController.m */; };
 		1820CA151C1021680053EF49 /* MineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1820CA131C1021680053EF49 /* MineTableViewCell.m */; };
 		1820CA161C1021680053EF49 /* MineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1820CA141C1021680053EF49 /* MineTableViewCell.xib */; };
@@ -159,6 +156,7 @@
 		60181E651CCA0A5D00F7DAC4 /* NavTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60181E641CCA0A5D00F7DAC4 /* NavTitleView.xib */; };
 		60181E691CCA270A00F7DAC4 /* PostWordCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60181E671CCA270A00F7DAC4 /* PostWordCollectionViewCell.m */; };
 		60181E6A1CCA270A00F7DAC4 /* PostWordCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60181E681CCA270A00F7DAC4 /* PostWordCollectionViewCell.xib */; };
+		6051CFBD1CFD7CB3006C9898 /* UIImageView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6051CFBC1CFD7CB3006C9898 /* UIImageView+Animation.m */; };
 		6054547C1CF6A60000BA7270 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 605454701CF6A60000BA7270 /* AFHTTPSessionManager.m */; };
 		6054547D1CF6A60000BA7270 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 605454731CF6A60000BA7270 /* AFNetworkReachabilityManager.m */; };
 		6054547E1CF6A60000BA7270 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 605454751CF6A60000BA7270 /* AFSecurityPolicy.m */; };
@@ -173,15 +171,6 @@
 /* Begin PBXFileReference section */
 		1809F2211C4DDDA8002B44F1 /* ShareRangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareRangeViewController.h; sourceTree = "<group>"; };
 		1809F2221C4DDDA8002B44F1 /* ShareRangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareRangeViewController.m; sourceTree = "<group>"; };
-		181960F61C1FC3F1009CA33B /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
-		181960F71C1FC3F1009CA33B /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
-		181960F81C1FC3F1009CA33B /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
-		181960F91C1FC3F1009CA33B /* ScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollView.h; sourceTree = "<group>"; };
-		181960FA1C1FC3F1009CA33B /* ScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollView.m; sourceTree = "<group>"; };
-		181960FB1C1FC3F1009CA33B /* TitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleView.h; sourceTree = "<group>"; };
-		181960FC1C1FC3F1009CA33B /* TitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleView.m; sourceTree = "<group>"; };
-		181960FD1C1FC3F1009CA33B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		181960FE1C1FC3F1009CA33B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		181961151C1FEBE7009CA33B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		181961161C1FEBE7009CA33B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		1820CA121C1021680053EF49 /* MineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineTableViewCell.h; sourceTree = "<group>"; };
@@ -455,6 +444,8 @@
 		60181E661CCA270A00F7DAC4 /* PostWordCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostWordCollectionViewCell.h; sourceTree = "<group>"; };
 		60181E671CCA270A00F7DAC4 /* PostWordCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostWordCollectionViewCell.m; sourceTree = "<group>"; };
 		60181E681CCA270A00F7DAC4 /* PostWordCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostWordCollectionViewCell.xib; sourceTree = "<group>"; };
+		6051CFBB1CFD7CB3006C9898 /* UIImageView+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Animation.h"; sourceTree = "<group>"; };
+		6051CFBC1CFD7CB3006C9898 /* UIImageView+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Animation.m"; sourceTree = "<group>"; };
 		6054546F1CF6A60000BA7270 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		605454701CF6A60000BA7270 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		605454711CF6A60000BA7270 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -508,7 +499,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		181960F21C1FC3F1009CA33B /* NSString */ = {
+		181960F21C1FC3F1009CA33B /* Category */ = {
 			isa = PBXGroup;
 			children = (
 				186551D71C3A407B00BE5C65 /* UIImageResize */,
@@ -518,25 +509,9 @@
 				18CAF9B71C2135160098386F /* UIView+Additions.m */,
 				18CAF9BD1C2158360098386F /* NSString+Additions.h */,
 				18CAF9BE1C2158360098386F /* NSString+Additions.m */,
-				181960F51C1FC3F1009CA33B /* 横向滑动导航栏 */,
 			);
+			name = Category;
 			path = NSString;
-			sourceTree = "<group>";
-		};
-		181960F51C1FC3F1009CA33B /* 横向滑动导航栏 */ = {
-			isa = PBXGroup;
-			children = (
-				181960F61C1FC3F1009CA33B /* CollectionViewCell.h */,
-				181960F71C1FC3F1009CA33B /* CollectionViewCell.m */,
-				181960F81C1FC3F1009CA33B /* CollectionViewCell.xib */,
-				181960F91C1FC3F1009CA33B /* ScrollView.h */,
-				181960FA1C1FC3F1009CA33B /* ScrollView.m */,
-				181960FB1C1FC3F1009CA33B /* TitleView.h */,
-				181960FC1C1FC3F1009CA33B /* TitleView.m */,
-				181960FD1C1FC3F1009CA33B /* ViewController.h */,
-				181960FE1C1FC3F1009CA33B /* ViewController.m */,
-			);
-			path = "横向滑动导航栏";
 			sourceTree = "<group>";
 		};
 		181961051C1FC668009CA33B /* WeiBoView */ = {
@@ -797,7 +772,6 @@
 				18F58CE01C337FBD00BFFB4C /* JPush */,
 				18403F731C28E83700651726 /* MJRefresh */,
 				188DF4D51C24FA6E0078363B /* Toast */,
-				181960F21C1FC3F1009CA33B /* NSString */,
 				18FBA0041C15A3FD00EF6EA6 /* LeeScrollView */,
 				1820CA1A1C1031330053EF49 /* SDWebImage */,
 				184B3ABD1C0E974E00FB7B06 /* libWeiboSDK */,
@@ -857,6 +831,8 @@
 				186551D91C3A407B00BE5C65 /* RunLightView.m */,
 				186551DA1C3A407B00BE5C65 /* UIImage+Addition.h */,
 				186551DB1C3A407B00BE5C65 /* UIImage+Addition.m */,
+				6051CFBB1CFD7CB3006C9898 /* UIImageView+Animation.h */,
+				6051CFBC1CFD7CB3006C9898 /* UIImageView+Animation.m */,
 			);
 			path = UIImageResize;
 			sourceTree = "<group>";
@@ -993,6 +969,7 @@
 		18E5503F1C0C1A09004A5E1D /* Weibo */ = {
 			isa = PBXGroup;
 			children = (
+				181960F21C1FC3F1009CA33B /* Category */,
 				18EE4A8D1C1EC96700C80164 /* Global */,
 				184B3AE41C0E9B7D00FB7B06 /* Libs */,
 				184B3AE21C0E9B4B00FB7B06 /* FrameWork */,
@@ -1402,7 +1379,6 @@
 				60181E651CCA0A5D00F7DAC4 /* NavTitleView.xib in Resources */,
 				18AD92381C3BACB300B518B9 /* DevelopmentTableViewCell.xib in Resources */,
 				1828CCEF1C34D1D6003CAF43 /* NavgationBarTitleBtn.xib in Resources */,
-				181961011C1FC3F1009CA33B /* CollectionViewCell.xib in Resources */,
 				18232E9B1C3D3B2400CE69D6 /* InfoPlist.strings in Resources */,
 				1852BF611C3A9A8A000C69D6 /* TitleViewHeader.xib in Resources */,
 				1820CA4E1C104AEE0053EF49 /* MineTableViewTitle.json in Resources */,
@@ -1460,6 +1436,7 @@
 				6054547E1CF6A60000BA7270 /* AFSecurityPolicy.m in Sources */,
 				1820CA491C1031330053EF49 /* UIImageView+HighlightedWebCache.m in Sources */,
 				184B3B2A1C0EF0A400FB7B06 /* MineHeaderTableViewCell.m in Sources */,
+				6051CFBD1CFD7CB3006C9898 /* UIImageView+Animation.m in Sources */,
 				185C0DE41C1A7DFC00BAF302 /* MineInfoViewController.m in Sources */,
 				18EE4A911C1EC99F00C80164 /* WeiboModel.m in Sources */,
 				1820CA481C1031330053EF49 /* UIImage+WebP.m in Sources */,
@@ -1492,7 +1469,6 @@
 				18403FA31C28E83700651726 /* MJRefreshFooter.m in Sources */,
 				18CAF9B91C2135160098386F /* UIView+Additions.m in Sources */,
 				1820CA151C1021680053EF49 /* MineTableViewCell.m in Sources */,
-				181961031C1FC3F1009CA33B /* TitleView.m in Sources */,
 				182C36C81C3E44400051B03F /* PostWordViewController.m in Sources */,
 				39A639E11C550BF90090905F /* PhotoShowView.m in Sources */,
 				182C36CE1C3E8D790051B03F /* LeeKeyboard.m in Sources */,
@@ -1511,7 +1487,6 @@
 				18CAF9BF1C2158360098386F /* NSString+Additions.m in Sources */,
 				1820CA3C1C1031330053EF49 /* MKAnnotationView+WebCache.m in Sources */,
 				1840F0081C1BF8CC0099362D /* MineInfoTableView.m in Sources */,
-				181961021C1FC3F1009CA33B /* ScrollView.m in Sources */,
 				184690DF1C11859800621DDD /* WeboTypeHeaderView.m in Sources */,
 				60181E631CCA0A4A00F7DAC4 /* NavTitleView.m in Sources */,
 				1820CA4A1C1031330053EF49 /* UIImageView+WebCache.m in Sources */,

@@ -8,6 +8,8 @@
 
 #import "CustomImageViewController.h"
 #import "ImageOptionScrollView.h"
+#import "UIImage+Addition.h"
+#import "UIImageView+Animation.h"
 
 @interface CustomImageViewController ()
 {
@@ -16,6 +18,10 @@
     //图片实际所在位置
     CGFloat _imageWidth;
     CGFloat _imageHeight;
+    
+    //图片
+    UIImageView * _imageView;
+    UIImage * _image;
 }
 @property (nonatomic,strong)UIView * toolsView;
 
@@ -98,9 +104,9 @@
 -(void)createUI
 {
     //待编辑图片
-    UIImageView * imageView = [[UIImageView alloc] init];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.frame = CGRectMake(0, 64, _width, _width);
+    _imageView = [[UIImageView alloc] init];
+    _imageView.contentMode = UIViewContentModeScaleAspectFit;
+    _imageView.frame = CGRectMake(0, 64, _width, _width);
     PHImageManager *imageManager = [PHImageManager defaultManager];
     [imageManager requestImageForAsset:self.asset
                             targetSize:PHImageManagerMaximumSize
@@ -108,11 +114,12 @@
                                options:nil
                          resultHandler:^(UIImage *result, NSDictionary *info) {
 //                             imageView.frame = result.scale >= 1?CGRectMake(0, 64, _width/result.scale, _width):CGRectMake(0, 64, _width, _width * result.scale);
-                             imageView.image = result;
+                             _image = result;
+                             _imageView.image = result;
                          }];
-    imageView.layer.anchorPoint = CGPointMake(0.5, 0.5);
-    imageView.layer.position = CGPointMake(_width/2, _width/2 + 64);
-    [self.view addSubview:imageView];
+    _imageView.layer.anchorPoint = CGPointMake(0.5, 0.5);
+    _imageView.layer.position = CGPointMake(_width/2, _width/2 + 64);
+    [self.view addSubview:_imageView];
     
     //编辑区域背景
     self.stickerView.hidden = NO;
@@ -201,7 +208,10 @@
     switch (btn.tag)
     {
         case 5:
-            
+            _imageView = [UIImageView rotate360DegreeWithImageView:_imageView];
+            _image = [UIImage image:_image rotation:UIImageOrientationRight];
+            _imageView.image = _image;
+
             break;
             
         case 6:

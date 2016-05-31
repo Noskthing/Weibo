@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+
+enum {
+    enSvCropClip,               // the image size will be equal to orignal image, some part of image may be cliped
+    enSvCropExpand,             // the image size will expand to contain the whole image, remain area will be transparent
+};
+typedef NSInteger SvCropMode;
 @interface UIImage (Addition)
 
 /**
@@ -17,4 +23,10 @@
  */
 - (UIImage *)resizeImage;
 
++ (UIImage *)image:(UIImage *)image rotation:(UIImageOrientation)orientation;
+
+/*
+ * @brief rotate image with radian
+ */
+- (UIImage*)rotateImageWithRadian:(CGFloat)radian cropMode:(SvCropMode)cropMode;
 @end
