@@ -22,7 +22,7 @@
                          CATransform3DMakeRotation(M_PI_2, 0.0, 0.0, 1.0) ];
     animation.duration = 0.3;
     animation.repeatCount = 1;
-    
+    [animation setAutoreverses:NO];
     //在图片边缘添加一个像素的透明区域，去图片锯齿
 //    CGRect imageRrect = CGRectMake(0, 0,imageView.frame.size.width, imageView.frame.size.height);
 //    UIGraphicsBeginImageContext(imageRrect.size);
@@ -34,5 +34,6 @@
     [imageView.layer addAnimation:animation forKey:nil];
     return imageView;
 }
+
 
 @end

@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+
+typedef void(^OptionButtonDidSelectedBlock)(UIImage * image);
 @interface CropImageView : UIView
 
+
+-(void)setImage:(UIImage *)image;
+-(void)setOptionButtonDidSelectedBlock:(OptionButtonDidSelectedBlock)block;
 @end

@@ -11,4 +11,5 @@
 @interface UIImageView (Animation)
 
 + (UIImageView *)rotate90DegreeWithImageView:(UIImageView *)imageView;
+
 @end

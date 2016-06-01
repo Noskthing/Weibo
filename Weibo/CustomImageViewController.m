@@ -10,6 +10,7 @@
 #import "ImageOptionScrollView.h"
 #import "UIImage+Addition.h"
 #import "UIImageView+Animation.h"
+#import "CropImageView.h"
 
 @interface CustomImageViewController ()
 {
@@ -22,6 +23,9 @@
     //图片
     UIImageView * _imageView;
     UIImage * _image;
+    
+    //第一次旋转
+    BOOL _isFirst;
 }
 @property (nonatomic,strong)UIView * toolsView;
 
@@ -29,7 +33,7 @@
 
 @property (nonatomic,strong)ImageOptionScrollView * stickerView;
 
-@property (nonatomic,strong)UIScrollView * cropView;
+@property (nonatomic,strong)CropImageView * cropView;
 @end
 @implementation CustomImageViewController
 
@@ -38,6 +42,8 @@
     _width = self.view.frame.size.width;
     
     self.view.backgroundColor = ColorWithRGB(224, 224, 224);
+    
+    _isFirst = YES;
     
     [self createUI];
 }
@@ -103,7 +109,16 @@
     return _filterView;
 }
 
-
+-(CropImageView *)cropView
+{
+    if (!_cropView)
+    {
+        _cropView = [[CropImageView alloc] initWithFrame:CGRectMake(0, 64, _width, self.view.frame.size.height - 64)];
+        _cropView.hidden = YES;
+        [self.view addSubview:_cropView];
+    }
+    return _cropView;
+}
 
 -(void)createUI
 {
@@ -213,12 +228,21 @@
     {
         case 5:
             _imageView = [UIImageView rotate90DegreeWithImageView:_imageView];
-            _image = [UIImage image:_image rotation:UIImageOrientationRight];
-            _imageView.image = _image;
+            
+            if (_isFirst)
+            {
+                _isFirst = NO;
+            }
+            else
+            {
+                _image = [UIImage image:_image rotation:UIImageOrientationRight];
+                _imageView.image = _image;
+            }
             break;
             
         case 6:
-            
+            [self.cropView setImage:_image];
+            self.cropView.hidden = NO;
             break;
             
         case 7:
