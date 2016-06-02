@@ -158,6 +158,7 @@
 		60181E6A1CCA270A00F7DAC4 /* PostWordCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60181E681CCA270A00F7DAC4 /* PostWordCollectionViewCell.xib */; };
 		6051CFBD1CFD7CB3006C9898 /* UIImageView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6051CFBC1CFD7CB3006C9898 /* UIImageView+Animation.m */; };
 		6051CFC01CFD92D7006C9898 /* CropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6051CFBF1CFD92D7006C9898 /* CropImageView.m */; };
+		605211BD1D001D71003DE46B /* CameraWaterMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 605211BC1D001D71003DE46B /* CameraWaterMarkView.m */; };
 		6054547C1CF6A60000BA7270 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 605454701CF6A60000BA7270 /* AFHTTPSessionManager.m */; };
 		6054547D1CF6A60000BA7270 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 605454731CF6A60000BA7270 /* AFNetworkReachabilityManager.m */; };
 		6054547E1CF6A60000BA7270 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 605454751CF6A60000BA7270 /* AFSecurityPolicy.m */; };
@@ -449,6 +450,8 @@
 		6051CFBC1CFD7CB3006C9898 /* UIImageView+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Animation.m"; sourceTree = "<group>"; };
 		6051CFBE1CFD92D7006C9898 /* CropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropImageView.h; sourceTree = "<group>"; };
 		6051CFBF1CFD92D7006C9898 /* CropImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropImageView.m; sourceTree = "<group>"; };
+		605211BB1D001D71003DE46B /* CameraWaterMarkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraWaterMarkView.h; sourceTree = "<group>"; };
+		605211BC1D001D71003DE46B /* CameraWaterMarkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraWaterMarkView.m; sourceTree = "<group>"; };
 		6054546F1CF6A60000BA7270 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		605454701CF6A60000BA7270 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		605454711CF6A60000BA7270 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -1271,6 +1274,8 @@
 				607FF32E1CFC2D3E00C49DEC /* ImageOptionScrollView.m */,
 				6051CFBE1CFD92D7006C9898 /* CropImageView.h */,
 				6051CFBF1CFD92D7006C9898 /* CropImageView.m */,
+				605211BB1D001D71003DE46B /* CameraWaterMarkView.h */,
+				605211BC1D001D71003DE46B /* CameraWaterMarkView.m */,
 			);
 			name = PhotoView;
 			sourceTree = "<group>";
@@ -1497,6 +1502,7 @@
 				60181E631CCA0A4A00F7DAC4 /* NavTitleView.m in Sources */,
 				1820CA4A1C1031330053EF49 /* UIImageView+WebCache.m in Sources */,
 				18403FA21C28E83700651726 /* MJRefreshComponent.m in Sources */,
+				605211BD1D001D71003DE46B /* CameraWaterMarkView.m in Sources */,
 				18403FA91C28E83700651726 /* MJRefreshBackNormalFooter.m in Sources */,
 				1828CCED1C34D1C8003CAF43 /* NavgationBarTitleBtn.m in Sources */,
 				1860720F1C48F79C008489F7 /* LocationViewController.m in Sources */,

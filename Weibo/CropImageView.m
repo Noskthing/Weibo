@@ -7,6 +7,7 @@
 //
 
 #import "CropImageView.h"
+#import "UIImage+Addition.h"
 
 #define ColorWithRGB(R,G,B) [UIColor colorWithRed:R/255.0f green:G/255.0f blue:B/255.0f alpha:1.0f]
 @interface CropImageView ()
@@ -16,6 +17,10 @@
     CGSize _baseSize;
     
     OptionButtonDidSelectedBlock _block;
+    
+    UIImageView * _imageView;
+    
+    UIImage * _image;
 }
 @end
 
@@ -62,6 +67,19 @@
         [cancel addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
         [cancel setImage:[UIImage imageNamed:@"camera_edit_cross"] forState:UIControlStateNormal];
         [self addSubview:cancel];
+        
+        _imageView = [[UIImageView alloc] init];
+        _imageView.userInteractionEnabled = YES;
+        [self insertSubview:_imageView atIndex:0];
+        
+        // 添加拖动手势
+        UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self  action:@selector(handlePan:)];
+        [_imageView addGestureRecognizer:panGestureRecognizer];
+        
+        //添加捏合手势
+        _imageView.multipleTouchEnabled = YES;
+        UIPinchGestureRecognizer* gesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scaleImage:)];
+        [_imageView addGestureRecognizer:gesture];
     }
     
     return self;
@@ -78,23 +96,17 @@
 //    _scrollView.contentSize = CGRectMake(0, 0, image.scale >=1?self.frame.size.width:self.frame.size.width/image.scale, image.scale >= 1?self.frame.size.width * image.scale : self.frame.size.width).size;
 //    [self insertSubview:_scrollView atIndex:0];
 //    NSLog(@"scale is %f ---%f",image.size.width,image.size.height);
+    _image = image;
     
     CGFloat scale = image.size.height/image.size.width;
+ 
+    _imageView.frame = CGRectMake(0, 0, scale >=1.0?self.frame.size.width:self.frame.size.width/scale, scale >= 1.0?self.frame.size.width * scale : self.frame.size.width);
+    _imageView.image = image;
     
-    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, scale >=1.0?self.frame.size.width:self.frame.size.width/scale, scale >= 1.0?self.frame.size.width * scale : self.frame.size.width)];
-    imageView.image = image;
-    imageView.userInteractionEnabled = YES;
-    _baseSize = imageView.frame.size;
-    [self insertSubview:imageView atIndex:0];
+    _baseSize = _imageView.frame.size;
     
-    // 添加拖动手势
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self  action:@selector(handlePan:)];
-    [imageView addGestureRecognizer:panGestureRecognizer];
     
-    //添加捏合手势
-    imageView.multipleTouchEnabled = YES;
-    UIPinchGestureRecognizer* gesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scaleImage:)];
-    [imageView addGestureRecognizer:gesture];
+    
 }
 
 #pragma mark   手势实现
@@ -110,27 +122,27 @@
         CGPoint point = recognizer.view.center;
         
         //center合法性确认
-        if (point.x > _baseSize.width/2 + 10)
+        if (point.x > _baseSize.width/2)
         {
-            point.x = _baseSize.width/2 + 10;
+            point.x = _baseSize.width/2;
         }
         else
         {
-            if ( (_baseSize.width/2 - point.x) > (_baseSize.width - self.frame.size.width + 10))
+            if ( (_baseSize.width/2 - point.x) > (_baseSize.width - self.frame.size.width))
             {
-                point.x = self.frame.size.width - _baseSize.width/2 - 10;
+                point.x = self.frame.size.width - _baseSize.width/2;
             }
         }
         
-        if (point.y > _baseSize.height/2 + 10)
+        if (point.y > _baseSize.height/2)
         {
-            point.y = _baseSize.height/2 + 10;
+            point.y = _baseSize.height/2;
         }
         else
         {
-            if ((_baseSize.height/2 - point.y) > (_baseSize.height - self.frame.size.width + 10))
+            if ((_baseSize.height/2 - point.y) > (_baseSize.height - self.frame.size.width))
             {
-                point.y = self.frame.size.width - _baseSize.height/2 - 10;
+                point.y = self.frame.size.width - _baseSize.height/2;
             }
         }
         
@@ -174,7 +186,13 @@
     {
         case 10:
         {
+//            NSLog(@"frame is %f-- %f-- %f-- %f",_imageView.frame.origin.x,_imageView.frame.origin.y,_imageView.frame.size.width,_imageView.frame.size.height);
+            CGFloat xScale = _imageView.frame.origin.x < 0 ? -_imageView.frame.origin.x/_imageView.frame.size.width:0;
+            CGFloat yScale = _imageView.frame.origin.y < 0 ? -_imageView.frame.origin.y/_imageView.frame.size.height:0;
+            CGFloat widthScale = self.frame.size.width/_imageView.frame.size.width;
+            CGFloat heightScale = self.frame.size.width/_imageView.frame.size.height;
             
+            _block([_image cropImageAtRect:CGRectMake(_image.size.width * xScale, _image.size.height * yScale, _image.size.width * widthScale, _image.size.height * heightScale)]);
         }
             break;
             
@@ -186,5 +204,7 @@
         default:
             break;
     }
+    
+    self.hidden = YES;
 }
 @end

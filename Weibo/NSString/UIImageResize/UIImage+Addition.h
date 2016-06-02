@@ -29,4 +29,5 @@ typedef NSInteger SvCropMode;
  * @brief rotate image with radian
  */
 - (UIImage*)rotateImageWithRadian:(CGFloat)radian cropMode:(SvCropMode)cropMode;
+-(UIImage *)cropImageAtRect:(CGRect)cropRect;
 @end

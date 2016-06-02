@@ -11,6 +11,7 @@
 #import "UIImage+Addition.h"
 #import "UIImageView+Animation.h"
 #import "CropImageView.h"
+#import "CameraWaterMarkView.h"
 
 @interface CustomImageViewController ()
 {
@@ -19,13 +20,6 @@
     //图片实际所在位置
     CGFloat _imageWidth;
     CGFloat _imageHeight;
-    
-    //图片
-    UIImageView * _imageView;
-    UIImage * _image;
-    
-    //第一次旋转
-    BOOL _isFirst;
 }
 @property (nonatomic,strong)UIView * toolsView;
 
@@ -34,6 +28,17 @@
 @property (nonatomic,strong)ImageOptionScrollView * stickerView;
 
 @property (nonatomic,strong)CropImageView * cropView;
+
+//图片
+@property (nonatomic,strong)UIImageView * imageView;
+
+@property (nonatomic,strong)UIImage * image;
+
+@property (nonatomic,assign)BOOL isFirst;
+
+//水印
+@property (nonatomic,strong)CameraWaterMarkView * cameraWaterMarkView;
+
 @end
 @implementation CustomImageViewController
 
@@ -78,7 +83,7 @@
     return _toolsView;
 }
 
--(UIScrollView *)stickerView
+-(ImageOptionScrollView *)stickerView
 {
     if (!_stickerView)
     {
@@ -86,8 +91,13 @@
         _stickerView.backgroundColor = ColorWithRGB(239, 239, 239);
         _stickerView.images = @[@"",@"",@"",@"",@""];
         _stickerView.hidden = YES;
+        
+        __weak __typeof__(self) weakSelf = self;
         [_stickerView setOptionButtonDidSelevtedBlock:^(NSInteger tag) {
-            NSLog(@"tag is %ld",(long)tag);
+//            NSLog(@"tag is %ld",(long)tag);
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            strongSelf.cameraWaterMarkView.image = [UIImage imageNamed:@"compose_slogan"];
+            [strongSelf.imageView addSubview:strongSelf.cameraWaterMarkView];
         }];
     }
     
@@ -115,9 +125,30 @@
     {
         _cropView = [[CropImageView alloc] initWithFrame:CGRectMake(0, 64, _width, self.view.frame.size.height - 64)];
         _cropView.hidden = YES;
+        
+        __weak __typeof__(self) weakSelf = self;
+        [_cropView setOptionButtonDidSelectedBlock:^(UIImage *image) {
+            if (image)
+            {
+                __strong __typeof__(weakSelf) strongSelf = weakSelf;
+                strongSelf.image = strongSelf.isFirst?image: [UIImage image:image rotation:UIImageOrientationLeft];
+                strongSelf.imageView.image = strongSelf.image;
+            }
+        }];
         [self.view addSubview:_cropView];
     }
     return _cropView;
+}
+
+-(CameraWaterMarkView *)cameraWaterMarkView
+{
+    if (!_cameraWaterMarkView)
+    {
+        _cameraWaterMarkView = [[CameraWaterMarkView alloc] initWithFrame:CGRectMake(100, 100, 100, 40)];
+        [self.view addSubview:_cameraWaterMarkView];
+    }
+    
+    return _cameraWaterMarkView;
 }
 
 -(void)createUI
@@ -241,7 +272,7 @@
             break;
             
         case 6:
-            [self.cropView setImage:_image];
+            [self.cropView setImage:_isFirst?_image:[UIImage image:_image rotation:UIImageOrientationRight]];
             self.cropView.hidden = NO;
             break;
             

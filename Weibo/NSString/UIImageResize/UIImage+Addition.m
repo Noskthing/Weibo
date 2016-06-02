@@ -111,4 +111,21 @@
     
     return image;
 }
+
+-(UIImage *)cropImageAtRect:(CGRect)cropRect
+{
+    CGRect drawRect = CGRectMake(-cropRect.origin.x , -cropRect.origin.y, self.size.width, self.size.height);
+    
+    UIGraphicsBeginImageContext(cropRect.size);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextClearRect(context, CGRectMake(0, 0, cropRect.size.width, cropRect.size.height));
+    
+    [self drawInRect:drawRect];
+    
+    UIImage * result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return result;
+}
 @end
