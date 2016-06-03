@@ -20,6 +20,9 @@
     //图片实际所在位置
     CGFloat _imageWidth;
     CGFloat _imageHeight;
+    
+    //挂件中心点
+    CGPoint _centerPoint;
 }
 @property (nonatomic,strong)UIView * toolsView;
 
@@ -39,6 +42,10 @@
 //水印
 @property (nonatomic,strong)CameraWaterMarkView * cameraWaterMarkView;
 
+//挂件按钮
+@property (nonatomic,strong)UIButton * removeBtn;
+
+@property (nonatomic,strong)UIImageView * zoomView;
 @end
 @implementation CustomImageViewController
 
@@ -98,6 +105,8 @@
             __strong __typeof__(weakSelf) strongSelf = weakSelf;
             strongSelf.cameraWaterMarkView.image = [UIImage imageNamed:@"compose_slogan"];
             [strongSelf.imageView addSubview:strongSelf.cameraWaterMarkView];
+            _centerPoint = strongSelf.cameraWaterMarkView.center;
+            
         }];
     }
     
@@ -145,10 +154,44 @@
     if (!_cameraWaterMarkView)
     {
         _cameraWaterMarkView = [[CameraWaterMarkView alloc] initWithFrame:CGRectMake(100, 100, 100, 40)];
+        self.removeBtn.layer.position = CGPointMake(100, 100);
+        self.removeBtn.hidden = NO;
+        self.zoomView.layer.position = CGPointMake(200, 140);
+        self.zoomView.hidden = NO;
         [self.view addSubview:_cameraWaterMarkView];
     }
     
     return _cameraWaterMarkView;
+}
+
+-(UIButton *)removeBtn
+{
+    if (!_removeBtn)
+    {
+        _removeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+        _removeBtn.layer.anchorPoint = CGPointMake(0.5, 0.5);
+        _removeBtn.hidden = YES;
+        [_removeBtn setImage:[UIImage imageNamed:@"camera_water_mrak_delete"] forState:UIControlStateNormal];
+        [self.imageView addSubview:_removeBtn];
+    }
+    return _removeBtn;
+}
+
+-(UIImageView *)zoomView
+{
+    if (!_zoomView)
+    {
+        _zoomView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+        _zoomView.layer.anchorPoint = CGPointMake(0.5, 0.5);
+        _zoomView.userInteractionEnabled = YES;
+        _zoomView.image = [UIImage imageNamed:@"camera_water_mrak_zoom"];
+        // 添加拖动手势
+        UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self  action:@selector(handlePan:)];
+        [_zoomView addGestureRecognizer:panGestureRecognizer];
+
+        [self.imageView addSubview:_zoomView];
+    }
+    return _zoomView;
 }
 
 -(void)createUI
@@ -157,6 +200,8 @@
     _imageView = [[UIImageView alloc] init];
     _imageView.contentMode = UIViewContentModeScaleAspectFit;
     _imageView.frame = CGRectMake(0, 64, _width, _width);
+    _imageView.userInteractionEnabled = YES;
+    
     PHImageManager *imageManager = [PHImageManager defaultManager];
     [imageManager requestImageForAsset:self.asset
                             targetSize:PHImageManagerMaximumSize
@@ -283,5 +328,17 @@
         default:
             break;
     }
+}
+
+#pragma mark     手势相关
+-(void)handlePan:(UIPanGestureRecognizer *)pan
+{
+    CGPoint translation = [pan translationInView:self.imageView];
+
+//    NSLog(@"translation.x is %f,translation.y is %f",translation.x,translation.y);
+//    NSLog(@"----x is %f  y is %f",_centerPoint.x,_centerPoint.y);
+     pan.view.center = CGPointMake(pan.view.center.x + translation.x, pan.view.center.y + translation.y);
+    
+    [pan setTranslation:CGPointZero inView:self.imageView];
 }
 @end

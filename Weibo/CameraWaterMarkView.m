@@ -12,7 +12,7 @@ static CGFloat alpha = 0.6;
 
 @interface  CameraWaterMarkView()
 {
-    UIImageView * _zoomView;
+//    UIImageView * _zoomView;
 }
 @end
 
@@ -50,31 +50,12 @@ static CGFloat alpha = 0.6;
         [self addSubview:line4];
         
         
-        UIButton * removeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
-        removeBtn.layer.anchorPoint = CGPointMake(0.5, 0.5);
-        removeBtn.layer.position = CGPointMake(0, 0);
-        [removeBtn setImage:[UIImage imageNamed:@"camera_water_mrak_delete"] forState:UIControlStateNormal];
-        [self addSubview:removeBtn];
         
-        UIImageView * zoomView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
-        zoomView.layer.anchorPoint = CGPointMake(0.5, 0.5);
-        zoomView.userInteractionEnabled = YES;
-        zoomView.layer.position = CGPointMake(frame.size.width, frame.size.height);
-        zoomView.image = [UIImage imageNamed:@"camera_water_mrak_zoom"];
-        [self addSubview:zoomView];
+//
         
-        // 添加拖动手势
-        UITapGestureRecognizer *panGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self  action:@selector(handlePan:)];
-        [zoomView addGestureRecognizer:panGestureRecognizer];
+//
     }
     return self;
 }
 
--(void)handlePan:(UITapGestureRecognizer *)pan
-{
-//    CGPoint translation = [pan translationInView:self];
-    
-//    NSLog(@"translation.x is %f,translation.y is %f",translation.x,translation.y);
-    NSLog(@"translation.x is ");
-}
 @end
