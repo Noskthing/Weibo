@@ -12,4 +12,5 @@
 
 + (UIImageView *)rotate90DegreeWithImageView:(UIImageView *)imageView;
 
++ (UIImageView *)imageView:(UIImageView *)imageView rotation:(UIImageOrientation)orientation;
 @end

@@ -21,8 +21,11 @@
     CGFloat _imageWidth;
     CGFloat _imageHeight;
     
-    //挂件中心点
+    //挂件中心点 便宜角度
     CGPoint _centerPoint;
+    double _angle;
+    
+    double _radius;
 }
 @property (nonatomic,strong)UIView * toolsView;
 
@@ -37,8 +40,6 @@
 
 @property (nonatomic,strong)UIImage * image;
 
-@property (nonatomic,assign)BOOL isFirst;
-
 //水印
 @property (nonatomic,strong)CameraWaterMarkView * cameraWaterMarkView;
 
@@ -46,6 +47,8 @@
 @property (nonatomic,strong)UIButton * removeBtn;
 
 @property (nonatomic,strong)UIImageView * zoomView;
+
+@property (nonatomic,assign)UIImageOrientation orientation;
 @end
 @implementation CustomImageViewController
 
@@ -54,8 +57,6 @@
     _width = self.view.frame.size.width;
     
     self.view.backgroundColor = ColorWithRGB(224, 224, 224);
-    
-    _isFirst = YES;
     
     [self createUI];
 }
@@ -98,7 +99,7 @@
         _stickerView.backgroundColor = ColorWithRGB(239, 239, 239);
         _stickerView.images = @[@"",@"",@"",@"",@""];
         _stickerView.hidden = YES;
-        
+
         __weak __typeof__(self) weakSelf = self;
         [_stickerView setOptionButtonDidSelevtedBlock:^(NSInteger tag) {
 //            NSLog(@"tag is %ld",(long)tag);
@@ -106,7 +107,12 @@
             strongSelf.cameraWaterMarkView.image = [UIImage imageNamed:@"compose_slogan"];
             [strongSelf.imageView addSubview:strongSelf.cameraWaterMarkView];
             _centerPoint = strongSelf.cameraWaterMarkView.center;
+            _radius = hypot(strongSelf.cameraWaterMarkView.frame.size.width/2, strongSelf.cameraWaterMarkView.frame.size.height/2);
             
+            double tan = strongSelf.cameraWaterMarkView.frame.size.height / strongSelf.cameraWaterMarkView.frame.size.width;
+            
+            _angle = atan(tan);
+
         }];
     }
     
@@ -140,8 +146,15 @@
             if (image)
             {
                 __strong __typeof__(weakSelf) strongSelf = weakSelf;
-                strongSelf.image = strongSelf.isFirst?image: [UIImage image:image rotation:UIImageOrientationLeft];
-                strongSelf.imageView.image = strongSelf.image;
+                strongSelf.image = image;
+                strongSelf.imageView.image = image;
+                
+                //截取的新图片替换原图  那么imageView的方向和保存的imageView的旋转方向需要恢复到默认  也就是最开始正放的状态
+                strongSelf.imageView.layer.transform = CATransform3DMakeRotation(0, 0, 0, 0);
+                strongSelf.orientation = UIImageOrientationUp;
+                
+                CGFloat scale = image.size.height/image.size.width;
+                strongSelf.imageView.frame = scale >= 1?CGRectMake(strongSelf.view.frame.size.width * (1 - 1/scale)/2, 64, strongSelf.view.frame.size.width/scale, strongSelf.view.frame.size.width):CGRectMake(0, 64 + strongSelf.view.frame.size.width * (1 - scale)/2, strongSelf.view.frame.size.width, strongSelf.view.frame.size.width * scale);
             }
         }];
         [self.view addSubview:_cropView];
@@ -154,10 +167,15 @@
     if (!_cameraWaterMarkView)
     {
         _cameraWaterMarkView = [[CameraWaterMarkView alloc] initWithFrame:CGRectMake(100, 100, 100, 40)];
+        _cameraWaterMarkView.layer.allowsEdgeAntialiasing = YES;
         self.removeBtn.layer.position = CGPointMake(100, 100);
         self.removeBtn.hidden = NO;
         self.zoomView.layer.position = CGPointMake(200, 140);
         self.zoomView.hidden = NO;
+        
+        UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveCameraWaterMarkView:)];
+        [_cameraWaterMarkView addGestureRecognizer:pan];
+        
         [self.view addSubview:_cameraWaterMarkView];
     }
     
@@ -199,8 +217,10 @@
     //待编辑图片
     _imageView = [[UIImageView alloc] init];
     _imageView.contentMode = UIViewContentModeScaleAspectFit;
-    _imageView.frame = CGRectMake(0, 64, _width, _width);
+//    _imageView.frame = CGRectMake(0, 64, _width, _width);
     _imageView.userInteractionEnabled = YES;
+    _imageView.clipsToBounds = YES;
+    _orientation = UIImageOrientationUp;
     
     PHImageManager *imageManager = [PHImageManager defaultManager];
     [imageManager requestImageForAsset:self.asset
@@ -208,7 +228,8 @@
                            contentMode:PHImageContentModeDefault
                                options:nil
                          resultHandler:^(UIImage *result, NSDictionary *info) {
-//                             imageView.frame = result.scale >= 1?CGRectMake(0, 64, _width/result.scale, _width):CGRectMake(0, 64, _width, _width * result.scale);
+                             CGFloat scale = result.size.height/result.size.width;
+                             _imageView.frame = scale >= 1?CGRectMake(_width * (1 - 1/scale)/2, 64, _width/scale, _width):CGRectMake(0, 64 + _width * (1 - scale)/2, _width, _width * scale);
                              _image = result;
                              _imageView.image = result;
                          }];
@@ -303,21 +324,32 @@
     switch (btn.tag)
     {
         case 5:
-            _imageView = [UIImageView rotate90DegreeWithImageView:_imageView];
-            
-            if (_isFirst)
-            {
-                _isFirst = NO;
+            switch (_orientation)
+        {
+            case UIImageOrientationUp:
+                _imageView = [UIImageView imageView:_imageView rotation:UIImageOrientationRight];
+                _orientation = UIImageOrientationRight;
+                break;
+            case UIImageOrientationRight:
+                _imageView = [UIImageView imageView:_imageView rotation:UIImageOrientationDown];
+                _orientation = UIImageOrientationDown;
+                break;
+            case UIImageOrientationDown:
+                _imageView = [UIImageView imageView:_imageView rotation:UIImageOrientationLeft];
+                _orientation = UIImageOrientationLeft;
+                break;
+            case UIImageOrientationLeft:
+                _imageView = [UIImageView imageView:_imageView rotation:UIImageOrientationUp];
+                _orientation = UIImageOrientationUp;
+                break;
+                default:
+                    break;
             }
-            else
-            {
-                _image = [UIImage image:_image rotation:UIImageOrientationRight];
-                _imageView.image = _image;
-            }
+            _image = [UIImage image:_image rotation:UIImageOrientationRight];
             break;
             
         case 6:
-            [self.cropView setImage:_isFirst?_image:[UIImage image:_image rotation:UIImageOrientationRight]];
+            [self.cropView setImage:_image];
             self.cropView.hidden = NO;
             break;
             
@@ -339,6 +371,30 @@
 //    NSLog(@"----x is %f  y is %f",_centerPoint.x,_centerPoint.y);
      pan.view.center = CGPointMake(pan.view.center.x + translation.x, pan.view.center.y + translation.y);
     
+    double radius = hypot(pan.view.center.x - _centerPoint.x, pan.view.center.y - _centerPoint.y);
+    double scale = radius/_radius;
+    
+    double tan = ( pan.view.center.y - _centerPoint.y) / ( pan.view.center.x - _centerPoint.x );
+    double angle = atan(tan) - _angle;
+    
+    //不要修改layer层 不然手势会失效
+    self.cameraWaterMarkView.transform = CGAffineTransformRotate(CGAffineTransformMakeScale(scale, scale), angle);
+
+    self.removeBtn.layer.position = CGPointMake(2 * _centerPoint.x - self.zoomView.center.x, 2 * _centerPoint.y - self.zoomView.center.y);
+    
     [pan setTranslation:CGPointZero inView:self.imageView];
+}
+
+-(void)moveCameraWaterMarkView:(UIPanGestureRecognizer *)pan
+{
+    CGPoint translation = [pan translationInView:self.imageView];
+    
+    pan.view.center = CGPointMake(pan.view.center.x + translation.x, pan.view.center.y + translation.y);
+    _centerPoint = pan.view.center;
+    self.removeBtn.center = CGPointMake(self.removeBtn.center.x + translation.x, self.removeBtn.center.y + translation.y);
+    self.zoomView.center = CGPointMake(self.zoomView.center.x + translation.x, self.zoomView.center.y + translation.y);
+    
+    [pan setTranslation:CGPointZero inView:self.imageView];
+    
 }
 @end
