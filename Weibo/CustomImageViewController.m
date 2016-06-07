@@ -375,7 +375,16 @@
     double scale = radius/_radius;
     
     double tan = ( pan.view.center.y - _centerPoint.y) / ( pan.view.center.x - _centerPoint.x );
-    double angle = atan(tan) - _angle;
+    double angle;
+    if (pan.view.center.x > _centerPoint.x)
+    {
+        angle = pan.view.center.y > _centerPoint.y ? ( atan(tan) - _angle ) : ( 2 * M_PI - _angle + atan(tan));
+    }
+    else
+    {
+        angle = pan.view.center.y > _centerPoint.y ? ( M_PI + atan(tan) - _angle ) : (  M_PI + atan(tan));
+    }
+    
     
     //不要修改layer层 不然手势会失效
     self.cameraWaterMarkView.transform = CGAffineTransformRotate(CGAffineTransformMakeScale(scale, scale), angle);
