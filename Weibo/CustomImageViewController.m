@@ -58,6 +58,7 @@
     
     self.view.backgroundColor = ColorWithRGB(224, 224, 224);
     
+    [self cameraWaterMarkView];
     [self createUI];
 }
 
@@ -105,6 +106,9 @@
 //            NSLog(@"tag is %ld",(long)tag);
             __strong __typeof__(weakSelf) strongSelf = weakSelf;
             strongSelf.cameraWaterMarkView.image = [UIImage imageNamed:@"defaultBg"];
+            strongSelf.cameraWaterMarkView.hidden = NO;
+            strongSelf.removeBtn.hidden = NO;
+            strongSelf.zoomView.hidden = NO;
             [strongSelf.imageView addSubview:strongSelf.cameraWaterMarkView];
             _centerPoint = strongSelf.cameraWaterMarkView.center;
             _radius = hypot(strongSelf.cameraWaterMarkView.frame.size.width/2, strongSelf.cameraWaterMarkView.frame.size.height/2);
@@ -168,10 +172,9 @@
     {
         _cameraWaterMarkView = [[CameraWaterMarkView alloc] initWithFrame:CGRectMake(100, 100, 100, 40)];
         _cameraWaterMarkView.layer.allowsEdgeAntialiasing = YES;
+        _cameraWaterMarkView.hidden = YES;
         self.removeBtn.layer.position = CGPointMake(100, 100);
-        self.removeBtn.hidden = NO;
         self.zoomView.layer.position = CGPointMake(200, 140);
-        self.zoomView.hidden = NO;
         
         UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveCameraWaterMarkView:)];
         [_cameraWaterMarkView addGestureRecognizer:pan];
@@ -188,9 +191,10 @@
     {
         _removeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
         _removeBtn.layer.anchorPoint = CGPointMake(0.5, 0.5);
-        _removeBtn.hidden = YES;
+        _removeBtn.hidden = _cameraWaterMarkView.hidden;
+        [_removeBtn addTarget:self action:@selector(removeButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
         [_removeBtn setImage:[UIImage imageNamed:@"camera_water_mrak_delete"] forState:UIControlStateNormal];
-        [self.imageView insertSubview:_removeBtn aboveSubview:self.cameraWaterMarkView];
+        [self.imageView addSubview:_removeBtn];
     }
     return _removeBtn;
 }
@@ -200,6 +204,7 @@
     if (!_zoomView)
     {
         _zoomView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+        _zoomView.hidden = _cameraWaterMarkView.hidden;
         _zoomView.layer.anchorPoint = CGPointMake(0.5, 0.5);
         _zoomView.userInteractionEnabled = YES;
         _zoomView.image = [UIImage imageNamed:@"camera_water_mrak_zoom"];
@@ -207,7 +212,7 @@
         UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self  action:@selector(handlePan:)];
         [_zoomView addGestureRecognizer:panGestureRecognizer];
 
-        [self.imageView insertSubview:_zoomView aboveSubview:self.cameraWaterMarkView];
+        [self.imageView addSubview:_zoomView];
     }
     return _zoomView;
 }
@@ -362,6 +367,11 @@
     }
 }
 
+-(void)removeButtonTouched:(UIButton *)btn
+{
+    self.cameraWaterMarkView.hidden = YES;
+}
+
 #pragma mark     手势相关
 -(void)handlePan:(UIPanGestureRecognizer *)pan
 {
@@ -372,7 +382,7 @@
      pan.view.center = CGPointMake(pan.view.center.x + translation.x, pan.view.center.y + translation.y);
     
     double radius = hypot(pan.view.center.x - _centerPoint.x, pan.view.center.y - _centerPoint.y);
-    double scale = radius/_radius;
+    double scale = radius/_radius > 0.4 ? radius/_radius : 0.4;
     
     double tan = ( pan.view.center.y - _centerPoint.y) / ( pan.view.center.x - _centerPoint.x );
     double angle;
