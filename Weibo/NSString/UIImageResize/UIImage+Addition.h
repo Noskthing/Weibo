@@ -30,4 +30,7 @@ typedef NSInteger SvCropMode;
  */
 - (UIImage*)rotateImageWithRadian:(CGFloat)radian cropMode:(SvCropMode)cropMode;
 -(UIImage *)cropImageAtRect:(CGRect)cropRect;
+
+//添加透明边 防锯齿
+- (UIImage *)antiAlias;
 @end

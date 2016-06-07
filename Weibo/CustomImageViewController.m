@@ -104,7 +104,7 @@
         [_stickerView setOptionButtonDidSelevtedBlock:^(NSInteger tag) {
 //            NSLog(@"tag is %ld",(long)tag);
             __strong __typeof__(weakSelf) strongSelf = weakSelf;
-            strongSelf.cameraWaterMarkView.image = [UIImage imageNamed:@"compose_slogan"];
+            strongSelf.cameraWaterMarkView.image = [UIImage imageNamed:@"defaultBg"];
             [strongSelf.imageView addSubview:strongSelf.cameraWaterMarkView];
             _centerPoint = strongSelf.cameraWaterMarkView.center;
             _radius = hypot(strongSelf.cameraWaterMarkView.frame.size.width/2, strongSelf.cameraWaterMarkView.frame.size.height/2);
@@ -190,7 +190,7 @@
         _removeBtn.layer.anchorPoint = CGPointMake(0.5, 0.5);
         _removeBtn.hidden = YES;
         [_removeBtn setImage:[UIImage imageNamed:@"camera_water_mrak_delete"] forState:UIControlStateNormal];
-        [self.imageView addSubview:_removeBtn];
+        [self.imageView insertSubview:_removeBtn aboveSubview:self.cameraWaterMarkView];
     }
     return _removeBtn;
 }
@@ -207,7 +207,7 @@
         UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self  action:@selector(handlePan:)];
         [_zoomView addGestureRecognizer:panGestureRecognizer];
 
-        [self.imageView addSubview:_zoomView];
+        [self.imageView insertSubview:_zoomView aboveSubview:self.cameraWaterMarkView];
     }
     return _zoomView;
 }
